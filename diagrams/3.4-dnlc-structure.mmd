@@ -1,0 +1,23 @@
+graph TD
+    subgraph "Hash Table (8 buckets)"
+        H0["nc_hash bucket 0"]
+        H1["nc_hash bucket 1"]
+        H7["nc_hash bucket 7"]
+        H0 -.-> E1[ncache entry]
+        H0 -.-> E2[ncache entry]
+        H1 -.-> E3[ncache entry]
+    end
+
+    subgraph "LRU List (circular)"
+        L[nc_lru head] --> E1
+        E1 --> E2
+        E2 --> E3
+        E3 --> L
+    end
+
+    subgraph "ncache Entry"
+        E1 --> VP[vp: target vnode]
+        E1 --> DP[dp: parent vnode]
+        E1 --> NAME[name: filename]
+        E1 --> CRED[cred: credentials]
+    end

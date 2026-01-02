@@ -1,0 +1,11 @@
+graph TD
+    A[dnlc_lookup: dp, name, cred] --> B{name > 15 chars?}
+    B -->|yes| C[Return NULL: too long]
+    B -->|no| D[Compute NC_HASH]
+    D --> E[Search hash bucket]
+    E --> F{Entry found?}
+    F -->|no| G[ncstats.misses++]
+    F -->|yes| H[ncstats.hits++]
+    G --> I[Return NULL: miss]
+    H --> J[Move to LRU tail]
+    J --> K[Return vp: hit!]
