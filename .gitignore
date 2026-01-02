@@ -1,6 +1,9 @@
 # mdbook build output
 book/
 
+# Build tooling
+.puppeteerrc.json
+
 # Backup files
 *~
 *.bak

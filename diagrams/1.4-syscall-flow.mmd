@@ -1,5 +1,8 @@
 graph TD
-    A[User calls syscall] --> B[INT 0x80]
-    B --> C[Kernel handler]
-    C --> D[Execute function]
-    D --> E[Return to user]
+    A[User calls syscall] --> B{Entry method}
+    B -->|Legacy| C[INT 0x80: software interrupt]
+    B -->|Modern| D[SYSENTER/SYSCALL: fast entry]
+    C --> E[systrap: kernel handler]
+    D --> E
+    E --> F[Execute system function]
+    F --> G[Return to user space]

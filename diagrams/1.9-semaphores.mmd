@@ -4,3 +4,6 @@ graph TD
     C --> D{Can proceed?}
     D -->|yes| E[Update semval]
     D -->|no| F[Sleep until available]
+    E --> G[Return to user space]
+    F --> H[Wakeup on semval change]
+    H --> C

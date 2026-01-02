@@ -2,5 +2,7 @@ graph TD
     A[issig: check signals] --> B[fsig: find unblocked]
     B --> C{Signal found?}
     C -->|yes| D[sendsig: build frame]
+    C -->|no| G[Return to user/kernel]
     D --> E[Execute handler]
     E --> F[sigreturn: restore context]
+    G --> H[Signal remains pending]
