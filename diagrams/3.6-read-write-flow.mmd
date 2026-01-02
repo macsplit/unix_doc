@@ -1,0 +1,18 @@
+graph TD
+    A[Open FIFO] --> B{Mode?}
+    B -->|FREAD| C[Increment fi_readers]
+    B -->|FWRITE| D[Increment fi_writers]
+    C --> E[Return 0]
+    D --> F[Return 0]
+
+    G[Read from FIFO] --> H{fi_writers == 0 && fi_size == 0?}
+    H -->|yes| I[Return 0: EOF]
+    H -->|no| J[Copy data to user buffer]
+    J --> K[Update fi_head and fi_size]
+    K --> L[Return bytes read]
+
+    M[Write to FIFO] --> N{fi_readers == 0?}
+    N -->|yes| O[Return EPIPE: no readers]
+    N -->|no| P[Copy data from user buffer]
+    P --> Q[Update fi_tail and fi_size]
+    Q --> R[Return bytes written]

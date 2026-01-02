@@ -1,0 +1,6 @@
+graph TD
+    A[Create FIFO with mknod()] --> B{Mode includes S_IFIFO?}
+    B -->|yes| C[Allocate fifoinfo]
+    B -->|no| D[Return error]
+    C --> E[Initialize fifoinfo fields]
+    E --> F[Mark vnode as FIFO]
