@@ -1,7 +1,7 @@
 # AI Agent Continuation Prompt: The Ghost of SVR4
 
 ## Project Overview
-You are continuing work on "The Ghost of SVR4", a technical book about the SVR4 UNIX kernel written in a Victorian narrative style with whimsy and technical precision. The book is built using mdbook (Rust documentation tool) and contains 5 chapters covering Process Management, Memory Management, File Systems, Networking, and System Initialization.
+You are continuing work on "The Ghost of SVR4", a technical book about the SVR4 UNIX kernel written in a "Victorian narrative" style (but do not mention Victorian referenced per se)  with whimsy and technical precision. The book is built using mdbook (Rust documentation tool) and contains 5 chapters covering Process Management, Memory Management, File Systems, Networking, and System Initialization.
 
 ## Repository Structure
 ```
@@ -413,5 +413,3 @@ A continuation session is successful when:
 - Remember: 2026 comparisons should be specific and technical, not vague
 
 ---
-
-**START HERE:** Write fdfs.md next. Source code already reviewed. Ready to write.
