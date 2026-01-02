@@ -1,0 +1,6 @@
+graph TD
+    A[shmget: create segment] --> B[Allocate anon_map]
+    B --> C[shmat: attach]
+    C --> D[as_map into process]
+    D --> E[Share physical pages]
+    E --> F[shmdt: detach]

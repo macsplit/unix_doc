@@ -1,0 +1,6 @@
+graph TD
+    A[exit syscall] --> B[closeall file descriptors]
+    B --> C[relvm: free address space]
+    C --> D[Reparent children to init]
+    D --> E[Set p_stat = SZOMB]
+    E --> F[sigcld: notify parent]

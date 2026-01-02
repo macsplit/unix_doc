@@ -1,0 +1,6 @@
+graph TD
+    A[page_freelist] --> B[page_get: allocate]
+    B --> C[Remove from list]
+    C --> D[page_free: return]
+    D --> E[Add to list head]
+    E --> F[page_lookup by hash]

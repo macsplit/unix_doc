@@ -1,0 +1,6 @@
+graph TD
+    A[allocb: allocate mblk] --> B[putq: enqueue message]
+    B --> C[qenable: schedule]
+    C --> D[Service procedure]
+    D --> E[Process and pass]
+    E --> F[Deliver to endpoint]

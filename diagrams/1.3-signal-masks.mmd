@@ -1,0 +1,6 @@
+graph TD
+    A[p_sig: pending] --> B[p_hold: blocked]
+    B --> C[p_ignore: ignored]
+    C --> D[fsig: find deliverable]
+    D --> E{Can deliver?}
+    E -->|yes| F[Deliver signal]

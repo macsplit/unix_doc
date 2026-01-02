@@ -1,0 +1,6 @@
+graph TD
+    A[vfs_mount] --> B[Allocate vfs structure]
+    B --> C[Call fs-specific mount]
+    C --> D[Link into vfs list]
+    D --> E[vfs_ops: operations]
+    E --> F[Path lookup crosses mount]

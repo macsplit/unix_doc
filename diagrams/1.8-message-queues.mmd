@@ -1,0 +1,6 @@
+graph TD
+    A[msgget: create queue] --> B[Allocate msqid_ds]
+    B --> C[msgsnd: send]
+    C --> D[Link to queue]
+    D --> E[msgrcv: receive]
+    E --> F[Unlink and copy]

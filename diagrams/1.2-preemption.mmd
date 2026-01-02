@@ -1,0 +1,7 @@
+graph TD
+    A[Higher priority ready] --> B[Set runrun flag]
+    B --> C{In kernel?}
+    C -->|yes| D[Set kprunrun]
+    C -->|no| E[preempt directly]
+    D --> E
+    E --> F[swtch: context switch]

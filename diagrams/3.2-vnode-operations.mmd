@@ -1,0 +1,6 @@
+graph TD
+    A[VOP_LOOKUP] --> B[Search directory]
+    B --> C[Find/allocate vnode]
+    C --> D[VOP_GETPAGE]
+    D --> E[Read from disk]
+    E --> F[Return page]

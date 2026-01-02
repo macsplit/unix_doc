@@ -1,0 +1,6 @@
+graph TD
+    A[t_open: allocate endpoint] --> B[t_bind: bind address]
+    B --> C[t_connect: send request]
+    C --> D[TCP handshake]
+    D --> E[DATAXFER state]
+    E --> F[t_snd/t_rcv: exchange]

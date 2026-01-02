@@ -1,0 +1,6 @@
+graph TD
+    A[seg_alloc] --> B[Align base and size]
+    B --> C[seg_attach to list]
+    C --> D[seg_unmap: remove]
+    D --> E[HAT unload]
+    E --> F[seg_free]

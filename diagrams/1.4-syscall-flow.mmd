@@ -1,0 +1,5 @@
+graph TD
+    A[User calls syscall] --> B[INT 0x80]
+    B --> C[Kernel handler]
+    C --> D[Execute function]
+    D --> E[Return to user]

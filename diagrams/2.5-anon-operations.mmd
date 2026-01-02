@@ -1,0 +1,6 @@
+graph TD
+    A[anon_resv: reserve swap] --> B[Check availsmem]
+    B --> C[Increment ani_resv]
+    C --> D[anon_alloc: get slot]
+    D --> E[Set refcnt and flags]
+    E --> F[Return anon pointer]

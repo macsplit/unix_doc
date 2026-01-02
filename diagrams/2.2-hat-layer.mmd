@@ -1,0 +1,19 @@
+graph TD
+    A[HAT: Hardware Address Translation] --> B[hat_alloc: create page tables]
+    B --> C[Allocate page directory]
+    C --> D[Map kernel space]
+
+    E[hat_memload: map page] --> F[Get/create page table entry]
+    F --> G[Set PTE with physical address]
+    G --> H[Set protection bits]
+    H --> I[Flush TLB if needed]
+
+    J[hat_unload: unmap pages] --> K[Clear PTE]
+    K --> L[Flush TLB entries]
+    L --> M[Free page table if empty]
+
+    N[TLB Miss] --> O[Hardware page table walk]
+    O --> P{PTE valid?}
+    P -->|yes| Q[Load TLB entry]
+    P -->|no| R[Page fault exception]
+    R --> S[as_fault handles miss]

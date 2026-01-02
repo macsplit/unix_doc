@@ -1,0 +1,5 @@
+graph TD
+    A[psignal called] --> B{Valid signal?}
+    B -->|Yes| C[Add to p_sig]
+    B -->|No| D[Return]
+    C --> E[Wake if sleeping]

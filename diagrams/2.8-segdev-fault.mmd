@@ -1,0 +1,6 @@
+graph TD
+    A[segdev_fault] --> B[Check permissions]
+    B --> C[Call device mapfunc]
+    C --> D[Get physical page]
+    D --> E[hat_devload: map]
+    E --> F[Return 0]

@@ -1,0 +1,6 @@
+graph TD
+    A[segkmem_alloc] --> B[Set allocation flags]
+    B --> C[rm_allocpage: get pages]
+    C --> D[Map pages with PTEs]
+    D --> E[flushtlb]
+    E --> F[Return address]

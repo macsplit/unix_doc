@@ -1,0 +1,16 @@
+[book]
+title = "The Ghost of SVR4"
+authors = ["Lee Hanken"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = ""
+git-repository-icon = "fa-git"
+additional-css = ["theme/custom.css"]
+additional-js = []

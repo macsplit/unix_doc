@@ -1,0 +1,6 @@
+graph TD
+    A[wait syscall] --> B[Search child list]
+    B --> C{Zombie found?}
+    C -->|yes| D[Package exit status]
+    C -->|no| E[Sleep on p_child]
+    D --> F[freeproc: cleanup]

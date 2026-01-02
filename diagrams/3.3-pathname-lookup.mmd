@@ -1,0 +1,7 @@
+graph TD
+    A[Copy path from user] --> B[Get starting directory]
+    B --> C[Extract component]
+    C --> D[VOP_LOOKUP in directory]
+    D --> E{More components?}
+    E -->|yes| C
+    E -->|no| F[Return vnode]

@@ -1,0 +1,32 @@
+/* Custom fonts for The Ghost of SVR4 */
+
+@font-face {
+    font-family: 'Alegreya';
+    src: url('Alegreya-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Alegreya';
+    src: url('Alegreya-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('SpaceMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply Alegreya to body text */
+body {
+    font-family: 'Alegreya', serif;
+}
+
+/* Apply Space Mono to monospace elements */
+code, pre, .hljs {
+    font-family: 'Space Mono', monospace;
+}

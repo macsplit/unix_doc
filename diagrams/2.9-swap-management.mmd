@@ -1,0 +1,6 @@
+graph TD
+    A[swapadd: add device] --> B[Allocate swapinfo structure]
+    B --> C[Create anon free list]
+    C --> D[Link into global list]
+    D --> E[swap_alloc: get slot]
+    E --> F[Return anon pointer]

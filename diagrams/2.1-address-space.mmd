@@ -1,0 +1,6 @@
+graph TD
+    A[as_alloc: create] --> B[Initialize segment list]
+    B --> C[as_map: add segment]
+    C --> D[as_fault: handle fault]
+    D --> E[Call segment handler]
+    E --> F[Load translation]

@@ -1,0 +1,5 @@
+graph TD
+    A[ISR Complete] --> B{User Mode?}
+    B -->|Yes| C[Check Signals]
+    B -->|No| D[Return to Kernel]
+    C --> E[Return to User]

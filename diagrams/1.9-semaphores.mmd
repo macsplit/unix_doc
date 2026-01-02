@@ -1,0 +1,6 @@
+graph TD
+    A[semget: create set] --> B[Allocate sem array]
+    B --> C[semop: operation]
+    C --> D{Can proceed?}
+    D -->|yes| E[Update semval]
+    D -->|no| F[Sleep until available]

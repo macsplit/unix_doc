@@ -1,0 +1,6 @@
+graph TD
+    A[segvn_create] --> B[anon_resv: reserve swap]
+    B --> C[hat_map: reserve HAT]
+    C --> D[Allocate segvn_data]
+    D --> E[Set seg->s_ops]
+    E --> F[Return 0]

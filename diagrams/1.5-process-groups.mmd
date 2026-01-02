@@ -1,0 +1,6 @@
+graph TD
+    A[Process created] --> B[Inherit p_pgrp]
+    B --> C[setpgrp: new group]
+    C --> D[Allocate pid_t]
+    D --> E[Job control signals]
+    E --> F[Deliver to group]

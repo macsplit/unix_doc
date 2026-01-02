@@ -1,0 +1,6 @@
+graph TD
+    A[pid_assign] --> B[Search hash table]
+    B --> C[Allocate pid_t]
+    C --> D[Assign next_pid]
+    D --> E[Insert into hash]
+    E --> F[Return PID]
