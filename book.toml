@@ -14,3 +14,15 @@ git-repository-url = ""
 git-repository-icon = "fa-git"
 additional-css = ["theme/custom.css"]
 additional-js = []
+
+# Enable EPUB output
+[output.epub]
+# Optional settings for EPUB:
+# cover-image = "assets/cover.png"
+# additional-css = ["custom.css"]
+
+# Enable PDF output
+[output.pdf]
+# Optional settings for PDF:
+# landscape = false
+# display-header-footer = true
