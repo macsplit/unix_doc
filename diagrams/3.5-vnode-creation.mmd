@@ -1,0 +1,7 @@
+graph TD
+    A[vn_make(fd, VDUP)] --> B[Allocate new vnode]
+    B --> C{VDUP flag set?}
+    C -->|yes| D[Set v_fd to curproc->p_fd->fd_ofiles[fd]]
+    C -->|no| E[Return vnode]
+    D --> F[VN_HOLD(vp->v_fd)]
+    F --> G[Return vnode]

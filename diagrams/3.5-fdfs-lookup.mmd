@@ -1,0 +1,8 @@
+graph TD
+    A[Access /dev/fd/N] --> B{Is name a digit?}
+    B -->|yes| C[Convert to integer]
+    B -->|no| D[Return ENOENT]
+    C --> E{FD valid?}
+    E -->|yes| F[Create vnode with VDUP]
+    E -->|no| G[Return EBADF]
+    F --> H[Return vnode]
