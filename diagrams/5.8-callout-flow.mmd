@@ -1,0 +1,12 @@
+graph TD
+    subgraph "timeout function call"
+        A[Start] --> B["Calculate future lbolt: t = lbolt + tim"]
+        B --> C[Raise IPL to spl7]
+        C --> D["Find next free slot in callout array"]
+        D --> E["Add new entry to end of heap"]
+        E --> F["Call heap_up to restore heap property"]
+        F --> G["Fill callout entry with fun, arg, and new ID"]
+        G --> H[Restore IPL with splx]
+        H --> I[Return new ID]
+    end
+    I --> J[End]

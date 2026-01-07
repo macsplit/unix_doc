@@ -1,0 +1,37 @@
+graph TD
+    subgraph "Buffer Hash Table (hbuf)"
+        direction LR
+        B0("hbuf 0")
+        B1("hbuf 1")
+        B2("hbuf ...")
+        B3("hbuf N")
+    end
+
+    subgraph "Buffer Pool"
+        direction TB
+        Buf1("dev=A, blk=10, BUSY")
+        Buf2("dev=B, blk=5, FREE")
+        Buf3("dev=A, blk=18, BUSY")
+        Buf4("dev=C, blk=3, FREE")
+        Buf5("dev=B, blk=13, BUSY")
+    end
+
+    subgraph "Free List (bfreelist)"
+        direction TD
+        FL("bfreelist Head")
+    end
+
+    B0 -- "b_forw" --> Buf1
+    Buf1 -- "b_forw" --> Buf3
+    Buf3 -- "b_forw" --> B0
+
+    B1 -- "b_forw" --> Buf2
+    Buf2 -- "b_forw" --> Buf5
+    Buf5 -- "b_forw" --> B1
+    
+    B3 -- "b_forw" --> Buf4
+    Buf4 -- "b_forw" --> B3
+
+    FL -- "av_forw (LRU)" --> Buf2
+    Buf2 -- "av_forw" --> Buf4
+    Buf4 -- "av_forw" --> FL

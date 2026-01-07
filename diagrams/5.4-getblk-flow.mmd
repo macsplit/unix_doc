@@ -1,0 +1,11 @@
+graph TD
+    A[Start getblk] --> B{Block in cache?};
+    B -- Yes --> C{Is it BUSY?};
+    B -- No --> G[Call getfreeblk];
+    C -- Yes --> D[Mark WANTED];
+    D --> E[sleep];
+    E --> A;
+    C -- No --> F[Mark BUSY];
+    F --> H[Return buffer];
+    G --> F;
+    H --> I[End];

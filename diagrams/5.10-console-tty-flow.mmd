@@ -1,0 +1,32 @@
+graph TD
+    subgraph "User Process"
+        A["read() call blocks"];
+    end
+
+    subgraph "Kernel"
+        B(Stream Head);
+        C(ldterm Module - Line Discipline);
+        D(asy Driver - Serial Port);
+    end
+
+    subgraph "Hardware"
+        E[Keyboard];
+    end
+
+    E -- Character typed --> D;
+    D -- M_DATA message up the Stream --> C;
+    C -- Processes character (echo, edit, etc.) --> C;
+    C -- Line complete (Enter pressed) --> B;
+    B -- Copies line to user buffer --> A;
+    A -- read() returns --> F[Process continues];
+
+    style A fill:#lightgreen,stroke:#333,stroke-width:2px
+    style F fill:#lightgreen,stroke:#333,stroke-width:2px
+    style E fill:#lightblue,stroke:#333,stroke-width:2px
+    
+    linkStyle 0 stroke-width:2px,stroke:blue,fill:none;
+    linkStyle 1 stroke-width:2px,stroke:red,fill:none;
+    linkStyle 2 stroke-width:2px,stroke:red,fill:none;
+    linkStyle 3 stroke-width:2px,stroke:red,fill:none;
+    linkStyle 4 stroke-width:2px,stroke:green,fill:none;
+    linkStyle 5 stroke-width:2px,stroke:green,fill:none;

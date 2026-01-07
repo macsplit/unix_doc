@@ -1,0 +1,9 @@
+graph TD
+    A["main calls newproc with NP_INIT"] --> B["Allocate Process 1"]
+    B --> C["Allocate Address Space - as_alloc"]
+    C --> D["Map Text Segment - UVTEXT"]
+    D --> E["Copy icode to UVTEXT - copyout"]
+    E --> F["Map Stack Segment"]
+    F --> G["Set up LDT/GDT for user mode"]
+    G --> H["Process 1 init ready to run"]
+    H -->|"Scheduler runs init"| I["init execs /sbin/init"]

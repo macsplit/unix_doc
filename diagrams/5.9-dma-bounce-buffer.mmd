@@ -1,0 +1,41 @@
+graph TD
+    subgraph "CPU (Master Architect)"
+        A["Process requests WRITE to high memory"];
+    end
+
+    subgraph "Kernel I/O Subsystem"
+        B{Device requires DMA-able buffer?};
+        C["1. Allocate Bounce Buffer in low memory (<16MB)"];
+        D["2. CPU copies data from High Memory to Bounce Buffer"];
+        E["3. Initiate DMA Transfer from Bounce Buffer"];
+    end
+    
+    subgraph "DMA Controller (Junior Drafter)"
+        F["4. Reads from Bounce Buffer"];
+        G["5. Writes data to I/O Device"];
+    end
+
+    subgraph "Memory (Drafting Table)"
+        HM["High Memory (>16MB)"];
+        BB["Low Memory Bounce Buffer (<16MB)"];
+    end
+
+    subgraph "I/O Device"
+        DEV["Disk / Network Card"];
+    end
+
+    A --> B;
+    B -- Yes --> C;
+    C --> D;
+    D -- Contains data --> BB;
+    HM -- Copied by CPU --> BB;
+    D --> E;
+    E --> F;
+    F -- Reads --> BB;
+    F --> G;
+    G --> DEV;
+    B -- No --> H(Perform direct DMA);
+    H --> DEV;
+
+    style HM fill:#f9f,stroke:#333,stroke-width:2px;
+    style DEV fill:#ccf,stroke:#333,stroke-width:2px;
