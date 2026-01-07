@@ -59,6 +59,9 @@ This elegant design allows for great modularity. To add a new subsystem, a progr
 
 After the core subsystems are running, the root filesystem is mounted (`vfs_mountroot()`), making the primary hierarchy of files and directories available for the first time.
 
+![System Initialization Sequence](5.7-initialization-sequence.png)
+**Figure 5.7.2: Simplified Flowchart of `main()` Initialization Sequence**
+
 <br/>
 
 ## The First Citizen: The `init` Process
@@ -88,6 +91,9 @@ With the fairgrounds fully prepared, it is time to admit the first citizen. `mai
 This is a special case of process creation. The new process, which will have a process ID of 1, does not `fork` from an existing process in the usual way. Instead, `main()` constructs its user-space image from scratch. It maps a text segment and copies in a small piece of machine code known as `icode`. This `icode` is a miniature program whose only purpose is to execute the program `/sbin/init`.
 
 Once this new process is created and made ready to run, the `main()` function's work in this context is done. It will return, and the scheduler will eventually run the newly-birthed `init` process, which will immediately `exec("/sbin/init")`. This user-space `init` program then takes over the task of bringing the system to its operational run-level by reading its configuration from `/etc/inittab` and spawning `getty` processes, daemons, and other essential services.
+
+![Init Process Creation Flow](5.7-init-process-creation.png)
+**Figure 5.7.1: Flowchart for the Creation of the `init` Process (Process 1)**
 
 <br/>
 

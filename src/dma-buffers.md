@@ -89,6 +89,9 @@ At boot time, the system identifies all physical memory that lies below the 16-m
 
 This process, known as "double-buffering" or creating a "bounce buffer," is managed by functions like `dmaable_rawio()` in `io/dmacheck.c`. It is inefficient—it requires an extra copy operation by the CPU—but it is the essential accommodation that allows modern, high-memory systems to work harmoniously with older, address-limited hardware. It is the architect providing a lowly drafting stool for the junior drafter to stand on, enabling him to complete his work.
 
+![DMA Bounce Buffer Mechanism](5.9-dma-bounce-buffer.png)
+**Figure 5.9.1: Data Flow with a DMA Bounce Buffer**
+
 ---
 
 > #### **The Ghost of SVR4: The Magic of the IOMMU**

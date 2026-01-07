@@ -89,13 +89,16 @@ Then, through an `I_PUSH` `ioctl()` call, the `ldterm` module is pushed onto the
 
 This modular pipeline allows for immense flexibility. One could, for instance, push a "JSON formatting" module on top of `ldterm` to automatically parse terminal input, or a network module below it to create a remote terminal session, all without modifying the other components.
 
+![TTY STREAMS Data Flow](5.10-console-tty-flow.png)
+**Figure 5.10.1: TTY STREAMS Data Flow from Hardware to User Process**
+
 ---
 
 > #### **The Ghost of SVR4: The Universal Erector Set**
 >
 > We saw in STREAMS a universal building block, an Erector Set for I/O. The TTY subsystem was its most perfect expression. We built everything with it. The console, serial ports, network pseudo-terminals for `rlogin` and `telnet`—they were all just different stacks of STREAMS modules. A pseudo-terminal (`ptem`) driver on the bottom, `ldterm` in the middle, and the stream head on top. This modularity was the pinnacle of our design philosophy.
 >
-> **Modern Contrast (2026):** The Linux kernel, in its relentless pursuit of performance, viewed our elegant Erector Set as cumbersome. The overhead of allocating message blocks for every character, the function call chain to pass them up and down the stream—it was considered too costly for something as fundamental as the terminal. The modern Linux TTY subsystem, while still supporting the same `termios` interface, is a far more monolithic affair.
+> **Modern Contrast (2026):** The Linux kernel, in its relentless pursuit of performance, viewed our elegant Erector Set as cumbersome. The overhead of allocating message blocks for every character, the function call chain to pass them up and down the stream—it was, frankly, slow. For a 9600-baud serial line, this was of no consequence. For a modern gigabit network connection masquerading as a terminal via SSH, it is a significant bottleneck. The modern Linux TTY subsystem, while still supporting the same `termios` interface, is a far more monolithic affair.
 >
 > The line discipline is no longer a swappable STREAMS module but a tightly integrated set of functions (the `n_tty.c` discipline) compiled directly into the kernel's TTY core. The complex machinery of `mblk_t` messages is replaced by a simpler `tty_buffer` and `flip_buffer` mechanism. While pseudo-terminals still exist, they are a specialized driver, not a generic STREAMS component. The result is a system that is significantly faster for terminal I/O, but which has sacrificed the universal modularity we so prized. The specialized workshops have triumphed over the general-purpose Telegraph Office.
 
@@ -103,7 +106,7 @@ This modular pipeline allows for immense flexibility. One could, for instance, p
 
 <br/>
 
-## Conclusion: The Interpreted Signal
+## Conclusion: From Raw Signals to Polished Lines
 
 The SVR4 console and terminal subsystem is the quintessential example of the power and elegance of the STREAMS architecture. It takes the raw, uninterpreted signals from the hardware and, through a disciplined chain of clerks, transforms them into the structured, line-oriented data that programs expect. The `asy` driver works the wire, and the `ldterm` module works the language.
 

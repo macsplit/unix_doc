@@ -1,6 +1,6 @@
 # File Descriptor File System
 
-Imagine, if you will, a grand Victorian-era office where every document and correspondence is meticulously organized within a labyrinthine filing system. Each file drawer contains not only the original documents but also reflective mirrors that allow one to see into other drawers. This system of mirrors ensures that any document can be cross-referenced with others, creating an intricate web of interconnected information.
+Imagine, if you will, a grand old-world office where every document and correspondence is meticulously organized within a labyrinthine filing system. Each file drawer contains not only the original documents but also reflective mirrors that allow one to see into other drawers. This system of mirrors ensures that any document can be cross-referenced with others, creating an intricate web of interconnected information.
 
 The File Descriptor File System (FDFS) in the SVR4 kernel operates much like this office. It provides a mechanism for processes to access file descriptors as if they were files themselves, allowing for seamless integration and manipulation within the filesystem.
 
@@ -74,6 +74,6 @@ The FDFS subsystem maintains a fake directory that contains entries correspondin
 
 ## Conclusion
 
-Returning to our Victorian office metaphor, the FDFS subsystem in SVR4 is akin to a system of reflective mirrors within a filing cabinet. Each mirror allows one to see into other drawers, facilitating cross-referencing and seamless access to information. Similarly, FDFS provides processes with a mechanism to access their file descriptors as if they were files, leveraging the existing filesystem infrastructure to create an intricate web of interconnected resources.
+Returning to our old-world office metaphor, the FDFS subsystem in SVR4 is akin to a system of reflective mirrors within a filing cabinet. Each mirror allows one to see into other drawers, facilitating cross-referencing and seamless access to information. Similarly, FDFS provides processes with a mechanism to access their file descriptors as if they were files, leveraging the existing filesystem infrastructure to create an intricate web of interconnected resources.
 
 The elegance of this design lies in its simplicity and efficiency, allowing for seamless integration and manipulation of file descriptors within the SVR4 kernel.

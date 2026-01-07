@@ -6,7 +6,7 @@ An interrupt is not a knock. Knocks are courteous. Knocks can be ignored.
 
 **An interrupt is a lightning strike.**
 
-Picture the CPU as a Victorian scholar hunched over illuminated manuscripts (user processes), quill in hand, mid-sentence in an important treatise. Beside him on the desk sits a telegraph key—silent, inert. Then, without warning, the key **SLAMS down**—*click-click-click*—unbidden, uncaring for his sentence mid-phrase, his ink mid-stroke. The telegraph wire (the `INTR` pin on the i386 package) carries voltage from the Programmable Interrupt Controller, a spike from 0V to 5V that the CPU's state machine **electrically detects** on every single clock cycle.
+Picture the CPU as a diligent scholar hunched over illuminated manuscripts (user processes), quill in hand, mid-sentence in an important treatise. Beside him on the desk sits a telegraph key—silent, inert. Then, without warning, the key **SLAMS down**—*click-click-click*—unbidden, uncaring for his sentence mid-phrase, his ink mid-stroke. The telegraph wire (the `INTR` pin on the i386 package) carries voltage from the Programmable Interrupt Controller, a spike from 0V to 5V that the CPU's state machine **electrically detects** on every single clock cycle.
 
 The CPU doesn't "hear" the interrupt. It doesn't "check for" the interrupt. The silicon itself, at the transistor level, **senses voltage** on a dedicated pin, and the processor's finite state machine—wired into the chip during fabrication—**hijacks the instruction pipeline**. This is not software. This is **electrical tyranny**.
 
@@ -92,7 +92,7 @@ This routine is the kernel's final gatekeeper, ensuring that asynchronous events
 
 Not all interrupts are created equal. A timer interrupt, which must occur precisely every 10 milliseconds to maintain system time, takes precedence over a keyboard interrupt (which can wait 50 milliseconds while you finish your critical section). SVR4's hierarchy is brutal and simple: **interrupt priority levels**.
 
-The `spl6()` function is like shouting **"SILENCE!"** in a crowded Victorian tavern—not politely requesting quiet, but **COMMANDING** it. Every device interrupt below priority 6 MUST wait, frozen mid-sentence, mouths open but silent, until `splx()` restores the original noise level.
+The `spl6()` function is like shouting **"SILENCE!"** in a crowded bustling tavern—not politely requesting quiet, but **COMMANDING** it. Every device interrupt below priority 6 MUST wait, frozen mid-sentence, mouths open but silent, until `splx()` restores the original noise level.
 
 **What Happens in Silicon:**
 

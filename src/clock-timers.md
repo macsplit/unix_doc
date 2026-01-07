@@ -117,6 +117,9 @@ The `timeout` function's procedure is straightforward:
 
 This ID can later be passed to `untimeout()` to find and remove the notice from the board before it has a chance to execute, cancelling the pending action.
 
+![Callout Table Timeout Flow](5.8-callout-flow.png)
+**Figure 5.8.1: Simplified Flowchart for `timeout()` Function**
+
 ---
 
 > #### **The Ghost of SVR4: The Humble Heap**

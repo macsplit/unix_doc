@@ -30,3 +30,17 @@ body {
 code, pre, .hljs {
     font-family: 'Space Mono', monospace;
 }
+
+/* Image styling for ebook (PDF) output to prevent full-width */
+.page-wrapper img, .content img {
+    max-width: 80% !important; /* Limits max image width to 80% of content area */
+    height: auto !important;    /* Maintains aspect ratio */
+    display: block;             /* Centers block-level images */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Specific rule for diagrams, if different styling is desired */
+.page-wrapper img[src*="diagrams"], .content img[src*="diagrams"] {
+    max-width: 80% !important; /* Can be adjusted, e.g., 90% */
+}

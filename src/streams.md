@@ -244,7 +244,7 @@ This code handles both initial stream creation and subsequent re-opens. The `sd_
 
 > **The Ghost Speaks: The Tragedy of Beautiful Abstraction**
 >
-> Picture STREAMS as a grand Victorian postal system—every packet a letter in a cream envelope, every queue a mahogany sorting office with glass doors, every service procedure a clerk in waistcoat and spectacles, meticulously examining each message before passing it to the next office. In 1988, this was elegance itself: **modular, inspectable, debuggable**. You could WATCH the mail flow through those glass-doored cabinets. A kernel debugger could freeze time and examine each `mblk_t` as if it were a letter on a desk—sender address (`b_rptr`), recipient (`b_wptr`), contents (`db_base`). The abstraction was so clean that new protocols could be added as new "departments" without rebuilding the post office.
+> Picture STREAMS as a grand old-world postal system—every packet a letter in a cream envelope, every queue a mahogany sorting office with glass doors, every service procedure a clerk in waistcoat and spectacles, meticulously examining each message before passing it to the next office. In 1988, this was elegance itself: **modular, inspectable, debuggable**. You could WATCH the mail flow through those glass-doored cabinets. A kernel debugger could freeze time and examine each `mblk_t` as if it were a letter on a desk—sender address (`b_rptr`), recipient (`b_wptr`), contents (`db_base`). The abstraction was so clean that new protocols could be added as new "departments" without rebuilding the post office.
 >
 > **But then the telegraph became the telephone, and the telephone became fiber-optic cable.**
 >

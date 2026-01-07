@@ -1,400 +1,188 @@
-# AI Agent Continuation Prompt: The Ghost of SVR4
+# AI Agent Continuation Prompt: Finalization Tasks
 
 ## Project Overview
-You are continuing work on "The Ghost of SVR4", a technical book about the SVR4 UNIX kernel written in a "Victorian narrative" style (but do not mention Victorian referenced per se)  with whimsy and technical precision. The book is built using mdbook (Rust documentation tool) and contains 5 chapters covering Process Management, Memory Management, File Systems, Networking, and System Initialization.
+You are continuing work on "The Ghost of SVR4", a technical book about the SVR4 UNIX kernel written in a narrative style with whimsy and technical precision. The book is built using mdbook (Rust documentation tool).
 
-## Repository Structure
-```
-/home/user/Code/Languages Coding/unix_doc/
-├── book.toml                    # mdbook configuration
-├── src/
-│   ├── SUMMARY.md              # Table of contents (single source of truth)
-│   ├── *.md                    # 50+ markdown files (descriptive names, no number prefixes)
-│   └── *.png                   # Generated diagram images
-├── diagrams/
-│   └── *.mmd                   # Mermaid diagram source files
-├── theme/
-│   ├── custom.css              # Alegreya font for body, Space Mono for code
-│   └── *.ttf                   # Font files
-├── PROGRESS.md                 # Session progress tracking
-└── .puppeteerrc.json          # Puppeteer config for diagram generation
-
-SVR4 Source Code:
-/home/user/Code/Languages Coding/svr4-src/uts/i386/
-├── fs/                         # File system implementations
-├── mem/                        # Memory management
-├── proc/                       # Process management
-├── net/                        # Networking
-└── sys/                        # System headers
-```
+## Repository Structure (unchanged from previous)
 
 ## Current Status
-
-**Next to write:**
-`block-io.md`  "Block I/O Subsystem"
-
-**Currently placeholder sections:** Sections contain about 15 lines.
-
-## Writing Style Requirements
-
-### Victorian Narrative Voice
-1. **Opening metaphor** (2-3 paragraphs): Compare kernel mechanism to Victorian-era concept
-   - Examples: pocket notebook (dnlc), pneumatic tubes, telegraph office, railway system
-   - Anthropomorphize components: "The kernel, fastidious clerk that it is..."
-   - Use period-appropriate vocabulary: "ledger", "registry", "mechanism", "apparatus"
-
-2. **Technical exposition** (main body):
-   - Start with high-level architecture
-   - Explain data structures with both prose and code
-   - Use **poetic code labels**: "The Ledger Entry Structure" not "Code Snippet 1"
-   - Include actual C code from SVR4 source with file:line references
-   - Explain algorithms step-by-step with Victorian metaphors woven throughout
-
-3. **Ghost of SVR4 aside** (1-2 paragraphs):
-   - Always enclosed in blockquote: `> **The Ghost of SVR4:**`
-   - Compare 1990 SVR4 approach to modern 2026 Linux/BSD implementation
-   - Be specific about modern technology (RCU, lockless algorithms, etc.)
-   - Maintain wistful, slightly melancholic tone about the passage of time
-   - Example: "In 2026, Linux's dcache employs RCU (Read-Copy-Update) for lockless lookups..."
-
-4. **Conclusion** (1-2 paragraphs):
-   - Return to opening metaphor
-   - Summarize significance of mechanism
-   - Victorian flourish to close
-
-### Formatting Rules
-- Use `<br/>` for section breaks (not `---`)
-- Code blocks with language: ````c` for C code
-- File references: `(fs/dnlc.c:232)` format
-- Cross-references: `[System Calls](./system-calls.md)` using descriptive filenames
-- Emphasis: **bold** for technical terms on first use, *italics* for metaphorical language
-
-### Example Structure (from dnlc.md)
-```markdown
-# Chapter.Section Title
-
-[Opening metaphor - Victorian comparison]
-
-[Technical overview paragraph]
-
-<br/>
-
-## Major Subsection 1
-
-[Technical content with code]
-
-### The Data Structure
-
-[Prose explanation]
-
-**The Ledger Entry Structure** (sys/dnlc.h:15):
-```c
-struct ncache {
-    /* actual code */
-};
-```
-
-[More prose explaining fields]
-
-<br/>
-
-## Major Subsection 2
-
-[Continue pattern]
-
-> **The Ghost of SVR4:** In 1990, SVR4's approach was [X].
-> By 2026, Linux implements this with [Y and Z]...
-
-<br/>
-
-## Conclusion
-
-[Return to metaphor, summary]
-```
-
-## Workflow Instructions
-
-### For Each Section:
-
-#### 1. RESEARCH PHASE
-```bash
-# Find relevant source files
-find "/home/user/Code/Languages Coding/svr4-src/uts/i386" -name "*keyword*" -type f
-
-# Read implementation files (.c)
-Read tool: /home/user/Code/Languages Coding/svr4-src/uts/i386/[path]/[file].c
-
-# Read header files (.h)
-Read tool: /home/user/Code/Languages Coding/svr4-src/uts/i386/sys/[header].h
-
-# Grep for specific functions or structures
-Grep tool: pattern="function_name", path="/home/user/Code/Languages Coding/svr4-src/uts/i386"
-```
-
-**Research checklist:**
-- [ ] Identify main data structures
-- [ ] Identify key functions and their purposes
-- [ ] Understand algorithm flow
-- [ ] Note interesting implementation details
-- [ ] Consider modern equivalents
-
-#### 2. PLANNING PHASE
-Before writing, plan:
-- Metaphor (what period concept matches this mechanism?)
-- Section structure (3-5 major subsections)
-- Which code snippets to include (2-4 key functions/structures)
-- What diagrams needed (1-3 flowcharts or structure diagrams)
-- Modern comparison for Ghost aside
-
-#### 3. WRITING PHASE
-```bash
-# Update existing placeholder file
-Read tool: /home/user/Code/Languages Coding/unix_doc/src/[section].md
-
-# Write the complete section
-Edit tool: Replace "PLACEHOLDER" text with full content (200-700 lines depending on complexity)
-```
-
-**Writing checklist:**
-- [ ] Opening metaphor establishes 'Victorian narrative' tone
-- [ ] Technical accuracy verified against source code
-- [ ] All code includes file:line references
-- [ ] Poetic labels for all code blocks
-- [ ] Ghost of SVR4 aside compares to modern (2026) systems
-- [ ] Cross-references use correct filenames (no number prefixes)
-- [ ] Conclusion returns to metaphor
-
-#### 4. DIAGRAM PHASE
-Create 1-3 Mermaid diagrams per section:
-
-```bash
-# Create diagram source
-Write tool: /home/user/Code/Languages Coding/unix_doc/diagrams/[chapter].[section]-[name].mmd
-
-# Mermaid flowchart example:
-graph TD
-    A[Start] --> B{Decision?}
-    B -->|yes| C[Action]
-    B -->|no| D[Alternative]
-    C --> E[End]
-    D --> E
-
-# Mermaid structure diagram example (avoid square brackets in node labels):
-graph TD
-    subgraph "Component Name"
-        N1["Field name: description"]
-        N2["Field name: description"]
-    end
-    N1 --> N3[Related structure]
-
-# Generate PNG
-Bash tool: PUPPETEER_EXECUTABLE_PATH=/home/user/.cache/puppeteer/chrome-headless-shell/linux-143.0.7499.169/chrome-headless-shell-linux64/chrome-headless-shell mmdc -i "diagrams/[file].mmd" -o "src/[file].png" -t default -b transparent -p .puppeteerrc.json
-```
-
-**Diagram guidelines:**
-- Flowcharts for algorithms (lookup, insert, delete operations)
-- Structure diagrams for data organization (hash tables, linked lists, trees)
-- Keep diagrams simple and readable (max 15 nodes)
-- Use descriptive node labels
-- AVOID square brackets in node labels (causes parse errors)
-
-#### 5. INTEGRATION PHASE
-```bash
-# Insert diagrams into markdown
-Edit tool: Add after relevant section heading:
-
-![Description](chapter.section-diagram-name.png)
-**Figure X.Y.Z: Caption in Title Case**
-```
-
-#### 6. TESTING PHASE
-```bash
-# Test mdbook builds successfully
-Bash: mdbook test
-
-# If errors, fix cross-references or formatting
-```
-
-#### 7. COMMIT PHASE
-```bash
-# Stage and commit
-Bash: git add src/[section].md diagrams/[chapter].[section]-*.mmd src/[chapter].[section]-*.png && git commit -m "Add [Section Name] documentation with diagrams
-
-- Complete [subsystem name] section (XXX lines)
-- Victorian narrative tone - characterized by realism, an omniscient, often moralizing, third-person narrator, and meticulous attention to detail
-- Metaphor: [metaphor used]
-- Technical detail: [key structures/algorithms]
-- Code from: svr4-src/uts/i386/[path]/[file].c
-- N diagrams: [list diagram purposes]
-- Ghost of SVR4: Compared to [modern equivalent]"
-
-# Update progress
-Edit tool: /home/user/Code/Languages Coding/unix_doc/PROGRESS.md
-# Add completed section, update statistics, note next section
-
-# Commit progress update
-Bash: git add PROGRESS.md && git commit -m "Update progress: completed [section name]"
-```
-
-## Tool Usage Patterns
-
-### Reading Source Code
-```
-ALWAYS use Read tool for specific files (NOT bash cat)
-Read tool: file_path="/home/user/Code/Languages Coding/svr4-src/uts/i386/[path]/[file]"
-```
-
-### Searching Source Code
-```
-Use Grep for finding functions/structures:
-Grep tool: pattern="struct_name", path="/home/user/Code/Languages Coding/svr4-src/uts/i386", output_mode="files_with_matches"
-
-Use Glob for finding files:
-Glob tool: pattern="**/keyword*.c", path="/home/user/Code/Languages Coding/svr4-src/uts/i386"
-```
-
-### Editing Markdown
-```
-ALWAYS Read first, then Edit (never Write for existing files)
-Read tool: file_path="/home/user/Code/Languages Coding/unix_doc/src/[file].md"
-Edit tool: old_string="PLACEHOLDER content", new_string="[full new content]"
-```
-
-### Creating Diagrams
-```
-Write tool for .mmd files (new files)
-Bash tool for mmdc command (with PUPPETEER_EXECUTABLE_PATH and -p .puppeteerrc.json)
-Edit tool to insert into markdown
-```
-
-## Common Pitfalls to Avoid
-
-1. **Square brackets in Mermaid**: Use `"nc_hash bucket 0"` not `"nc_hash[0]"`
-2. **Number prefixes in filenames**: Files are `process-lifecycle.md` not `1.1-process-lifecycle.md`
-3. **Diagram filenames**: Diagrams keep numbers like `3.4-dnlc-lookup.mmd` for organization
-4. **Git workflow**: Use `git add` then `git commit`, always with descriptive messages
-5. **Code without references**: Every code snippet needs `(file/path.c:line)` notation
-6. **Modern comparisons**: Be specific about 2026 technology, not vague "modern systems"
-7. **Dry technical writing**: Maintain whimsy throughout, never just bare technical exposition
-8. **Missing conclusion**: Every section must return to opening metaphor
-
-## Source Code Mapping (Key Files)
-
-### File Systems (Chapter 3)
-- **fdfs**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/fdfs/fdops.c`
-- **fifo**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/fifo/*.c`
-- **s5fs**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/s5fs/*.c`
-- **ufs**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/ufs/*.c`
-- **nfs**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/nfs/*.c`
-- **specfs**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/specfs/*.c`
-
-### Networking (Chapter 4)
-- **RPC/XDR**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/net/rpc/*.c`
-- **TCP/IP**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/net/inet/*.c`
-- **Sockets**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/net/socket/*.c`
-- **STREAMS**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/net/streams/*.c`
-
-### System Init (Chapter 5)
-- **Boot**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/boot/*.c`
-- **Drivers**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/io/*.c`
-- **Clock**: `/home/user/Code/Languages Coding/svr4-src/uts/i386/os/clock.c`
-
-### Headers (All)
-- `/home/user/Code/Languages Coding/svr4-src/uts/i386/sys/*.h`
-
-## Quality Checklist (Before Committing)
-
-Each completed section must have:
-- [ ] 200-700 lines (appropriate to complexity)
-- [ ] Metaphor in opening and conclusion
-- [ ] 2-4 code snippets with file:line references
-- [ ] 1-3 Mermaid diagrams (generated to PNG and inserted)
-- [ ] Technical accuracy verified against SVR4 source
-- [ ] Ghost of SVR4 aside with 2026 comparison
-- [ ] Poetic labels for all code blocks
-- [ ] No markdown syntax errors
-- [ ] Passes `mdbook test`
-- [ ] Git committed with descriptive message
-- [ ] PROGRESS.md updated
-
-## Session Management
-
-At end of each writing session:
-1. Commit all completed work
-2. Update PROGRESS.md with:
-   - Sections completed
-   - Sections in progress (with source files reviewed)
-   - Next steps
-   - Statistics (lines written, diagrams created)
-3. Commit PROGRESS.md
-4. Leave repository in clean state (`git status` shows nothing uncommitted)
-
-## Starting Point for New Agent
-
-**Immediate next task:** Write `src/fdfs.md` (File Descriptor File System)
-- Priority: SIMPLE (150-250 lines)
-- Source reviewed: `/home/user/Code/Languages Coding/svr4-src/uts/i386/fs/fdfs/fdops.c`
-- Key concepts: `/dev/fd/N` access to FDs, fdfsget() parsing, VDUP flag, fake directory
-- Suggested metaphor: Mirror reflecting mirror, or calling card system
-- Modern comparison: Linux `/proc/self/fd` symlinks
-- Expected diagrams: 1-2 (lookup flow, vnode creation)
-
-## Example Session Flow
-
-```
-1. Read fdops.c source (already done, see PROGRESS.md notes)
-2. Plan fdfs.md structure and metaphor
-3. Read current placeholder: src/fdfs.md
-4. Edit src/fdfs.md with complete content (150-250 lines)
-5. Write diagrams/3.5-fdfs-lookup.mmd (flowchart)
-6. Generate src/3.5-fdfs-lookup.png
-7. Edit src/fdfs.md to insert diagram
-8. Test: mdbook test
-9. Commit: git add src/fdfs.md diagrams/3.5-*.mmd src/3.5-*.png && git commit
-10. Update PROGRESS.md
-11. Commit PROGRESS.md
-12. Move to next section (fifo.md)
-13. Repeat
-```
-
-## Reference Completed Section
-
-For style reference, read:
-```
-Read tool: /home/user/Code/Languages Coding/unix_doc/src/dnlc.md
-```
-
-This shows perfect example of:
-- Metaphor (librarian's pocket notebook)
-- Technical depth (hash function, LRU list, code snippets)
-- Poetic labels ("The Ledger Entry Structure")
-- Ghost aside (comparing to Linux dcache)
-- Proper diagram integration
-- File references (fs/dnlc.c:232)
-
-## Success Criteria
-
-A continuation session is successful when:
-- At least 1 section completed per hour
-- All commits have descriptive messages
-- PROGRESS.md accurately reflects work done
-- Repository left in clean, buildable state
-- Style consistency maintained with existing sections
-- Technical accuracy verified against source code
-- mdbook test passes
-
-## Final Notes
-
-- Work through sections in priority order (simple → complex)
-- Build momentum with simple sections first
-- Take time on complex sections (TCP, NFS) - quality over speed
-- Maintain whimsy - this is NOT a dry technical manual
-- The cartoons in the book should not be changed or referenced
-- When stuck on metaphor, think: "What old-era system does this resemble?"
-- Remember: 2026 comparisons should be specific and technical, not vague
+All initial content writing tasks are complete. All explicit mentions of the word "Victorian" have been removed. Basic image styling for PDF output has been applied.
+
+## Next Tasks:
+
+### 1. Image Generation and Integration
+
+**Objective:** Generate PNG images for remaining Mermaid diagrams and correctly integrate them into their respective Markdown files.
+
+**Instructions:**
+*   For each `.mmd` file listed below, generate a `.png` image using the `mmdc` command. The command should be executed as follows (replace `diagram_file.mmd` and `diagram_file.png` with actual names):
+    ```bash
+    PUPPETEER_EXECUTABLE_PATH=/home/user/.cache/puppeteer/chrome-headless-shell/linux-143.0.7499.169/chrome-headless-shell-linux64/chrome-headless-shell mmdc -i "diagrams/diagram_file.mmd" -o "src/diagram_file.png" -t default -b transparent -p .puppeteerrc.json
+    ```
+*   Once the `.png` image is available, ensure the image is properly inserted into its corresponding `.md` file in the correct section. This means ensuring the Markdown file contains the `![Description](path/to/image.png)` tag with a descriptive caption and correct figure numbering.
+
+**List of `.mmd` files requiring corresponding `.png` generation and integration:**
+*   `diagrams/5.10-console-tty-flow.mmd` -> `src/console-terminal.md` (Figure 5.10.1)
+*   `diagrams/5.9-dma-bounce-buffer.mmd` -> `src/dma-buffers.md` (Figure 5.9.1)
+*   `diagrams/5.8-callout-flow.mmd` -> `src/clock-timers.md` (Figure 5.8.1)
+*   `diagrams/5.7-init-process-creation.mmd` -> `src/system-initialization.md` (Figure 5.7.1)
+*   `diagrams/5.7-initialization-sequence.mmd` -> `src/system-initialization.md` (Figure 5.7.2)
+
+### 2. Styling for Ebook (PDF) Output
+**Status:** COMPLETE. `theme/custom.css` has been updated with image scaling rules.
+
+### 3. Comprehensive Content Audit
+
+**Objective:** Systematically review *all* `.md` files linked in `SUMMARY.md` to accurately determine their status (fleshed out or placeholder) and identify any variances in length, content depth, or tone.
+
+**Instructions:**
+*   Go through each `.md` file listed in `SUMMARY.md`.
+*   For each file:
+    1.  **Read entire content.**
+    2.  **Determine Placeholder Status:** A file is considered a "placeholder" if its content is less than 50 lines long AND its content consists solely of boilerplate text (e.g., only a title, or a "Overview/Implementation/Key Functions" structure without details). Otherwise, it is "fleshed out".
+    3.  **Audit Fleshed-Out Sections:** For files identified as "fleshed out":
+        *   **Length Check:** Note the approximate line count. Does it seem disproportionately short or long compared to similar technical sections?
+        *   **Content Depth:** Assess if the technical detail provided is sufficient and consistent. Is it too superficial or overly granular for the topic?
+        *   **Tone Consistency:** Verify that the narrative style (whimsical, precise, "Ghost of SVR4" asides) is maintained.
+        *   **Technical Detail Double-Check:** Briefly re-verify that code snippets align with explanations and that "Ghost of SVR4" comparisons are technically sound.
+*   **Report:** Provide a detailed report categorizing all `SUMMARY.md` linked files as either "Fleshed Out" (with audit notes) or "Placeholder" (with boilerplate content).
+
+**Markdown files to audit:** (All non-numerically prefixed files linked in `SUMMARY.md`)
+*   `src/intro.md`
+*   `src/process-lifecycle.md`
+*   `src/process-scheduling.md`
+*   `src/signal-handling.md`
+*   `src/system-calls.md`
+*   `src/process-groups.md`
+*   `src/pid-management.md`
+*   `src/credentials.md`
+*   `src/messages.md`
+*   `src/semaphores.md`
+*   `src/shared-memory.md`
+*   `src/address-space.md`
+*   `src/hat-layer.md`
+*   `src/page-management.md`
+*   `src/memory-segments.md`
+*   `src/anonymous-memory.md`
+*   `src/segment-driver-vnode.md`
+*   `src/segment-driver-kernel-memory.md`
+*   `src/segment-driver-device-memory.md`
+*   `src/swap-space-management.md`
+*   `src/page-replacement-paging.md`
+*   `src/vfs-layer.md`
+*   `src/vnode-interface.md`
+*   `src/pathname-resolution.md`
+*   `src/dnlc.md`
+*   `src/ufs.md`
+*   `src/s5fs.md`
+*   `src/nfs-client.md`
+*   `src/special-files.md`
+*   `src/fifo.md`
+*   `src/fdfs.md`
+*   `src/network-stack-overview.md`
+*   `src/socket-layer.md`
+*   `src/ip.md`
+*   `src/tcp.md`
+*   `src/udp.md`
+*   `src/network-interfaces.md`
+*   `src/rpc.md`
+*   `src/nfs-server.md`
+*   `src/network-drivers.md`
+*   `src/streams.md`
+*   `src/boot.md`
+*   `src/driver-framework.md`
+*   `src/interrupts.md`
+*   `src/block-io.md`
+*   `src/character-io.md`
+*   `src/executable-formats.md`
+*   `src/system-initialization.md`
+*   `src/clock-timers.md`
+*   `src/dma-buffers.md`
+*   `src/console-terminal.md`
+*   `src/conclusion.md`
+*   `src/glossary.md`
+*   `src/acknowledgements.md`
+
+### 4. Fleshing Out Identified Placeholder Sections
+
+**Objective:** Fully develop all `.md` files identified as "Placeholder" in the Comprehensive Content Audit (Task 3).
+
+**Instructions:**
+*   For each identified placeholder file:
+    1.  **Research:** Investigate the SVR4 source code (located in `svr4-src/uts/i386/`) for relevant data structures and functions.
+    2.  **Write Content:** Create a complete section (200-700 lines recommended) following the established narrative style (whimsical yet precise, "Ghost of SVR4" asides). Incorporate SVR4 code snippets with file:line references and poetic labels.
+    3.  **Create Diagrams:** Design 1-3 Mermaid diagram source files (`diagrams/[chapter].[section]-[name].mmd`) illustrating key data structures or algorithms discussed.
+    4.  **Integrate Diagram Placeholders:** Insert conceptual PNG image placeholders (e.g., `![Description](path/to/image.png)`) into the Markdown file after relevant subsections, ensuring proper figure numbering and descriptive captions. Do NOT generate the actual PNGs; only create the `.mmd` and markdown reference.
+    5.  **Update Progress:** Remove the file from the list of placeholders in this prompt upon completion.
+
+### 5. Remove Redundant Numerically Prefixed Markdown Files
+
+**Objective:** Delete old `.md` files that are numerically prefixed and have been superseded by non-numerically prefixed counterparts (referenced in `SUMMARY.md`).
+
+**Instructions:**
+*   For each file in the list below, confirm its existence and then delete it.
+
+**Redundant Numerically Prefixed Markdown Files to Remove:**
+*   `src/1.1-process-lifecycle.md`
+*   `src/1.10-shared-memory.md`
+*   `src/1.2-process-scheduling.md`
+*   `src/1.3-signal-handling.md`
+*   `src/1.4-system-calls.md`
+*   `src/1.5-process-groups.md`
+*   `src/1.6-pid-management.md`
+*   `src/1.7-credentials.md`
+*   `src/1.8-messages.md`
+*   `src/1.9-semaphores.md`
+*   `src/2.1-address-space.md`
+*   `src/2.10-page-replacement-and-paging.md`
+*   `src/2.2-hat-layer.md`
+*   `src/2.3-page-management.md`
+*   `src/2.4-memory-segments.md`
+*   `src/2.5-anonymous-memory.md`
+*   `src/2.6-segment-drivers---vnode.md`
+*   `src/2.7-segment-drivers---kernel-memory.md`
+*   `src/2.8-segment-drivers---device-memory.md`
+*   `src/2.9-swap-space-management.md`
+*   `src/3.1-virtual-file-system-vfs-layer.md`
+*   `src/3.10-file-descriptor-file-system.md`
+*   `src/3.2-vnode-interface.md`
+*   `src/3.3-pathname-resolution.md`
+*   `src/3.4-directory-name-lookup-cache.md`
+*   `src/3.5-unix-file-system-ufs.md`
+*   `src/3.6-system-v-file-system.md`
+*   `src/3.7-network-file-system-nfs-client.md`
+*   `src/3.8-special-files-and-devices.md`
+*   `src/3.9-fifo-file-system.md`
+*   `src/4.1-network-stack-overview.md`
+*   `src/4.10-streams-framework.md`
+*   `src/4.2-socket-layer.md`
+*   `src/4.3-internet-protocol-ip.md`
+*   `src/4.4-transport-control-protocol-tcp.md`
+*   `src/4.5-user-datagram-protocol-udp.md`
+*   `src/4.6-network-interfaces.md`
+*   `src/4.7-remote-procedure-call-rpc.md`
+*   `src/4.8-nfs-server.md`
+*   `src/4.9-network-device-drivers.md`
+*   `src/5.1-boot-process.md`
+*   `src/5.2-device-driver-framework.md`
+*   `src/5.3-interrupt-handling.md`
+*   `src/5.5-character-i-o.md`
+
+## Tool Usage Patterns (unchanged from previous, except `mmdc` execution is detailed)
+
+## Common Pitfalls to Avoid (updated)
+-   **No "Victorian" word**: The word itself must not appear in the text, only the narrative style.
+-   **Diagram filenames**: Diagrams keep numbers like `5.7-initialization-sequence.mmd` for organization.
+-   **No PNG Generation by Agent**: The agent should only create the `.mmd` source files and integrate the *conceptual* PNG placeholders into markdown. The actual `mmdc` command to generate the PNGs should be provided to the user.
+
+## Success Criteria (updated)
+-   `AI_CONTINUATION_PROMPT.md` is updated with these instructions.
+-   `theme/custom.css` is updated with image styling.
+-   A report on the content audit (variances) is provided.
+-   All explicit "Victorian" references are removed from `.md` files.
+-   No markdown syntax errors after integration.
+-   Technical accuracy of new sections is confirmed.
+-   All placeholder sections are fleshed out.
+-   Redundant numerically prefixed `.md` files are removed.
 
 ---
-
-## Start
-
-Start with *src/block-io.md*

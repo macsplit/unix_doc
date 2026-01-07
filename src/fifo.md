@@ -1,6 +1,6 @@
 # FIFO File System: The Whispering Gallery
 
-Picture, if you will, a grand Victorian-era mansion with an intricate network of corridors and chambers. In one such chamber, there exists a peculiar device known as the "Whispering Gallery." This gallery is lined with curved walls that carry sound from one end to the other, allowing a whisper spoken at one point to be heard clearly at the opposite end. The Whispering Gallery serves as a metaphor for the FIFO (First-In-First-Out) File System in the SVR4 kernel—a mechanism that allows processes to communicate through named pipes.
+Picture, if you will, a grand mansion with an intricate network of corridors and chambers. In one such chamber, there exists a peculiar device known as the "Whispering Gallery." This gallery is lined with curved walls that carry sound from one end to the other, allowing a whisper spoken at one point to be heard clearly at the opposite end. The Whispering Gallery serves as a metaphor for the FIFO (First-In-First-Out) File System in the SVR4 kernel—a mechanism that allows processes to communicate through named pipes.
 
 In this system, data written by one process into a FIFO can be read by another process, much like a whispered message traveling along the curved walls of the gallery. The FIFO ensures that the order of messages is preserved, just as the Whispering Gallery preserves the sequence of whispers.
 
@@ -129,6 +129,6 @@ The circular buffer allows for efficient reading and writing operations, ensurin
 
 ## Conclusion
 
-Returning to our Victorian mansion metaphor, the FIFO subsystem in SVR4 is akin to the Whispering Gallery—a mechanism that allows messages to travel from one process to another with precision and order. Just as whispers echo along the curved walls of the gallery, data written by one process can be read by another, preserving the sequence of information.
+Returning to our mansion metaphor, the FIFO subsystem in SVR4 is akin to the Whispering Gallery—a mechanism that allows messages to travel from one process to another with precision and order. Just as whispers echo along the curved walls of the gallery, data written by one process can be read by another, preserving the sequence of information.
 
 The elegance of this design lies in its simplicity and efficiency, allowing for seamless inter-process communication within the SVR4 kernel.
