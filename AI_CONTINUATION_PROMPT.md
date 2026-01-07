@@ -29,31 +29,11 @@ SVR4 Source Code:
 ```
 
 ## Current Status
-**Completed:** 1 of 25 placeholder sections
-- ✅ src/dnlc.md (Directory Name Lookup Cache) - 246 lines with 2 diagrams
 
-**Next to write (in priority order):**
-1. src/fdfs.md - File Descriptor File System (SIMPLE, 150-250 lines)
-2. src/fifo.md - FIFO File System (SIMPLE-MEDIUM, 200-300 lines)
-3. src/special-files.md - Special Files and Devices (MEDIUM, 300-400 lines)
-4. src/s5fs.md - System V File System (COMPLEX, 400-600 lines)
-5. src/ufs.md - Unix File System (COMPLEX, 500-700 lines)
-6. src/nfs-client.md - NFS Client (COMPLEX, 400-600 lines)
-7. src/nfs-server.md - NFS Server (COMPLEX, 400-600 lines)
-8. src/rpc.md - RPC Mechanism (MEDIUM, 300-500 lines)
-9. src/xdr.md - XDR (External Data Representation) (MEDIUM, 250-400 lines)
-10. src/tcp.md - TCP Protocol (COMPLEX, 500-700 lines)
-11. src/udp.md - UDP Protocol (MEDIUM, 300-500 lines)
-12. src/ip.md - IP Layer (COMPLEX, 500-700 lines)
-13. src/routing.md - Routing (MEDIUM, 300-500 lines)
-14. src/sockets.md - Socket Interface (MEDIUM, 300-500 lines)
-15. src/streams-networking.md - STREAMS for Networking (COMPLEX, 400-600 lines)
-16. src/boot.md - Boot Process (MEDIUM, 300-500 lines)
-17. src/device-drivers.md - Device Drivers (MEDIUM, 300-500 lines)
-18. src/kernel-modules.md - Kernel Modules (MEDIUM, 250-400 lines)
-19. src/clock-timers.md - Clock and Timers (MEDIUM, 300-500 lines)
+**Next to write:**
+`block-io.md`  "Block I/O Subsystem"
 
-**Currently placeholder sections:** All 19 sections above contain "PLACEHOLDER" text.
+**Currently placeholder sections:** Sections contain about 15 lines.
 
 ## Writing Style Requirements
 
@@ -160,7 +140,7 @@ Grep tool: pattern="function_name", path="/home/user/Code/Languages Coding/svr4-
 
 #### 2. PLANNING PHASE
 Before writing, plan:
-- Victorian metaphor (what period concept matches this mechanism?)
+- Metaphor (what period concept matches this mechanism?)
 - Section structure (3-5 major subsections)
 - Which code snippets to include (2-4 key functions/structures)
 - What diagrams needed (1-3 flowcharts or structure diagrams)
@@ -176,7 +156,7 @@ Edit tool: Replace "PLACEHOLDER" text with full content (200-700 lines depending
 ```
 
 **Writing checklist:**
-- [ ] Opening metaphor establishes Victorian tone
+- [ ] Opening metaphor establishes 'Victorian narrative' tone
 - [ ] Technical accuracy verified against source code
 - [ ] All code includes file:line references
 - [ ] Poetic labels for all code blocks
@@ -241,7 +221,8 @@ Bash: mdbook test
 Bash: git add src/[section].md diagrams/[chapter].[section]-*.mmd src/[chapter].[section]-*.png && git commit -m "Add [Section Name] documentation with diagrams
 
 - Complete [subsystem name] section (XXX lines)
-- Victorian narrative: [metaphor used]
+- Victorian narrative tone - characterized by realism, an omniscient, often moralizing, third-person narrator, and meticulous attention to detail
+- Metaphor: [metaphor used]
 - Technical detail: [key structures/algorithms]
 - Code from: svr4-src/uts/i386/[path]/[file].c
 - N diagrams: [list diagram purposes]
@@ -294,7 +275,7 @@ Edit tool to insert into markdown
 4. **Git workflow**: Use `git add` then `git commit`, always with descriptive messages
 5. **Code without references**: Every code snippet needs `(file/path.c:line)` notation
 6. **Modern comparisons**: Be specific about 2026 technology, not vague "modern systems"
-7. **Dry technical writing**: Maintain Victorian whimsy throughout, never just bare technical exposition
+7. **Dry technical writing**: Maintain whimsy throughout, never just bare technical exposition
 8. **Missing conclusion**: Every section must return to opening metaphor
 
 ## Source Code Mapping (Key Files)
@@ -325,7 +306,7 @@ Edit tool to insert into markdown
 
 Each completed section must have:
 - [ ] 200-700 lines (appropriate to complexity)
-- [ ] Victorian metaphor in opening and conclusion
+- [ ] Metaphor in opening and conclusion
 - [ ] 2-4 code snippets with file:line references
 - [ ] 1-3 Mermaid diagrams (generated to PNG and inserted)
 - [ ] Technical accuracy verified against SVR4 source
@@ -384,7 +365,7 @@ Read tool: /home/user/Code/Languages Coding/unix_doc/src/dnlc.md
 ```
 
 This shows perfect example of:
-- Victorian metaphor (librarian's pocket notebook)
+- Metaphor (librarian's pocket notebook)
 - Technical depth (hash function, LRU list, code snippets)
 - Poetic labels ("The Ledger Entry Structure")
 - Ghost aside (comparing to Linux dcache)
@@ -407,9 +388,13 @@ A continuation session is successful when:
 - Work through sections in priority order (simple → complex)
 - Build momentum with simple sections first
 - Take time on complex sections (TCP, NFS) - quality over speed
-- Maintain Victorian whimsy - this is NOT a dry technical manual
+- Maintain whimsy - this is NOT a dry technical manual
 - The cartoons in the book should not be changed or referenced
-- When stuck on metaphor, think: "What Victorian-era system does this resemble?"
+- When stuck on metaphor, think: "What old-era system does this resemble?"
 - Remember: 2026 comparisons should be specific and technical, not vague
 
 ---
+
+## Start
+
+Start with *src/block-io.md*
