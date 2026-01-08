@@ -1,6 +1,10 @@
-<center>by Lee</center>
+<div style="page-break-after: always; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-<center><em>for India</em></center>
+<center style="font-size: 1.2em; margin-bottom: 4em;">by Lee</center>
+
+<center style="font-size: 1em; font-style: italic;">for India</center>
+
+</div>
 
 # Introduction
 
