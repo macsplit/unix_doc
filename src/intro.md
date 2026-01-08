@@ -1,7 +1,3 @@
-<div class="cover-page">
-<img src="cover.png" alt="The Ghost of SVR4 - Cover">
-</div>
-
 <center>by Lee</center>
 
 <center><em>for India</em></center>

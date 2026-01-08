@@ -45,43 +45,6 @@ img[src*="cartoon"] {
     max-width: 50% !important;
 }
 
-/* Cover page - full page height and width, page break after */
-.cover-page {
-    display: block;
-    width: 100%;
-    height: 11in;
-    margin: 0;
-    padding: 0;
-    page-break-after: always;
-    page-break-inside: avoid;
-    page: cover-page;
-}
-
-/* Cover image - full width and height, no constraints */
-.cover-page img,
-img[src*="cover.png"] {
-    max-width: none !important;
-    max-height: none !important;
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-}
-
-/* Hide header and footer on cover page */
-@page cover-page {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    @top-right {
-        content: "";
-    }
-    @bottom-center {
-        content: "";
-    }
-}
-
 /* Technical diagrams (everything that's NOT a cartoon) - 90% width, height constrained */
 img:not([src*="cartoon"]) {
     max-width: 90% !important;
