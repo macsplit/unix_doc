@@ -31,10 +31,11 @@ code, pre, .hljs {
     font-family: 'Space Mono', monospace;
 }
 
-/* Image styling - constrain by both dimensions, letting aspect ratio determine which is limiting */
-.page-wrapper img, .content img {
-    max-width: 90% !important;    /* Allow wider diagrams more room (not too constrained) */
-    max-height: 75vh !important;  /* Tall diagrams constrained by height (75% of page) */
+/* Image styling for PDF output with proper constraints */
+.page-wrapper img, .content img,
+img {
+    max-width: 90% !important;    /* Allow wider diagrams room */
+    max-height: 5.5in !important; /* Tall diagrams: ~75% of usable page height (A4/Letter with margins) */
     height: auto !important;      /* Maintains aspect ratio */
     display: block;               /* Block-level for centering */
     margin: 1em auto;             /* Center with margin */
@@ -45,7 +46,7 @@ code, pre, .hljs {
 @media print {
     img {
         max-width: 90% !important;  /* 90% of page width for wider diagrams */
-        max-height: 75vh !important; /* 75% height constraint for tall diagrams */
+        max-height: 5.5in !important; /* 5.5 inches ~ 75% of usable page height */
         height: auto !important;
         page-break-inside: avoid;
         display: block;
