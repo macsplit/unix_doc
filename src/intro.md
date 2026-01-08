@@ -7,7 +7,7 @@
 
 <center><em>for India</em></center>
 
-# Introduction {.unnumbered}
+# Introduction
 
 This technical guide provides comprehensive documentation of the SVR4 (System V Release 4) i386 kernel architecture and implementation. The documentation is derived from source code analysis and covers the major subsystems that comprise a complete Unix kernel.
 

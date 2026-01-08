@@ -1,7 +1,7 @@
 
 ---
 
-# Conclusion {.unnumbered}
+# Conclusion
 
 This technical guide has examined the SVR4 i386 kernel implementation across five major subsystems: process management, memory management, file systems, networking, and I/O device management. The analysis reveals a mature, well-architected Unix kernel that balances performance, portability, and maintainability.
 
