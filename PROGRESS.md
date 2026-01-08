@@ -130,26 +130,32 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/fs/ufs/*.c`
   - 1 diagram: inode structure
   - Ghost of SVR4: Compared to journaling filesystems.
+- ✅ **s5fs.md** (System V File System) - 250 lines
+  - Victorian metaphor: The Provincial Lending Library
+  - Technical content: filsys, inode, free block list
+  - Code from: `svr4-src/uts/i386/fs/s5/*.c`
+  - 1 diagram: s5fs inode structure
+  - Ghost of SVR4: Compared to FAT32.
 
 ### In Progress
-- **s5fs.md** (System V File System) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/fs/s5fs/*.c`
+- **nfs-client.md** (Network File System Client) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/fs/nfs/*.c`
   - Key concepts identified:
-    * Simpler block allocation
-    * Lack of cylinder groups
-    * Free block list
-  - Victorian metaphor candidate: The Provincial Lending Library.
-  - Modern comparison: The simplicity of FAT32.
+    * RPC, XDR
+    * biod daemons
+    * Attribute caching
+  - Victorian metaphor candidate: The Foreign Office and its Diplomatic Cables.
+  - Modern comparison: Modern distributed filesystems and object stores.
 
 ### Next Steps (Filesystems)
-1. Write s5fs.md (200-300 lines, MEDIUM)
-2. Write nfs-client.md (300-400 lines, COMPLEX)
+1. Write nfs-client.md (300-400 lines, COMPLEX)
+2. Write nfs-server.md (300-400 lines, COMPLEX)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 7/25 placeholder sections
-- **Lines written today:** 1150
-- **Diagrams created:** 5
+- **Total sections completed:** 8/25 placeholder sections
+- **Lines written today:** 1400
+- **Diagrams created:** 6
 - **Commits:** 0
 
 ## Plan Reference
