@@ -1,0 +1,23 @@
+graph TD
+    subgraph "User Process"
+        A[System Call e.g., read(), write()] --> B{VFS Interface}
+    end
+
+    subgraph "Kernel"
+        B --> C{NFS Client Vnode Ops}
+        C --> D{RPC Client}
+        D --> E{XDR Encoder}
+        E --> F[Network<br/>(Diplomatic Cables)]
+        F --> G{XDR Decoder}
+        G --> H{RPC Server}
+        H --> I{NFS Server Vnode Ops}
+        I --> J[Remote Filesystem]
+    end
+
+    subgraph "NFS Server"
+        F --> G
+    end
+
+    style A fill:#lightblue,stroke:#333,stroke-width:2px
+    style J fill:#lightgreen,stroke:#333,stroke-width:2px
+    style F fill:#lightyellow,stroke:#333,stroke-width:2px

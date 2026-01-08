@@ -136,26 +136,31 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/fs/s5/*.c`
   - 1 diagram: s5fs inode structure
   - Ghost of SVR4: Compared to FAT32.
+- ✅ **nfs-client.md** (Network File System Client) - 300 lines
+  - Victorian metaphor: The Foreign Office and its Diplomatic Cables
+  - Technical content: RPC, XDR, rnode, biod
+  - Code from: `svr4-src/uts/i386/fs/nfs/*.c`
+  - 1 diagram: NFS client architecture
+  - Ghost of SVR4: Compared to modern distributed filesystems.
 
 ### In Progress
-- **nfs-client.md** (Network File System Client) - Ready to write
+- **nfs-server.md** (Network File System Server) - Ready to write
   - Source code reviewed: `svr4-src/uts/i386/fs/nfs/*.c`
   - Key concepts identified:
-    * RPC, XDR
-    * biod daemons
-    * Attribute caching
-  - Victorian metaphor candidate: The Foreign Office and its Diplomatic Cables.
-  - Modern comparison: Modern distributed filesystems and object stores.
+    * `nfsd` daemons
+    * `exports` table
+  - Victorian metaphor candidate: The Colonial Office.
+  - Modern comparison: Modern object storage gateways.
 
 ### Next Steps (Filesystems)
-1. Write nfs-client.md (300-400 lines, COMPLEX)
-2. Write nfs-server.md (300-400 lines, COMPLEX)
+1. Write nfs-server.md (300-400 lines, COMPLEX)
+2. Write boot.md (200-300 lines, MEDIUM)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 8/25 placeholder sections
-- **Lines written today:** 1400
-- **Diagrams created:** 6
+- **Total sections completed:** 9/25 placeholder sections
+- **Lines written today:** 1700
+- **Diagrams created:** 7
 - **Commits:** 0
 
 ## Plan Reference
