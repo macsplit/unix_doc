@@ -1,10 +1,14 @@
-<div style="page-break-after: always; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+![The Ghost of SVR4](cover.png)
 
-<center style="font-size: 1.2em; margin-bottom: 4em;">by Lee</center>
+---
 
-<center style="font-size: 1em; font-style: italic;">for India</center>
+# The Ghost of SVR4
 
-</div>
+by Lee
+
+for India
+
+---
 
 # Introduction
 
