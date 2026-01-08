@@ -45,6 +45,14 @@ img[src*="cartoon"] {
     max-width: 50% !important;
 }
 
+/* Cover image - full width, no constraints */
+.cover-image, img[src*="cover"] {
+    max-width: 100% !important;
+    max-height: none !important;
+    width: 100%;
+    height: auto;
+}
+
 /* Technical diagrams (everything that's NOT a cartoon) - 90% width, height constrained */
 img:not([src*="cartoon"]) {
     max-width: 90% !important;

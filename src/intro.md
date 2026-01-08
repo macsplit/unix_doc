@@ -1,3 +1,8 @@
+![The Ghost of SVR4 - Cover](cover.png)
+{.cover-image}
+
+---
+
 <center>by Lee</center>
 
 <center><em>for India</em></center>
