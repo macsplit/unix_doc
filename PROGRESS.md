@@ -112,26 +112,32 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/netinet/tcp*.c`
   - 2 diagrams: TCP state machine and 3-way handshake
   - Ghost of SVR4: Compared to modern TCP with Fast Open, SACK, and advanced congestion control.
+- ✅ **udp.md** (User Datagram Protocol) - 250 lines
+  - Victorian metaphor: The Empire's Postal Service
+  - Technical content: udphdr, udp_input, udp_output
+  - Code from: `svr4-src/uts/i386/netinet/udp*.c`
+  - 1 diagram: UDP header
+  - Ghost of SVR4: Compared to the rise of QUIC.
 
 ### In Progress
-- **udp.md** (User Datagram Protocol) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/netinet/udp*.c`
+- **ip.md** (Internet Protocol) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/netinet/ip*.c`
   - Key concepts identified:
-    * Connectionless, unreliable datagrams
-    * `udp_input()` and `udp_output()`
-    * Checksum validation
-  - Victorian metaphor candidate: A simple, no-frills postal service.
-  - Modern comparison: The role of UDP in real-time applications and QUIC.
+    * Packet routing and forwarding
+    * Fragmentation and reassembly
+    * IP header format
+  - Victorian metaphor candidate: The Imperial Cartographers and Messengers.
+  - Modern comparison: IPv6 and the decline of fragmentation.
 
 ### Next Steps (Networking Protocols)
-1. Write udp.md (200-300 lines, MEDIUM)
-2. Write ip.md (300-400 lines, MEDIUM)
-3. Move to Filesystems
+1. Write ip.md (300-400 lines, MEDIUM)
+2. Move to Filesystems
+3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 4/25 placeholder sections
-- **Lines written today:** 300
-- **Diagrams created:** 2
+- **Total sections completed:** 5/25 placeholder sections
+- **Lines written today:** 550
+- **Diagrams created:** 3
 - **Commits:** 0
 
 ## Plan Reference

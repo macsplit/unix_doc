@@ -1,0 +1,10 @@
+graph TD
+    subgraph "UDP Header (8 bytes)"
+        A["Source Port\n(16 bits)"] --> B("Destination Port\n(16 bits)")
+        B --> C("Length\n(16 bits)")
+        C --> D("Checksum\n(16 bits)")
+    end
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#f9f,stroke:#333,stroke-width:2px
+    style D fill:#f9f,stroke:#333,stroke-width:2px
