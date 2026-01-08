@@ -118,26 +118,32 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/netinet/udp*.c`
   - 1 diagram: UDP header
   - Ghost of SVR4: Compared to the rise of QUIC.
+- ✅ **ip.md** (Internet Protocol) - 300 lines
+  - Victorian metaphor: The Imperial Cartographers and Messengers
+  - Technical content: IP header, routing, fragmentation
+  - Code from: `svr4-src/uts/i386/netinet/ip*.c`
+  - 1 diagram: IP header
+  - Ghost of SVR4: Compared to IPv6.
 
 ### In Progress
-- **ip.md** (Internet Protocol) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/netinet/ip*.c`
+- **ufs.md** (Unix File System) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/fs/ufs/*.c`
   - Key concepts identified:
-    * Packet routing and forwarding
-    * Fragmentation and reassembly
-    * IP header format
-  - Victorian metaphor candidate: The Imperial Cartographers and Messengers.
-  - Modern comparison: IPv6 and the decline of fragmentation.
+    * Inodes, superblocks, cylinder groups
+    * Block allocation
+    * Directory structure
+  - Victorian metaphor candidate: The Grand Library and its Index.
+  - Modern comparison: Modern journaling filesystems like ext4 or ZFS.
 
-### Next Steps (Networking Protocols)
-1. Write ip.md (300-400 lines, MEDIUM)
-2. Move to Filesystems
+### Next Steps (Filesystems)
+1. Write ufs.md (300-400 lines, COMPLEX)
+2. Write s5fs.md (200-300 lines, MEDIUM)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 5/25 placeholder sections
-- **Lines written today:** 550
-- **Diagrams created:** 3
+- **Total sections completed:** 6/25 placeholder sections
+- **Lines written today:** 850
+- **Diagrams created:** 4
 - **Commits:** 0
 
 ## Plan Reference

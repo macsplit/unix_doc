@@ -1,0 +1,16 @@
+graph TD
+    subgraph "IP Header (20 bytes + options)"
+        A["Version (4) | IHL (4)<br/>Type of Service (8)"] --> B("Total Length (16)")
+        B --> C("Identification (16)")
+        C --> D["Flags (3) | Fragment Offset (13)"]
+        D --> E["Time to Live (8) | Protocol (8)<br/>Header Checksum (16)"]
+        E --> F("Source Address (32)")
+        F --> G("Destination Address (32)")
+    end
+    style A fill:#cfc,stroke:#333,stroke-width:2px
+    style B fill:#cfc,stroke:#333,stroke-width:2px
+    style C fill:#cfc,stroke:#333,stroke-width:2px
+    style D fill:#cfc,stroke:#333,stroke-width:2px
+    style E fill:#cfc,stroke:#333,stroke-width:2px
+    style F fill:#cfc,stroke:#333,stroke-width:2px
+    style G fill:#cfc,stroke:#333,stroke-width:2px
