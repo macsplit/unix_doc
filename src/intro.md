@@ -1,5 +1,5 @@
 <div class="cover-page">
-![The Ghost of SVR4 - Cover](cover.png)
+<img src="cover.png" alt="The Ghost of SVR4 - Cover">
 </div>
 
 <center>by Lee</center>
