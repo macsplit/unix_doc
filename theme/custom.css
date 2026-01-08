@@ -33,14 +33,35 @@ code, pre, .hljs {
 
 /* Image styling for ebook (PDF) output to prevent full-width */
 .page-wrapper img, .content img {
-    max-width: 80% !important; /* Limits max image width to 80% of content area */
+    max-width: 50% !important; /* Limits max image width to 50% of content area */
     height: auto !important;    /* Maintains aspect ratio */
     display: block;             /* Centers block-level images */
     margin-left: auto;
     margin-right: auto;
+    page-break-inside: avoid;   /* Prevent images from breaking across pages */
 }
 
-/* Specific rule for diagrams, if different styling is desired */
-.page-wrapper img[src*="diagrams"], .content img[src*="diagrams"] {
-    max-width: 80% !important; /* Can be adjusted, e.g., 90% */
+/* Specific rule for diagrams - tighter constraints for PDF */
+.page-wrapper img[src*="png"], .content img[src*="png"],
+img[src$=".png"] {
+    max-width: 50% !important;
+    height: auto !important;
+    display: block;
+    margin: 1em auto;
+    page-break-inside: avoid;
+}
+
+/* Print media query for PDF output */
+@media print {
+    img {
+        max-width: 50% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+        display: block;
+        margin: 1em auto;
+    }
+
+    figure {
+        page-break-inside: avoid;
+    }
 }
