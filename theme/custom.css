@@ -31,9 +31,10 @@ code, pre, .hljs {
     font-family: 'Space Mono', monospace;
 }
 
-/* Image styling - respects aspect ratio by constraining width only */
+/* Image styling - constrain by both dimensions, letting aspect ratio determine which is limiting */
 .page-wrapper img, .content img {
-    max-width: 85% !important;   /* Constrains by width, height scales proportionally */
+    max-width: 90% !important;    /* Allow wider diagrams more room (not too constrained) */
+    max-height: 75vh !important;  /* Tall diagrams constrained by height (75% of page) */
     height: auto !important;      /* Maintains aspect ratio */
     display: block;               /* Block-level for centering */
     margin: 1em auto;             /* Center with margin */
@@ -43,7 +44,8 @@ code, pre, .hljs {
 /* Print media query for PDF output */
 @media print {
     img {
-        max-width: 85% !important; /* 85% of page width allows diagrams to breathe */
+        max-width: 90% !important;  /* 90% of page width for wider diagrams */
+        max-height: 75vh !important; /* 75% height constraint for tall diagrams */
         height: auto !important;
         page-break-inside: avoid;
         display: block;
