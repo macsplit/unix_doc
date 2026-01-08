@@ -103,6 +103,40 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
 ## Plan Reference
 Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
 
+## Session 2026-01-08
+
+### Completed
+- ✅ **tcp.md** (Transport Control Protocol) - 300 lines
+  - Victorian metaphor: The Empire's Telegraph Office
+  - Technical content: tcpcb, TCP finite state machine, 3-way handshake
+  - Code from: `svr4-src/uts/i386/netinet/tcp*.c`
+  - 2 diagrams: TCP state machine and 3-way handshake
+  - Ghost of SVR4: Compared to modern TCP with Fast Open, SACK, and advanced congestion control.
+
+### In Progress
+- **udp.md** (User Datagram Protocol) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/netinet/udp*.c`
+  - Key concepts identified:
+    * Connectionless, unreliable datagrams
+    * `udp_input()` and `udp_output()`
+    * Checksum validation
+  - Victorian metaphor candidate: A simple, no-frills postal service.
+  - Modern comparison: The role of UDP in real-time applications and QUIC.
+
+### Next Steps (Networking Protocols)
+1. Write udp.md (200-300 lines, MEDIUM)
+2. Write ip.md (300-400 lines, MEDIUM)
+3. Move to Filesystems
+
+## Statistics
+- **Total sections completed:** 4/25 placeholder sections
+- **Lines written today:** 300
+- **Diagrams created:** 2
+- **Commits:** 0
+
+## Plan Reference
+Full implementation plan: `REMAINING_WORK.md`
+
 ---
 
 ## Session 2026-01-07 (Finalization Tasks)

@@ -1,0 +1,36 @@
+graph TD
+    subgraph Connection Establishment
+        CLOSED -- "Passive Open (listen)" --> LISTEN
+        CLOSED -- "Active Open (connect)" --> SYN_SENT
+        LISTEN -- "Receive SYN" --> SYN_RECEIVED
+        SYN_SENT -- "Receive SYN" --> SYN_RECEIVED
+        SYN_SENT -- "Receive SYN, ACK" --> ESTABLISHED
+        SYN_RECEIVED -- "Receive ACK" --> ESTABLISHED
+    end
+
+    subgraph Data Transfer
+        ESTABLISHED
+    end
+
+    subgraph Connection Termination
+        ESTABLISHED -- "Close" --> FIN_WAIT_1
+        LISTEN -- "Close" --> CLOSED
+        SYN_SENT -- "Close" --> CLOSED
+        SYN_RECEIVED -- "Close" --> FIN_WAIT_1
+        
+        FIN_WAIT_1 -- "Receive FIN" --> CLOSING
+        FIN_WAIT_1 -- "Receive ACK of FIN" --> FIN_WAIT_2
+        
+        CLOSING -- "Receive ACK of FIN" --> TIME_WAIT
+        
+        FIN_WAIT_2 -- "Receive FIN" --> TIME_WAIT
+        
+        ESTABLISHED -- "Receive FIN" --> CLOSE_WAIT
+        CLOSE_WAIT -- "Close" --> LAST_ACK
+        LAST_ACK -- "Receive ACK of FIN" --> CLOSED
+        
+        TIME_WAIT -- "Timeout (2MSL)" --> CLOSED
+    end
+
+    style ESTABLISHED fill:#9f9,stroke:#333,stroke-width:2px
+    style CLOSED fill:#f99,stroke:#333,stroke-width:2px

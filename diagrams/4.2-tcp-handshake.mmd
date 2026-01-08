@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant Client
+    participant Server
+
+    Client->>Server: SYN (SEQ=x)
+    activate Server
+    Server->>Client: SYN, ACK (SEQ=y, ACK=x+1)
+    deactivate Server
+    activate Client
+    Client->>Server: ACK (SEQ=x+1, ACK=y+1)
+    deactivate Client
