@@ -1,5 +1,4 @@
 ![The Ghost of SVR4 - Cover](cover.png)
-{.cover-image}
 
 ---
 
