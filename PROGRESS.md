@@ -124,26 +124,32 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/netinet/ip*.c`
   - 1 diagram: IP header
   - Ghost of SVR4: Compared to IPv6.
+- ✅ **ufs.md** (Unix File System) - 300 lines
+  - Victorian metaphor: The Grand Library and its Index
+  - Technical content: inode, superblock, cylinder groups
+  - Code from: `svr4-src/uts/i386/fs/ufs/*.c`
+  - 1 diagram: inode structure
+  - Ghost of SVR4: Compared to journaling filesystems.
 
 ### In Progress
-- **ufs.md** (Unix File System) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/fs/ufs/*.c`
+- **s5fs.md** (System V File System) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/fs/s5fs/*.c`
   - Key concepts identified:
-    * Inodes, superblocks, cylinder groups
-    * Block allocation
-    * Directory structure
-  - Victorian metaphor candidate: The Grand Library and its Index.
-  - Modern comparison: Modern journaling filesystems like ext4 or ZFS.
+    * Simpler block allocation
+    * Lack of cylinder groups
+    * Free block list
+  - Victorian metaphor candidate: The Provincial Lending Library.
+  - Modern comparison: The simplicity of FAT32.
 
 ### Next Steps (Filesystems)
-1. Write ufs.md (300-400 lines, COMPLEX)
-2. Write s5fs.md (200-300 lines, MEDIUM)
+1. Write s5fs.md (200-300 lines, MEDIUM)
+2. Write nfs-client.md (300-400 lines, COMPLEX)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 6/25 placeholder sections
-- **Lines written today:** 850
-- **Diagrams created:** 4
+- **Total sections completed:** 7/25 placeholder sections
+- **Lines written today:** 1150
+- **Diagrams created:** 5
 - **Commits:** 0
 
 ## Plan Reference
