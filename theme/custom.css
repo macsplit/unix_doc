@@ -31,22 +31,41 @@ code, pre, .hljs {
     font-family: 'Space Mono', monospace;
 }
 
-/* Image styling for PDF output with proper constraints */
+/* Default image styling - base for all images */
 .page-wrapper img, .content img,
 img {
-    max-width: 90% !important;    /* Allow wider diagrams room */
-    max-height: 5.5in !important; /* Tall diagrams: ~75% of usable page height (A4/Letter with margins) */
     height: auto !important;      /* Maintains aspect ratio */
     display: block;               /* Block-level for centering */
     margin: 1em auto;             /* Center with margin */
     page-break-inside: avoid;     /* Prevent breaking across pages */
 }
 
+/* Cartoons (illustrative images) - 50% width */
+img[src*="cartoon"] {
+    max-width: 50% !important;
+}
+
+/* Technical diagrams (everything that's NOT a cartoon) - 90% width, height constrained */
+img:not([src*="cartoon"]) {
+    max-width: 90% !important;
+    max-height: 5.5in !important;
+}
+
 /* Print media query for PDF output */
 @media print {
-    img {
-        max-width: 90% !important;  /* 90% of page width for wider diagrams */
-        max-height: 5.5in !important; /* 5.5 inches ~ 75% of usable page height */
+    /* Cartoons in print */
+    img[src*="cartoon"] {
+        max-width: 50% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+        display: block;
+        margin: 1em auto;
+    }
+
+    /* Technical diagrams in print */
+    img:not([src*="cartoon"]) {
+        max-width: 90% !important;
+        max-height: 5.5in !important;
         height: auto !important;
         page-break-inside: avoid;
         display: block;
