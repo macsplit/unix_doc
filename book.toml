@@ -24,5 +24,11 @@ cover-image = "src/cover.png"
 # Enable PDF output
 [output.pdf]
 # Optional settings for PDF:
-# landscape = false
-# display-header-footer = true
+landscape = false
+display-header-footer = true
+header-template = "<div style=\"font-size: 10px; width: 100%; text-align: right; padding-right: 1cm;\">The Ghost of SVR4</div>"
+footer-template = "<div style=\"font-size: 10px; width: 100%; text-align: center;\"><span class=\"pageNumber\"></span> / <span class=\"totalPages\"></span></div>"
+margin-top = 1.0
+margin-bottom = 1.0
+margin-left = 0.75
+margin-right = 0.75
