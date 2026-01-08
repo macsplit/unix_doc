@@ -1,6 +1,6 @@
+<div class="cover-page">
 ![The Ghost of SVR4 - Cover](cover.png)
-
----
+</div>
 
 <center>by Lee</center>
 

@@ -45,11 +45,23 @@ img[src*="cartoon"] {
     max-width: 50% !important;
 }
 
-/* Cover image - full width, aspect ratio preserved */
+/* Cover page - full page height, page break after */
+.cover-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 8.5in;
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+
+/* Cover image - full width, fill available height */
+.cover-page img,
 img[src*="cover.png"] {
     max-width: 100% !important;
     height: auto !important;
     width: 100%;
+    max-height: 8.5in;
 }
 
 /* Technical diagrams (everything that's NOT a cartoon) - 90% width, height constrained */
