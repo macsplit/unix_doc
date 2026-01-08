@@ -31,33 +31,19 @@ code, pre, .hljs {
     font-family: 'Space Mono', monospace;
 }
 
-/* Image styling for ebook (PDF) output to prevent full-width */
+/* Image styling - respects aspect ratio by constraining width only */
 .page-wrapper img, .content img {
-    max-width: 50% !important;  /* Limits max image width to 50% of content area */
-    max-height: 75vh !important; /* Limits max image height to 75% of viewport height */
-    height: auto !important;     /* Maintains aspect ratio */
-    display: block;              /* Centers block-level images */
-    margin-left: auto;
-    margin-right: auto;
-    page-break-inside: avoid;    /* Prevent images from breaking across pages */
-}
-
-/* Specific rule for diagrams - tighter constraints for PDF */
-.page-wrapper img[src*="png"], .content img[src*="png"],
-img[src$=".png"] {
-    max-width: 50% !important;
-    max-height: 75vh !important;
-    height: auto !important;
-    display: block;
-    margin: 1em auto;
-    page-break-inside: avoid;
+    max-width: 85% !important;   /* Constrains by width, height scales proportionally */
+    height: auto !important;      /* Maintains aspect ratio */
+    display: block;               /* Block-level for centering */
+    margin: 1em auto;             /* Center with margin */
+    page-break-inside: avoid;     /* Prevent breaking across pages */
 }
 
 /* Print media query for PDF output */
 @media print {
     img {
-        max-width: 50% !important;
-        max-height: 75vh !important;
+        max-width: 85% !important; /* 85% of page width allows diagrams to breathe */
         height: auto !important;
         page-break-inside: avoid;
         display: block;
@@ -66,15 +52,5 @@ img[src$=".png"] {
 
     figure {
         page-break-inside: avoid;
-    }
-
-    /* Alternative for print: use page-relative sizing */
-    @page {
-        size: A4;
-        margin: 1in;
-    }
-
-    img {
-        max-height: 7.5in !important; /* For A4 with 1in margins, approximately 75% of usable height */
     }
 }
