@@ -18,7 +18,7 @@ additional-js = []
 # Enable EPUB output
 [output.epub]
 # Optional settings for EPUB:
-# cover-image = "assets/cover.png"
+cover-image = "src/cover.png"
 # additional-css = ["custom.css"]
 
 # Enable PDF output
