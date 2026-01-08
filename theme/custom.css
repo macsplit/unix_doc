@@ -45,43 +45,40 @@ img[src*="cartoon"] {
     max-width: 50% !important;
 }
 
-/* Cover page - full page height and width, no margins, page break after */
+/* Cover page - full page height and width, page break after */
 .cover-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    min-height: 11in;
+    display: block;
+    width: 100%;
+    height: 11in;
     margin: 0;
     padding: 0;
     page-break-after: always;
     page-break-inside: avoid;
-    position: relative;
-    margin-left: calc(-50vw + 50%);
-    margin-top: -1.5in;
-    margin-bottom: 0;
+    page: cover-page;
 }
 
-/* Cover image - full width and height of page */
+/* Cover image - full width and height, no constraints */
 .cover-page img,
 img[src*="cover.png"] {
     max-width: none !important;
-    height: auto !important;
+    max-height: none !important;
     width: 100%;
-    max-height: 11in;
-    object-fit: cover;
+    height: 100%;
+    display: block;
+    object-fit: contain;
 }
 
-/* Hide header and footer on first page (cover page) */
-@page :first {
+/* Hide header and footer on cover page */
+@page cover-page {
     margin-top: 0;
     margin-bottom: 0;
-    @bottom-center {
-        content: none;
-    }
+    margin-left: 0;
+    margin-right: 0;
     @top-right {
-        content: none;
+        content: "";
+    }
+    @bottom-center {
+        content: "";
     }
 }
 
