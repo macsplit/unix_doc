@@ -52,9 +52,13 @@ img:not([src*="cartoon"]) {
 }
 
 /* Center image captions */
-img + p {
-    text-align: center;
+img + p,
+img + p strong {
+    text-align: center !important;
     font-style: italic;
+}
+
+img + p {
     margin-top: -0.5em;
     margin-bottom: 1.5em;
 }
@@ -98,5 +102,12 @@ hr {
         height: 0;
         page-break-after: always;
         margin: 0;
+    }
+
+    /* Ensure captions are centered in print */
+    img + p,
+    img + p strong {
+        text-align: center !important;
+        font-style: italic;
     }
 }
