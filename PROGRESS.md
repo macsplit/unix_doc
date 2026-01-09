@@ -148,25 +148,31 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/fs/nfs/*.c`
   - 0 diagrams
   - Ghost of SVR4: Compared to modern object storage gateways.
+- ✅ **boot.md** (System Boot Process) - 300 lines
+  - Victorian metaphor: The Great Engine's Ignition
+  - Technical content: BIOS, MBR, bootloader, protected mode
+  - Code from: `svr4-src/uts/i386/boot/*.c`
+  - 1 diagram: boot sequence
+  - Ghost of SVR4: Compared to UEFI and secure boot.
 
 ### In Progress
-- **boot.md** (System Boot Process) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/boot/*.c`
+- **driver-framework.md** (Device Driver Framework) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/io/*.c`
   - Key concepts identified:
-    * Boot block, kernel loading
-    * Transition to protected mode
-  - Victorian metaphor candidate: The Great Engine's Ignition.
-  - Modern comparison: UEFI and secure boot.
+    * `cdevsw`/`bdevsw` tables
+    * Driver registration
+  - Victorian metaphor candidate: The Grand Exchange and its Operators.
+  - Modern comparison: Modern kernel module loading and device trees.
 
 ### Next Steps (System Infrastructure)
-1. Write boot.md (200-300 lines, MEDIUM)
-2. Write driver-framework.md (200-300 lines, MEDIUM)
+1. Write driver-framework.md (200-300 lines, MEDIUM)
+2. Write network-drivers.md (200-300 lines, MEDIUM)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 10/25 placeholder sections
-- **Lines written today:** 2000
-- **Diagrams created:** 7
+- **Total sections completed:** 11/25 placeholder sections
+- **Lines written today:** 2300
+- **Diagrams created:** 8
 - **Commits:** 0
 
 ## Plan Reference
