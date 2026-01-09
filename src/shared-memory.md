@@ -12,20 +12,24 @@ Shared memory segments are described by `struct shmid_ds` in `sys/shm.h` (sys/sh
 
 ```c
 struct shmid_ds {
-    struct ipc_perm shm_perm; /* operation permission struct */
-    int shm_segsz;            /* size of segment in bytes */
-    struct anon_map *shm_amp; /* segment anon_map pointer */
-    ushort shm_lkcnt;         /* number of times it is being locked */
-    pid_t shm_lpid;           /* pid of last shmop */
-    pid_t shm_cpid;           /* pid of creator */
-    ulong shm_nattch;         /* used only for shminfo */
-    ulong shm_cnattch;        /* used only for shminfo */
-    time_t shm_atime;         /* last shmat time */
-    time_t shm_dtime;         /* last shmdt time */
-    time_t shm_ctime;         /* last change time */
+	struct ipc_perm shm_perm;	/* operation permission struct */
+	int		shm_segsz;	/* size of segment in bytes */
+	struct anon_map	*shm_amp;	/* segment anon_map pointer */
+	ushort		shm_lkcnt;	/* number of times it is being locked */
+	pid_t		shm_lpid;	/* pid of last shmop */
+	pid_t		shm_cpid;	/* pid of creator */
+	ulong		shm_nattch;	/* used only for shminfo */
+	ulong		shm_cnattch;	/* used only for shminfo */
+	time_t		shm_atime;	/* last shmat time */
+	long		shm_pad1;	/* reserved for time_t expansion */
+	time_t		shm_dtime;	/* last shmdt time */
+	long		shm_pad2;	/* reserved for time_t expansion */
+	time_t		shm_ctime;	/* last change time */
+	long		shm_pad3;	/* reserved for time_t expansion */
+	long		shm_pad4[4];	/* reserve area */
 };
 ```
-**The Courtyard Ledger** (sys/shm.h:83-97, abridged)
+**The Courtyard Ledger** (sys/shm.h:83-111)
 
 The crucial field is **`shm_amp`**, an `anon_map` that represents the shared anonymous pages. Every process maps this same `anon_map`, so every write becomes visible to all key holders.
 
@@ -42,17 +46,36 @@ The crucial field is **`shm_amp`**, an `anon_map` that represents the shared ano
 The `shmat()` system call validates permissions and maps the `anon_map` into the process address space. In `os/shm.c`, the kernel picks or validates an address, then calls `as_map()` with `segvn_create` (os/shm.c:168-246).
 
 ```c
+if (addr == 0) {
+	map_addr(&addr, size, (off_t)0, 1);
+	if (addr == NULL) {
+		error = ENOMEM;
+		goto errret;
+	}
+} else {
+	if (uap->flag & SHM_RND)
+		addr = (addr_t)((ulong)addr & ~(SHMLBA - 1));
+	base = addr;
+	len = size;
+	if (((uint)base & PAGEOFFSET) ||
+	    (valid_usr_range(base,len) == 0) ||
+	    as_gap(pp->p_as, len, &base, &len, AH_LO, (addr_t)NULL) != 0) {
+		error = EINVAL;
+		goto errret;
+	}
+}
+
 crargs = *(struct segvn_crargs *)zfod_argsp;
 crargs.offset = 0;
 crargs.type = MAP_SHARED;
 crargs.amp = sp->shm_amp;
 crargs.maxprot = crargs.prot;
 crargs.prot = (uap->flag & SHM_RDONLY) ?
-    (PROT_ALL & ~PROT_WRITE) : PROT_ALL;
+	(PROT_ALL & ~PROT_WRITE) : PROT_ALL;
 
 error = as_map(pp->p_as, addr, size, segvn_create, (caddr_t)&crargs);
 ```
-**The Attach Ritual** (os/shm.c:225-235, abridged)
+**The Attach Ritual** (os/shm.c:194-236, excerpt)
 
 After mapping, the kernel records the region for later detach (`sa_add`) and increments the `anon_map` reference count (os/shm.c:238-241). This reference count is the keyring tally.
 

@@ -12,14 +12,17 @@ A semaphore set is described by `struct semid_ds` in `sys/sem.h` (sys/sem.h:63-7
 
 ```c
 struct semid_ds {
-    struct ipc_perm sem_perm; /* operation permission struct */
-    struct sem *sem_base;     /* ptr to first semaphore in set */
-    ushort sem_nsems;         /* # of semaphores in set */
-    time_t sem_otime;         /* last semop time */
-    time_t sem_ctime;         /* last change time */
+	struct ipc_perm sem_perm;	/* operation permission struct */
+	struct sem	*sem_base;	/* ptr to first semaphore in set */
+	ushort		sem_nsems;	/* # of semaphores in set */
+	time_t		sem_otime;	/* last semop time */
+	long		sem_pad1;	/* reserved for time_t expansion */
+	time_t		sem_ctime;	/* last change time */
+	long		sem_pad2;	/* time_t expansion */
+	long		sem_pad3[4];	/* reserve area */
 };
 ```
-**The Turnstile Ledger** (sys/sem.h:63-70, abridged)
+**The Turnstile Ledger** (sys/sem.h:63-75)
 
 Each set holds a contiguous array of `struct sem` entries, allowing multiple operations to be applied atomically in a single `semop()` call.
 
@@ -72,21 +75,37 @@ struct sembuf {
 
 ```c
 if (op->sem_op < 0) {
-    if (semp->semval >= (unsigned)(-op->sem_op)) {
-        semp->semval += op->sem_op;
-        if (semp->semzcnt && !semp->semval)
-            wakeprocs((caddr_t)&semp->semzcnt, PRMPT);
-        continue;
-    }
-    if (op->sem_flg & IPC_NOWAIT)
-        return EAGAIN;
-    semp->semncnt++;
-    if (sleep((caddr_t)&semp->semncnt, PCATCH|PSEMN))
-        return EINTR;
-    goto check;
+	if (semp->semval >= (unsigned)(-op->sem_op)) {
+		if (op->sem_flg & SEM_UNDO
+		  && (error = semaoe(op->sem_op, uap->semid,
+		    op->sem_num))) {
+			if (i)
+				semundo(semtmp.semops, i, uap->semid, sp);
+			return error;
+		}
+		semp->semval += op->sem_op;
+		if (semp->semzcnt && !semp->semval) {
+			semp->semzcnt = 0;
+			wakeprocs((caddr_t)&semp->semzcnt, PRMPT);
+		}
+		continue;
+	}
+	if (i)
+		semundo(semtmp.semops, i, uap->semid, sp);
+	if (op->sem_flg & IPC_NOWAIT)
+		return EAGAIN;
+	semp->semncnt++;
+	if (sleep((caddr_t)&semp->semncnt, PCATCH|PSEMN)) {
+		if ((semp->semncnt)-- <= 1) {
+			semp->semncnt = 0;
+			wakeprocs((caddr_t)&semp->semncnt, PRMPT);
+		}
+		return EINTR;
+	}
+	goto check;
 }
 ```
-**The Negative Gate** (os/sem.c:688-719, abridged)
+**The Negative Gate** (os/sem.c:675-718, excerpt)
 
 If a later operation fails after earlier ones succeeded, `semundo()` rolls back the completed steps to preserve atomicity (os/sem.c:672-707). The station master never leaves a partial transaction in the ledger.
 

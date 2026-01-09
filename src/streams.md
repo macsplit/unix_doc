@@ -10,27 +10,29 @@ Having explored the STREAMS-based networking architecture from the application p
 
 At the core of STREAMS lies a trinity of structures that together embody the essence of message-based I/O:
 
-![STREAMS - Victorian Postal System](cartoons/streams-cartoon.png)
-**STREAMS - Victorian Postal System**
+![STREAMS - Postal System](cartoons/streams-cartoon.png)
+**STREAMS - Postal System**
 
 ### The Message Block (`mblk_t`)
 
 A message block is a lightweight descriptor, the handle by which STREAMS code manipulates data. It does not own the data itself; rather, it **points** to a data block and maintains metadata about the message's position within that data:
 
 ```c
-// From stream.c - The Message Block Structure (Conceptual)
-struct msgb {
-	struct msgb	*b_next;	// Link to next message in queue
-	struct msgb	*b_prev;	// Link to previous message
-	struct msgb	*b_cont;	// Continuation: next message block in this message
-	unsigned char	*b_rptr;	// Read pointer: start of valid data
-	unsigned char	*b_wptr;	// Write pointer: end of valid data
-	struct datab	*b_datap;	// Pointer to the data block
-	unsigned char	b_band;		// Priority band
-	unsigned short	b_flag;		// Message flags
+/* From sys/stream.h */
+struct	msgb {
+	struct	msgb	*b_next;
+	struct	msgb	*b_prev;
+	struct	msgb	*b_cont;
+	unsigned char	*b_rptr;
+	unsigned char	*b_wptr;
+	struct datab 	*b_datap;
+	unsigned char	b_band;
+	unsigned char	b_pad1;
+	unsigned short	b_flag;
+	long		b_pad2;
 };
 ```
-**Code Snippet 4.10.1: The Message Block Structure**
+**Code Snippet 4.10.1: The Message Block Structure (sys/stream.h:294-305)**
 
 The genius of this design is the **separation of descriptor from data**. Multiple message blocks can reference the same underlying data block (via `b_datap`), enabling zero-copy operations. When TCP prepends a header to user data, it doesn't copy the data—it allocates a new `mblk_t` for the header, links it via `b_cont` to the original data's `mblk_t`, and passes the chain downward.
 
@@ -39,17 +41,23 @@ The genius of this design is the **separation of descriptor from data**. Multipl
 The data block is the actual memory buffer, reference-counted to support sharing:
 
 ```c
-// Conceptual Data Block Structure
+/* From sys/stream.h */
 struct datab {
-	unsigned char	*db_base;	// Start of buffer
-	unsigned char	*db_lim;	// End of buffer
-	unsigned char	db_ref;		// Reference count
-	unsigned char	db_type;	// Message type (M_DATA, M_PROTO, etc.)
-	void		(*free_func)();	// Custom free function (optional)
-	char		*free_arg;	// Argument to free_func
+	union {
+		struct datab	*freep;
+		struct free_rtn *frtnp;
+	} db_f;
+	unsigned char	*db_base;
+	unsigned char	*db_lim;
+	unsigned char	db_ref;
+	unsigned char	db_type;
+	unsigned char	db_iswhat;
+	unsigned int	db_size;
+	long		db_filler;
+	caddr_t		db_msgaddr;
 };
 ```
-**Code Snippet 4.10.2: The Data Block Structure**
+**Code Snippet 4.10.2: The Data Block Structure (sys/stream.h:254-266)**
 
 When a message block is duplicated (via `dupb()`), the reference count (`db_ref`) increments—but this is **NOT garbage collection**. This is not Java. This is not automatic. This is **manual reference bookkeeping** in the most unforgiving sense.
 
@@ -64,22 +72,27 @@ This manual reference counting is the bedrock of STREAMS' zero-copy philosophy�
 Queues are the conduits through which messages flow. Each STREAMS module has four queues: read and write queues for both its upper and lower interfaces. The queue structure encapsulates not just the message list, but also the procedural entry points for processing:
 
 ```c
-// Queue Structure (Simplified)
-typedef struct queue {
-	struct qinit	*q_qinfo;	// Initialization structure (put/service procedures)
-	struct msgb	*q_first;	// First message on queue
-	struct msgb	*q_last;	// Last message on queue
-	struct queue	*q_next;	// Next queue in stream
-	void		*q_ptr;		// Module's private data
-	ulong		q_count;	// Number of bytes on queue
-	ulong		q_flag;		// Queue state flags (QFULL, QENAB, etc.)
-	long		q_minpsz;	// Minimum packet size
-	long		q_maxpsz;	// Maximum packet size
-	ulong		q_hiwat;	// High water mark (flow control)
-	ulong		q_lowat;	// Low water mark (flow control)
-} queue_t;
+/* From sys/stream.h */
+struct	queue {
+	struct	qinit	*q_qinfo;
+	struct	msgb	*q_first;
+	struct	msgb	*q_last;
+	struct	queue	*q_next;
+	struct	queue	*q_link;
+	_VOID		*q_ptr;
+	ulong		q_count;
+	ulong		q_flag;
+	long		q_minpsz;
+	long		q_maxpsz;
+	ulong		q_hiwat;
+	ulong		q_lowat;
+	struct qband	*q_bandp;
+	unsigned char	q_nband;
+	unsigned char	q_pad1[3];
+	long		q_pad2[2];
+};
 ```
-**Code Snippet 4.10.3: The Queue Structure**
+**Code Snippet 4.10.3: The Queue Structure (sys/stream.h:62-81)**
 
 The `q_qinfo` pointer references a `qinit` structure, defining the module's `put` and `service` procedures—the very functions we encountered in TCP and IP modules earlier.
 
@@ -159,22 +172,35 @@ Not all processing can occur in interrupt context. When a hardware interrupt del
 The kernel maintains a **queue run list** (`qhead` and `qtail` in the source), a linked list of queues whose service procedures need execution. The `qenable()` function adds a queue to this list:
 
 ```c
-// Conceptual qenable() logic
-void qenable(queue_t *q) {
-	if (!(q->q_flag & QENAB)) {
-		q->q_flag |= QENAB;
-		// Add q to global queue run list
-		if (qtail)
-			qtail->q_link = q;
-		else
-			qhead = q;
-		qtail = q;
-		q->q_link = NULL;
-		qrunflag = 1;  // Signal that queue processing is needed
+void
+qenable(q)
+	register queue_t *q;
+{
+	register s;
+
+	ASSERT(q);
+
+	if (!q->q_qinfo->qi_srvp)
+		return;
+
+	s = splstr();
+	if (q->q_flag & QENAB) {
+		splx(s);
+		return;
 	}
+
+	q->q_flag |= QENAB;
+	if (!qhead)
+		qhead = q;
+	else
+		qtail->q_link = q;
+	qtail = q;
+	q->q_link = NULL;
+	setqsched();
+	splx(s);
 }
 ```
-**Code Snippet 4.10.6: Queue Enable Logic (Conceptual)**
+**Code Snippet 4.10.6: Queue Enable Logic (io/stream.c:2089-2121)**
 
 Periodically (often during the return from system calls or interrupts), the kernel checks `qrunflag`. If set, it invokes `runqueues()`, which iterates through the queue run list, invoking each queue's service procedure in turn. This deferred processing model allows interrupt handlers to remain brief while complex protocol logic runs in a more permissive context.
 
@@ -199,45 +225,62 @@ This typing allows modules to distinguish data from control, process appropriate
 When a user opens a STREAMS device (e.g., `/dev/tcp`), the `stropen()` function in `streamio.c` orchestrates the stream's construction:
 
 ```c
-// From streamio.c - Stream Open Logic (lines 83-133, simplified)
-int stropen(vp, devp, flag, crp)
-	struct vnode *vp;
-	dev_t *devp;
-	int flag;
-	cred_t *crp;
-{
-	register struct stdata *stp;
-	register queue_t *qp;
-
-	// Check if stream already exists
+/* Excerpt from stropen() in os/streamio.c */
 retry:
 	if (stp = vp->v_stream) {
-		// Stream exists; wait for any pending open/close
 		if (stp->sd_flag & (STWOPEN|STRCLOSE)) {
-			if (flag & (FNDELAY|FNONBLOCK))
-				return EAGAIN;
-			sleep((caddr_t)stp, STOPRI|PCATCH);
-			goto retry;
+			if (flag & (FNDELAY|FNONBLOCK)) {
+				error = EAGAIN;
+				goto ckreturn;
+			}
+			if (sleep((caddr_t)stp, STOPRI|PCATCH)) {
+				error = EINTR;
+				goto ckreturn;
+			}
+			goto retry;  /* could be clone */
 		}
 
-		// Re-open existing stream: call open on all modules/drivers
+		if (stp->sd_flag & (STRDERR|STWRERR)) {
+			error = EIO;
+			goto ckreturn;
+		}
+
+		s = splstr();
 		stp->sd_flag |= STWOPEN;
+		splx(s);
+
 		qp = stp->sd_wrq;
 		while (SAMESTR(qp)) {
 			qp = qp->q_next;
-			// Call module/driver's open procedure
-			if (error = (*qp->q_qinfo->qi_qopen)(qp, devp, flag, ...))
-				return error;
+			if (qp->q_flag & QREADR)
+				break;
+			if (qp->q_flag & QOLD) {
+				dev_t oldev;
+				extern void gen_setup_idinfo();
+
+				gen_setup_idinfo(crp);
+				if ((oldev = cmpdev(*devp)) == NODEV) {
+					error = ENXIO;
+					break;
+				}
+				if ((*RD(qp)->q_qinfo->qi_qopen)(RD(qp),
+				    oldev, (qp->q_next ? 0 : flag),
+			    	    (qp->q_next ? MODOPEN : 0)) == OPENFAIL) {
+					if ((error = u.u_error) == 0)
+						error = ENXIO;
+					break;
+				}
+			} else {
+				dummydev = *devp;
+				if (error = ((*RD(qp)->q_qinfo->qi_qopen)(RD(qp),
+				    &dummydev, (qp->q_next ? 0 : flag),
+			    	    (qp->q_next ? MODOPEN : 0), crp)))
+					break;
+			}
 		}
 	}
-	else {
-		// Create new stream: allocate stream head, call driver open, etc.
-		...
-	}
-	return 0;
-}
 ```
-**Code Snippet 4.10.7: Stream Open Logic (Simplified)**
+**Code Snippet 4.10.7: Stream Open Logic (os/streamio.c:101-156, excerpt)**
 
 This code handles both initial stream creation and subsequent re-opens. The `sd_flag` field serializes concurrent opens, ensuring that stream state remains consistent. Once open, modules can be dynamically pushed onto the stream using the `I_PUSH` ioctl, inserting new functionality (e.g., line disciplines, compression, encryption) into an active data path.
 
@@ -307,5 +350,3 @@ Though STREAMS has faded from the mainstream, its architectural principles endur
 These ideas resonate in modern systems: message queues in distributed systems, pluggable protocol stacks in user-space networking (e.g., DPDK), and the eternal quest to balance abstraction with performance. STREAMS was ahead of its time—a framework so ambitious that hardware took decades to catch up, and by then, simpler designs had won the day.
 
 Yet for those who study it, STREAMS remains a **masterclass in kernel architecture**, a reminder that elegance and performance are not always allies, and that the best designs are those that acknowledge the constraints of their era while aspiring to transcend them.
-
-

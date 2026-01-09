@@ -12,20 +12,24 @@ The message queue descriptor in `sys/msg.h` tracks permissions, queue pointers, 
 
 ```c
 struct msqid_ds {
-    struct ipc_perm msg_perm;  /* operation permission struct */
-    struct msg *msg_first;     /* ptr to first message on q */
-    struct msg *msg_last;      /* ptr to last message on q */
-    ulong   msg_cbytes;        /* current # bytes on q */
-    ulong   msg_qnum;          /* # of messages on q */
-    ulong   msg_qbytes;        /* max # of bytes on q */
-    pid_t   msg_lspid;         /* pid of last msgsnd */
-    pid_t   msg_lrpid;         /* pid of last msgrcv */
-    time_t  msg_stime;         /* last msgsnd time */
-    time_t  msg_rtime;         /* last msgrcv time */
-    time_t  msg_ctime;         /* last change time */
+	struct ipc_perm msg_perm;	/* operation permission struct */
+	struct msg	*msg_first;	/* ptr to first message on q */
+	struct msg	*msg_last;	/* ptr to last message on q */
+	ulong		msg_cbytes;	/* current # bytes on q */
+	ulong		msg_qnum;	/* # of messages on q */
+	ulong		msg_qbytes;	/* max # of bytes on q */
+	pid_t		msg_lspid;	/* pid of last msgsnd */
+	pid_t		msg_lrpid;	/* pid of last msgrcv */
+	time_t		msg_stime;	/* last msgsnd time */
+	long		msg_pad1;	/* reserved for time_t expansion */
+	time_t		msg_rtime;	/* last msgrcv time */
+	long		msg_pad2;	/* time_t expansion */
+	time_t		msg_ctime;	/* last change time */
+	long		msg_pad3;	/* time expansion */
+	long		msg_pad4[4];	/* reserve area */
 };
 ```
-**The Courier Ledger** (sys/msg.h:56-69, abridged)
+**The Courier Ledger** (sys/msg.h:56-72)
 
 Two fields govern flow:
 - **`msg_cbytes`** counts the current bytes in the queue.
@@ -97,26 +101,66 @@ The receive path walks the queue, matching by type. It handles three cases (os/m
 - **`msgtyp < 0`**: take the message with the lowest type that is <= `-msgtyp`.
 
 ```c
+pmp = NULL;
+mp = qp->msg_first;
 if (uap->msgtyp == 0)
-    smp = mp;
+	smp = mp;
 else
-    for (; mp; pmp = mp, mp = mp->msg_next) {
-        if (uap->msgtyp > 0) {
-            if (uap->msgtyp != mp->msg_type)
-                continue;
-            smp = mp;
-            spmp = pmp;
-            break;
-        }
-        if (mp->msg_type <= -uap->msgtyp) {
-            if (smp && smp->msg_type <= mp->msg_type)
-                continue;
-            smp = mp;
-            spmp = pmp;
-        }
-    }
+	for (; mp; pmp = mp, mp = mp->msg_next) {
+		if (uap->msgtyp > 0) {
+			if (uap->msgtyp != mp->msg_type)
+				continue;
+			smp = mp;
+			spmp = pmp;
+			break;
+		}
+		if (mp->msg_type <= -uap->msgtyp) {
+			if (smp && smp->msg_type <= mp->msg_type)
+				continue;
+			smp = mp;
+			spmp = pmp;
+		}
+}
+if (smp) {
+	if ((unsigned)uap->msgsz < smp->msg_ts) {
+		if (!(uap->msgflg & MSG_NOERROR)) {
+			error = E2BIG;
+			goto msgrcv_out;
+		} else
+			sz = uap->msgsz;
+	} else
+		sz = smp->msg_ts;
+	if (copyout((caddr_t)&smp->msg_type, (caddr_t)uap->msgp,
+	  sizeof(smp->msg_type))) {
+		error = EFAULT;
+		goto msgrcv_out;
+	}
+	if (sz
+	  && copyout((caddr_t)(msg + msginfo.msgssz * smp->msg_spot),
+	    (caddr_t)uap->msgp + sizeof(smp->msg_type), sz)) {
+		error = EFAULT;
+		goto msgrcv_out;
+	}
+	rvp->r_val1 = sz;
+	qp->msg_cbytes -= smp->msg_ts;
+	qp->msg_lrpid = u.u_procp->p_pid;
+	qp->msg_rtime = hrestime.tv_sec;
+	wflag = NOPRMPT;
+	msgfree(qp, spmp, smp, NOPRMPT);
+	goto msgrcv_out;
+}
+if (uap->msgflg & IPC_NOWAIT) {
+	error = ENOMSG;
+	goto msgrcv_out;
+}
+qp->msg_perm.mode |= MSG_RWAIT;
+*lockp = 0;
+wakeprocs(lockp, wflag);
+if (sleep((caddr_t)&qp->msg_qnum, PMSG|PCATCH))
+	return EINTR;
+goto findmsg;
 ```
-**The Type Selection Walk** (os/msg.c:430-447)
+**The Type Selection Walk** (os/msg.c:419-476, excerpt)
 
 Once selected, `msgrcv()` copies out the type and text, updates counters, and frees the header and text slot. If no matching message exists and `IPC_NOWAIT` is not set, the receiver sleeps on `msg_qnum` until a sender wakes it (os/msg.c:476-485).
 

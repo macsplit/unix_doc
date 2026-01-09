@@ -63,7 +63,7 @@ This elegant design allows for great modularity. To add a new subsystem, a progr
 After the core subsystems are running, the root filesystem is mounted (`vfs_mountroot()`), making the primary hierarchy of files and directories available for the first time.
 
 ![System Initialization Sequence](5.7-initialization-sequence.png)
-**Figure 5.7.2: Simplified Flowchart of `main()` Initialization Sequence**
+**Figure 5.7.2: Flowchart of `main()` Initialization Sequence**
 
 <br/>
 

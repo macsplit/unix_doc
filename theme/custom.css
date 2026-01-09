@@ -71,6 +71,13 @@ hr {
 
 /* Print media query for PDF output */
 @media print {
+
+    /* Cover image */
+    img[src*="cover.png"] {
+        width: 100%;
+        min-height: 8in !important;
+    }
+
     /* Cartoons in print */
     img[src*="cartoon"] {
         max-width: 50% !important;
@@ -111,4 +118,5 @@ hr {
         margin-left: auto !important;
         margin-right: auto !important;
     }
+
 }

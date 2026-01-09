@@ -43,38 +43,70 @@ The most common and vexing problem is a single I/O request that is too large to 
 
 When a block device driver initiates a transfer on a buffer (`buf_t`) that is known to have such limitations, it does not call the hardware strategy routine directly. Instead, it calls `dma_breakup()`, passing its own strategy routine as an argument.
 
-**The Breakup Logic** (io/physdsk.c:74, simplified):
+**The Breakup Logic** (io/physdsk.c:74-171, excerpt):
 ```c
-dma_breakup(strat, obp)
-	int (*strat)();
-	register struct buf *obp;
+void
+dma_breakup(strat, bp)
+void (*strat)();
+register struct buf *bp;
 {
-	register int cc, iocount;
-	register struct buf *bp;	
+	register int iocount;
+	register char *va;
+	register int cc, rw, left;
+	register int firsttime;
 
-	/* Duplicate the original buffer header */
-	bp = (struct buf *)kmem_zalloc(sizeof (*bp), KM_SLEEP);
-	bcopy((caddr_t)obp, (caddr_t)bp, sizeof(*bp));
-	iocount = obp->b_bcount;
+	rw = bp->b_flags & B_READ;
+	firsttime = 1;
+	iocount = bp->b_bcount;
+	if (dbbnd(bp->b_un.b_addr) < NBPSCTR) {
+		char *iovaddr;
 
-	/* Do the fragment of the buffer in the first page */
-	cc = min(iocount, pgbnd(bp->b_un.b_addr));
-	bp->b_bcount = cc;
-	(*strat)(bp);
-	/* ... wait for I/O to complete ... */
-	iocount -= cc;
+		iovaddr = bp->b_un.b_addr;
+		va = kseg(1);
+		if (va == NULL) {
+			bp->b_flags |= B_ERROR | B_DONE;
+			bp->b_error = EAGAIN;
+			return;
+		}
+		bp->b_un.b_addr = va;
+		do {
+			bp->b_bcount = cc = min(iocount, NBPP);
+			left = iocount - cc;
+			bp->b_flags &= ~B_DONE;
+			if (rw == B_READ) {
+				(*strat)(bp);
+				spl6();
+				while ((bp->b_flags & B_DONE) == 0) {
+					bp->b_flags |= B_WANTED;
+					SLEEP(bp);
+				}
+				spl0();
+				if (bp->b_flags & B_KERNBUF)
+					bcopy(va, iovaddr, bp->b_bcount - bp->b_resid);
+				else
+					copyout(va, iovaddr, bp->b_bcount - bp->b_resid);
+				iovaddr += (bp->b_bcount - bp->b_resid);
+				iocount -= (bp->b_bcount - bp->b_resid);
+			} else {
+				if (bp->b_flags & B_KERNBUF)
+					bcopy(iovaddr, va, cc);
+				else
+					copyin(iovaddr, va, cc);
 
-	/* Now do the DMA a page at a time */
-	while (iocount > 0) {
-		bp->b_bcount = cc = min(iocount, NBPP);
-		/* ... update buffer address and block number ... */
-		(*strat)(bp);
-		/* ... wait for I/O to complete ... */
-		iocount -= cc;
+				(*strat)(bp);
+				spl6();
+				while ((bp->b_flags & B_DONE) == 0) {
+					bp->b_flags |= B_WANTED;
+					SLEEP(bp);
+				}
+				spl0();
+
+				iovaddr += (bp->b_bcount - bp->b_resid);
+				iocount -= (bp->b_bcount - bp->b_resid);
+			}
+		} while (iocount > 0);
+		unkseg(va);
 	}
-
-	kmem_free((caddr_t)bp, sizeof(*bp));
-	biodone(obp); /* Signal completion of the original, large buffer */
 }
 ```
 `dma_breakup` is a master of delegation. It creates a temporary, secondary buffer header and uses it to submit a series of smaller I/O requests to the underlying driver's strategy routine, one for each physically contiguous chunk of the original request. It meticulously tracks the progress, waiting for each small piece to complete before submitting the next, until the entire original request has been satisfied.

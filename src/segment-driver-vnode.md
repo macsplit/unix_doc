@@ -49,35 +49,49 @@ The `segvn_create()` function (seg_vn.c:157) establishes a new mapping:
 ```c
 int
 segvn_create(seg, argsp)
-    struct seg *seg;
-    _VOID *argsp;
+	struct seg *seg;
+	_VOID *argsp;
 {
-    register struct segvn_crargs *a = (struct segvn_crargs *)argsp;
-    register struct segvn_data *svd;
-    register u_int swresv = 0;
+	register struct segvn_crargs *a = (struct segvn_crargs *)argsp;
+	register struct segvn_data *svd;
+	register u_int swresv = 0;
+	register struct cred *cred;
+	int error;
 
-    if (a->type != MAP_PRIVATE && a->type != MAP_SHARED)
-        cmn_err(CE_PANIC, "segvn_create type");
+	if (a->type != MAP_PRIVATE && a->type != MAP_SHARED)
+		cmn_err(CE_PANIC, "segvn_create type");
 
-    if (a->amp != NULL && a->vp != NULL)
-        cmn_err(CE_PANIC, "segvn_create anon_map");
+	if (a->amp != NULL && a->vp != NULL)
+		cmn_err(CE_PANIC, "segvn_create anon_map");
 
-    /* Reserve swap space if needed */
-    if ((a->vp == NULL && a->amp == NULL)
-      || (a->type == MAP_PRIVATE && (a->prot & PROT_WRITE))) {
-        if (anon_resv(seg->s_size) == 0)
-            return (EAGAIN);
-        swresv = seg->s_size;
-    }
+	if ((a->vp == NULL && a->amp == NULL)
+	  || (a->type == MAP_PRIVATE && (a->prot & PROT_WRITE))) {
+		if (anon_resv(seg->s_size) == 0)
+			return (EAGAIN);
+		swresv = seg->s_size;
+	}
 
-    /* Reserve HAT resources */
-    error = hat_map(seg, a->vp, a->offset & PAGEMASK,
-            a->prot & ~PROT_WRITE, HAT_PRELOAD);
-    if (error != 0) {
-        if (swresv != 0)
-            anon_unresv(swresv);
-        return(error);
-    }
+	error = hat_map(seg, a->vp, a->offset & PAGEMASK,
+		a->prot & ~PROT_WRITE, HAT_PRELOAD);
+	if (error != 0) {
+		if (swresv != 0)
+			anon_unresv(swresv);
+		return(error);
+	}
+
+	cred = a->cred ? (crhold(a->cred), a->cred) : crgetcred();
+	if (a->vp) {
+		error = VOP_ADDMAP(a->vp, a->offset & PAGEMASK, seg->s_as,
+			seg->s_base, seg->s_size, a->prot,
+			a->maxprot, a->type, cred);
+		if (error) {
+			if (swresv != 0)
+				anon_unresv(swresv);
+			crfree(cred);
+			hat_unload(seg, seg->s_base, seg->s_size, HAT_NOFLAGS);
+			return (error);
+		}
+	}
 ```
 
 The function first validates arguments, then reserves swap space for potentially private pages. HAT resources are reserved with initial protections disabling write access to force protection faults for lazy allocation.

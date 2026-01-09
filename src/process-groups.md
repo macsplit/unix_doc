@@ -94,15 +94,23 @@ typedef struct sess {
 Creating a new session via `setsid()` ultimately calls `sess_create()`, which detaches the process from its current group, allocates a new session, and makes the process its own process group leader (os/session.c:57-77).
 
 ```c
+pp = u.u_procp;
+
 pgexit(pp);
 SESS_RELE(pp->p_sessp);
+
 sp = (sess_t *)kmem_zalloc(sizeof (sess_t), KM_SLEEP);
 sp->s_sidp = pp->p_pidp;
+sp->s_ref = 1;
+sp->s_dev = NODEV;
 pp->p_sessp = sp;
+u.u_ttyp = NULL; /* compatibility */
+
 pgjoin(pp, pp->p_pidp);
+
 PID_HOLD(sp->s_sidp);
 ```
-**The New Production** (os/session.c:64-76, abridged)
+**The New Production** (os/session.c:57-79, excerpt)
 
 ![Session Creation](1.5-session-create.png)
 **Figure 1.5.3: `setsid()` and Session Formation**

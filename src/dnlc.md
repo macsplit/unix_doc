@@ -4,7 +4,7 @@ Picture, if you will, a grand old-world library housing ten thousand volumes acr
 
 This ritual, performed thousands of times each day, wears not only paths in the marble floor but also precious moments from the patron's afternoon. Yet the head librarian, a woman of keen observation and sharper memory, notices a pattern: certain volumes are requested repeatedly. The *Proceedings* Volume XIV, perhaps, or the *Atlas of Parliamentary Districts*, or the *Compendium of Agricultural Statistics*. These popular tomes account for the vast majority of requests, while thousands of other volumes gather dust, consulted once per decade if at all.
 
-The solution? A **pocket notebook**—a small, leather-bound ledger tucked into her waistcoat. When Volume XIV is requested, she jots down: "*Proceedings XIV-III → Shelf 47B, Alcove West*". When the next patron, not five minutes later, requests the very same volume, she need not consult the grand catalog at all. A quick glance at her pocket notebook reveals the answer instantly. This is the essence of the **Directory Name Lookup Cache (DNLC)**: a compact, rapidly-consulted ledger of recent lookups, sparing the kernel the expense of traversing directory blocks for frequently-accessed pathnames.
+The solution? A **pocket notebook**—a small, leather-bound ledger tucked into her waistcoat. When Volume XIV is requested, she jots down: "*Proceedings XIV-III → Shelf 47B, Alcove West*". When the next patron, not five minutes later, requests the very same volume, she need not consult the grand catalog at all. A quick glance at her pocket notebook reveals the answer swiftly. This is the essence of the **Directory Name Lookup Cache (DNLC)**: a compact, rapidly-consulted ledger of recent lookups, sparing the kernel the expense of traversing directory blocks for frequently-accessed pathnames.
 
 <br/>
 
@@ -77,7 +77,7 @@ The hash combines:
 - **Name length**: `namelen`
 - **Parent vnode pointer**: `(int) vp`
 
-This yields an index into `nc_hash[]`, an array of 8 hash buckets. The hash is intentionally simple—computed in a handful of CPU cycles—trading perfect distribution for speed. Collisions are resolved via chaining: each bucket is the head of a doubly-linked list of `ncache` entries.
+This yields an index into `nc_hash[]`, an array of 8 hash buckets. The hash is intentionally simple—computed in a handful of CPU cycles—trading perfect distribution for speed. Collisions are resolved via chaining: each bucket is the head of a doubly-linked list of `ncache` entries. With a cache sized at 64–256 entries, an 8-bucket table means average chains in the single digits to a few dozen; not instant, but still far cheaper than a directory I/O.
 
 > **Why such a small hash table?** In 1990, DRAM was measured in megabytes, not gigabytes. The DNLC, sized at perhaps 64-256 entries (`ncsize`), represented a significant memory investment. A hash table of 8 or 16 buckets provided adequate distribution without wasting precious address space on empty buckets. Modern systems, with gigabytes of RAM, can afford thousands of hash buckets and correspondingly enormous caches.
 
@@ -134,7 +134,7 @@ The process:
 4. **On hit**: Move entry to LRU tail (mark as recently used), return `vp`
 5. **On miss**: Increment `ncstats.misses`, return `NULL` (caller performs full lookup)
 
-The beauty is in the negative case: a cache miss costs only a hash computation and a short list traversal—perhaps 10-20 CPU cycles. The positive case avoids an entire directory I/O operation, saving thousands of cycles and potential disk latency.
+The beauty is in the negative case: a cache miss costs only a hash computation and a short list traversal. The positive case avoids an entire directory I/O operation, saving thousands of cycles and potential disk latency.
 
 <br/>
 

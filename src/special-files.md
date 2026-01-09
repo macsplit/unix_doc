@@ -105,8 +105,13 @@ if (cdevsw[maj].d_str) {
 		struct stdata *stp = cvp->v_stream;
 		if (dev != newdev) {
 			/* Clone open. */
-			if ((nvp = makespecvp(newdev, VCHR)) == NULL)
-				...
+			if ((nvp = makespecvp(newdev, VCHR)) == NULL) {
+				vp->v_stream = stp;
+				cvp->v_stream = stp;
+				strclose(vp, flag, cr);
+				error = ENOMEM;
+				break;
+			}
 			VTOS(nvp)->s_fsid = VTOS(vp)->s_fsid;
 			nvp->v_stream = stp;
 			cvp = VTOS(nvp)->s_commonvp;
@@ -118,7 +123,7 @@ if (cdevsw[maj].d_str) {
 	}
 }
 ```
-**The Cabinet Door Opens** (specfs/specvnops.c:220-260, abridged)
+**The Cabinet Door Opens** (specfs/specvnops.c:220-260, excerpt)
 
 Clone opens are a special trick: the driver returns a new minor device number, and specfs manufactures a new vnode and snode for it. This is how devices like `/dev/ptmx` and `/dev/clone` hand out private endpoints.
 

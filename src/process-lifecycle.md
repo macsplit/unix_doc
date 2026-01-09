@@ -54,43 +54,48 @@ The parent, a benevolent but watchful guardian, would then pause, suspended in t
 
 However, like any daring maneuver, `vfork()` came with its own perilous tightrope walk. Should the child, in its shared dominion, dare to *modify* the parent's address space before its inevitable `exec()`, chaos could ensue. The kernel, ever vigilant, enforces this strict contract to prevent a child's nascent scribbles from corrupting the parent's pristine canvas.
 
----
+<br/>
 
 > #### **The Ghost of SVR4: Memory Constraints of Yore**
 >
 > In the dimly lit server rooms of 1988, memory was a precious commodity, measured in megabytes rather than gigabytes. The full duplication performed by `fork()`—especially for large processes—could be a performance bottleneck. `vfork()` was a clever, if slightly perilous, solution to mitigate this. It exploited the common `fork()`-then-`exec()` pattern, avoiding an expensive copy that would immediately be discarded.
 >
-> **Modern Contrast (2026):** Today, with gigabytes of RAM being the norm and sophisticated Copy-On-Write (COW) mechanisms deeply embedded in `fork()` implementations (even for Linux's `fork()`, which effectively acts like a COW `vfork()` for the address space), the explicit `vfork()` call is largely deprecated and its use discouraged in modern systems. The kernel handles the optimization transparently, making the old SVR4 `vfork()` an elegant but obsolete historical artifact. The spirit of efficiency lives on, but the explicit `vfork()` dance is rarely seen outside of historical curiosities.
-
----
+> **Modern Contrast (2026):** Modern `fork()` on Linux uses Copy-On-Write: parent and child remain runnable and only incur page copies on write. `vfork()` still exists, but it retains its historical contract by suspending the parent until the child calls `exec()` or `_exit()`. The optimization is now mostly transparent, and the explicit `vfork()` dance is used sparingly, but the distinction remains: COW `fork()` preserves parallelism, while `vfork()` trades it for speed.
 
 <br/>
 
 ### The u-Block: A Glimpse into a Process's Soul (SVR4 Edition)
 
-Central to the SVR4 process's identity, beyond its PID, was the venerable **User Area**, affectionately known as the **u-block**. This kernel-resident data structure, unique to each process, was a veritable treasure trove of context. It housed the process's kernel stack, its per-process open file table, signal handling information, error numbers, and a myriad of other critical runtime details. It was, in essence, the kernel's intimate dossier on a running process.
+Central to the SVR4 process's identity, beyond its PID, was the venerable **User Area**, affectionately known as the **u-block**. This kernel-resident data structure, unique to each process, was a veritable treasure trove of context. It housed the process's kernel stack, its per-process open file table, signal handling information, error numbers, and a myriad of other critical runtime details. In SVR4 terms, the u-block and the `proc` table entry together serve as the Process Control Block (PCB): the hardware context lives in the u-block, while system-wide identity and state live in `proc`.
 
 ```c
-// Conceptual simplified structure of the u-block (struct user)
-// In reality, much more complex, often defined in <sys/user.h>
-struct user {
-    caddr_t       u_stack;      // User stack pointer (conceptual)
-    struct proc   *u_procp;     // Pointer to the proc table entry
-    int           u_error;      // Error number for system calls
-    file_t        *u_ofile[NOFILE]; // Per-process open file table
-    struct sighandling u_signal; // Signal handling information
-    // ... many more fields
-};
+/* Excerpted fields from struct user (sys/user.h) */
+typedef struct user {
+	char	u_stack[KSTKSZ];	/* kernel stack */
+	char	u_stack_filler_1[2];
+	char	u_fpvalid;		/* fp state valid */
+	char	u_weitek;		/* uses weitek */
+	struct tss386 *u_tss;		/* pointer to user TSS */
+	ushort	u_sztss;		/* size of tss */
+	ulong	u_sub;			/* stack upper bound */
+	proc_t *u_procp;		/* pointer to proc structure */
+	int	u_arg[MAXSYSARGS];	/* args to current syscall */
+	label_t	u_qsav;			/* longjmp label */
+	char	u_error;		/* return error code */
+	struct rlimit u_rlimit[RLIM_NLIMITS]; /* resource limits */
+	k_sigset_t u_sigonstack;	/* signals on alt stack */
+	k_sigset_t u_sigrestart;	/* restart syscalls */
+	k_sigset_t u_sigmask[MAXSIG];	/* signals held in catcher */
+	void	(*u_signal[MAXSIG])();	/* dispositions */
+} user_t;
 ```
-**Code Snippet 1.2: The Intimate `u_block` (Simplified)**
+**Code Snippet 1.2: The Intimate `u_block` (Excerpted)**  
 
 > #### **The Ghost of SVR4: The u-block's Legacy**
 >
 > The u-block was a cornerstone of SVR4 process management, a compact and efficient way to store per-process kernel context. Its design reflected a time when every byte of memory was carefully accounted for. It served as a critical bridge between the generic `proc` table entry (which held system-wide process information) and the specific, rapidly changing context of a process's kernel execution.
 >
 > **Modern Contrast (2026):** In contemporary Linux, the concept of a monolithic u-block has evolved. Its responsibilities are now distributed across various fields within the comprehensive `struct task_struct` and related data structures. While the `task_struct` in Linux is far more extensive and integrated, the spirit of the u-block—that direct, intimate connection to a process's ephemeral state—is still palpable within the modern kernel's design. The SVR4 u-block stands as an elegant predecessor, showing how fundamental information was once encapsulated.
-
----
 
 <br/>
 
@@ -104,19 +109,17 @@ Alas, even the most vibrant process must, at some juncture, meet its cessation. 
 
 *   **Involuntary Eviction**: The kernel, or another process, can forcibly terminate a process, most often through the delivery of a signal. A `SIGKILL`, for instance, is the ultimate, unblockable eviction notice, while a `SIGSEGV` (segmentation fault) marks a catastrophic misstep in memory access, compelling the kernel to intervene.
 
-Upon termination, a process does not vanish instantaneously. Instead, it lingers as a spectral **"zombie"** process. In this enigmatic state, its computational essence is gone, its resources largely reclaimed by the kernel. Yet, a vestige remains: its entry in the kernel's Process Table and its Process Control Block (PCB), specifically to house its exit status. This spectral existence serves a vital purpose: it allows the parent process, through the `wait()` or `waitpid()` system calls, to collect the child's final report—its exit status—and only then does the kernel fully expunge the zombie, "reaping" its last kernel resources.
+Upon termination, a process does not vanish instantaneously. Instead, it lingers as a spectral **"zombie"** process. In this enigmatic state, its computational essence is gone, its resources largely reclaimed by the kernel. Yet, a vestige remains: its entry in the kernel's Process Table and its u-block/PCB context, preserved long enough to hold the exit status. This spectral existence serves a vital purpose: it allows the parent process, through the `wait()` or `waitpid()` system calls, to collect the child's final report—its exit status—and only then does the kernel fully expunge the zombie, "reaping" its last kernel resources.
 
 Should a parent process prematurely depart this digital realm before its children, those orphaned processes are not left to wander the wilderness. Instead, they are nobly adopted by the venerable `init` process (always PID 1), the primordial ancestor of all user-space processes. `init`, the steadfast caretaker, assumes the responsibility of patiently `wait()`ing for these adopted children, dutifully reaping their zombie forms when their time comes. This ensures that no process lingers eternally, hogging precious Process Table entries.
 
----
+<br/>
 
 > #### **The Ghost of SVR4: The Importance of Reaping**
 >
 > Unreaped zombie processes, while consuming minimal resources, can exhaust the finite number of entries in the kernel's Process Table. In the SVR4 era, this was a tangible risk, capable of leading to system instability by preventing new processes from being created. The `wait()` family of calls wasn't just good practice; it was a necessary ritual to maintain kernel hygiene.
 >
 > **Modern Contrast (2026):** While modern kernels have larger process tables, the principle remains. Zombie processes, if accumulated in large numbers, can still signify application bugs (e.g., parent processes not `wait()`ing for their children) and can indeed consume resources, albeit mostly Process Table entries, which are still finite. The `init` adoption mechanism remains a cornerstone of UNIX-like systems, a testament to the foresight of early designers.
-
----
 
 <br/>
 
@@ -136,13 +139,13 @@ The primary states in this grand choreography include:
 
 > #### **The Ghost of SVR4: Process Groups and Sessions for Order**
 >
-> The SVR4 kernel introduced sophisticated mechanisms like **process groups** and **sessions** (related to Critique Point 3) not merely as abstract concepts, but as fundamental tools for imposing order on the chaos of multiple processes.
+> The SVR4 kernel introduced sophisticated mechanisms like **process groups** and **sessions** not merely as abstract concepts, but as fundamental tools for imposing order on the chaos of multiple processes.
 >
 > **Process Groups** are collections of related processes, typically created by a shell pipeline (e.g., `command1 | command2`). Signals, such as `SIGINT` (Ctrl+C), are often delivered to an entire process group, allowing for collective control. This was crucial for shell job control, enabling a user to suspend (`SIGTSTP`), resume (`SIGCONT`), or terminate an entire pipeline of commands with a single keystroke.
 >
 > **Sessions** elevate this concept further, encapsulating one or more process groups. A session typically corresponds to a login session or a terminal, acting as an insulating layer. When a terminal closes, a `SIGHUP` signal is often sent to the session leader, which can then propagate it to its process groups, gracefully terminating the applications associated with that session. This structured hierarchy was vital for managing interactive user environments and background jobs reliably.
 
----
+<br/>
 
 <br/>
 
@@ -164,9 +167,9 @@ At the core of this resurrection, particularly in SVR4, lies the often-unsung he
 
 ### The `resume()` Function: Awakening a Slumbering Giant
 
-The `resume()` function, typically a highly optimized, architecture-dependent assembly routine, is the incantation that breathes life back into a scheduled process (addressing Critique Point 1). It is the final, atomic act of the context switch. Its mission: to load the previously saved CPU state of the chosen `newproc` into the physical CPU registers.
+The `resume()` function, a highly optimized, architecture-dependent assembly routine, is the incantation that breathes life back into a scheduled process. It is the final, atomic act of the context switch. Its mission: to load the previously saved CPU state of the chosen `newproc` into the physical CPU registers. On i386 this logic lives in `ml/misc.s` (ml/misc.s:1339-1370).
 
-Conceptually, `resume()` performs the inverse operation of context saving:
+In practice, `resume()` performs the inverse operation of context saving:
 
 1.  It receives pointers to the `proc` structures (or their relevant context saving areas) of the `oldproc` (the process being switched *from*) and `newproc` (the process being switched *to*) to save the current CPU state (registers, stack pointer, program counter) of `oldproc`.
 2.  It updates the kernel's internal pointers to reflect the currently executing process.
@@ -174,8 +177,7 @@ Conceptually, `resume()` performs the inverse operation of context saving:
 4.  It then "returns" into the `newproc`'s context, making it appear as if `newproc` was simply suspended and is now continuing from where it left off.
 
 ```assembly
-// Conceptual pseudo-assembly for resume() (x86 specific)
-// Actual implementation would be far more intricate and platform-specific
+// Schematic outline for resume() (x86 specific)
 resume(oldproc, newproc):
     ; Save oldproc's context (often done by the caller or an interrupt handler)
     ; ...
@@ -202,10 +204,10 @@ resume(oldproc, newproc):
     ; Finally, return to the new process's execution flow
     ret_from_interrupt_or_call ; Jumps to newproc's saved EIP/CS
 ```
-**Code Snippet 1.3: The `resume()` Function's Orchestration (Pseudo-Assembly)**
+**Code Snippet 1.3: The `resume()` Function's Orchestration (Schematic)**
 
 The `resume()` function is an exquisite piece of engineering, often residing at the very boundary between C code and the raw power of assembly. It operates with surgical precision, ensuring that the transition between processes is seamless and efficient, a blink-and-you-miss-it moment that underpins the entire multiprocessing paradigm.
 
----
+<br/>
 
 ![](1.1-wait-reaping.png)

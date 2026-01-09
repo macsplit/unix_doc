@@ -13,21 +13,47 @@ A signal's journey begins with its **posting**. This is the act of marking a tar
 The dispatch mechanism is surprisingly nuanced, especially for job control signals, which carry specific implications for process states. For instance, a `SIGCONT` (continue signal) is a powerful command:
 
 ```c
-// Simplified excerpt from psignal() in sig.c:103 onwards
+/* Excerpt from sigtoproc() in sig.c:112-169 */
 if (sig == SIGCONT) {
-    if (p->p_sig & sigmask(SIGSTOP)) // Check if SIGSTOP is pending
-        sigdelq(p, SIGSTOP);         // Clear any pending SIGSTOP
-    sigdiffset(&p->p_sig, &stopdefault); // Remove other stop signals
-    if (p->p_stat == SSTOP && p->p_whystop == PR_JOBCONTROL) {
-        p->p_flag |= SXSTART; // Mark for immediate start
-        setrun(p);            // Make process runnable
-    }
-} else if (sigismember(&stopdefault, sig)) { // If it's a stop signal
-    sigdelq(p, SIGCONT);                     // Clear any pending SIGCONT
-    sigdelset(&p->p_sig, SIGCONT);           // Remove SIGCONT from pending
+	if (p->p_sig & sigmask(SIGSTOP))
+		sigdelq(p, SIGSTOP);
+	if (p->p_sig & sigmask(SIGTSTP))
+		sigdelq(p, SIGTSTP);
+	if (p->p_sig & sigmask(SIGTTOU))
+		sigdelq(p, SIGTTOU);
+	if (p->p_sig & sigmask(SIGTTIN))
+		sigdelq(p, SIGTTIN);
+	sigdiffset(&p->p_sig, &stopdefault);
+	if (p->p_stat == SSTOP && p->p_whystop == PR_JOBCONTROL) {
+		p->p_flag |= SXSTART;
+		setrun(p);
+	}
+} else if (sigismember(&stopdefault, sig)) {
+	sigdelq(p, SIGCONT);
+	sigdelset(&p->p_sig, SIGCONT);
+}
+
+if (!tracing(p, sig) && sigismember(&p->p_ignore, sig))
+	return;
+
+sigaddset(&p->p_sig, sig);
+
+if (p->p_stat == SSLEEP) {
+	if ((p->p_flag & SNWAKE)
+	  || (sigismember(&p->p_hold, sig) && !EV_ISTRAP(p)))
+		return;
+	setrun(p);
+} else if (p->p_stat == SSTOP) {
+	if (sig == SIGKILL) {
+		p->p_flag |= SXSTART|SPSTART;
+		setrun(p);
+	} else if (p->p_wchan && ((p->p_flag & SNWAKE) == 0))
+		unsleep(p);
+} else if (p == curproc) {
+	u.u_sigevpend = 1;
 }
 ```
-**Code Snippet 1.4: Job Control Signal Posting Logic (Simplified)**
+**Code Snippet 1.4: Job Control Signal Posting Logic (Excerpt)**
 
 This snippet illustrates the delicate dance between `SIGCONT` and stop signals (`SIGSTOP`, `SIGTSTP`, etc.). Posting a `SIGCONT` implicitly cancels any pending stop signals and, crucially, can awaken a process that was previously `SSTOP` (stopped). Conversely, attempting to stop a process will clear any pending `SIGCONT`. This mutual exclusivity is the kernel's way of enforcing consistent job control semantics, preventing paradoxical states.
 
@@ -56,7 +82,7 @@ For the currently executing process, a special flag (`u.u_sigevpend`) is set. Th
 
 A process is not merely a passive recipient of signals; it possesses a sophisticated array of defenses and preferences, managed by the kernel through various **signal bitmasks** and predefined **signal sets**. These act as filters, allowing a process to selectively block, ignore, or trace specific signals, thereby controlling its susceptibility to external interruptions.
 
-The kernel maintains several critical bitmasks for each process (conceptually depicted in Figure 1.3.3 from your `.mmd` diagrams):
+The kernel maintains several critical bitmasks for each process (conceptually depicted in Figure 1.3.3):
 
 *   **`p_sig` (Pending Signals)**: This bitmask holds the signals that have been posted to the process but have not yet been delivered. Think of it as a process's "inbox" for incoming notifications.
 *   **`p_hold` (Blocked Signals)**: Signals whose corresponding bit is set in `p_hold` are *blocked*. They will not be delivered to the process even if they are pending (`p_sig` has their bit set). They effectively wait in `p_sig` until they are unblocked. This is crucial for critical sections of code where a process needs to avoid asynchronous interruptions.
@@ -98,26 +124,52 @@ A signal, once posted and nestled in `p_sig`, does not immediately disrupt the p
 Think of `issig()` as the gatekeeper, constantly scanning the process's pending signals (via the `fsig()` helper function, which dutifully checks `p->p_sig` for the first unblocked, unignored signal). Its loop is relentless, ensuring no deliverable signal is overlooked:
 
 ```c
-// Simplified logic of issig() in sig.c:224
+/* Excerpt from issig() in sig.c:224-324 */
 for (;;) {
-    if ((sig = fsig(p)) == 0) // No deliverable signal?
-        return 0;             // Return, let process continue
-    
-    // Is it being traced or not ignored?
-    if (tracing(p, sig) || !sigismember(&p->p_ignore, sig)) {
-        if (why == JUSTLOOKING) // Just checking, don't consume signal yet
-            return sig;
-        break;                  // Found a signal to deliver
-    }
-    // If ignored, consume and keep looking
-    sigdelset(&p->p_sig, sig);
-    sigdelq(p, sig); // Also remove from any detailed queue
+	if (why == FORREAL
+	  && (p->p_flag & SPRSTOP)
+	  && stop(p, PR_REQUESTED, 0, 0))
+		swtch();
+
+	if ((sig = p->p_cursig) != 0) {
+		p->p_cursig = 0;
+		if (why == JUSTLOOKING
+		  || (p->p_flag & SPTRX)
+		  || (!sigismember(&p->p_ignore, sig)
+		    && !isjobstop(sig)))
+			return p->p_cursig = (char)sig;
+		if (p->p_cursig == 0 && p->p_curinfo != NULL) {
+			kmem_free((caddr_t)p->p_curinfo,
+			  sizeof(*p->p_curinfo));
+			p->p_curinfo = NULL;
+		}
+		continue;
+	}
+
+	for (;;) {
+		if ((sig = fsig(p)) == 0)
+			return 0;
+		if (tracing(p, sig)
+		  || !sigismember(&p->p_ignore, sig)) {
+			if (why == JUSTLOOKING)
+				return sig;
+			break;
+		}
+		sigdelset(&p->p_sig, sig);
+		sigdelq(p, sig);
+	}
+
+	sigdelset(&p->p_sig, sig);
+	p->p_cursig = (char)sig;
+	ASSERT(p->p_curinfo == NULL);
+	sigdeq(p, sig, &p->p_curinfo);
 }
-// ... further processing for 'sig'
 ```
-**Code Snippet 1.6: The `issig()` Signal Delivery Loop (Simplified)**
+**Code Snippet 1.6: The `issig()` Signal Delivery Loop (Excerpt)**
 
 ![Signal Delivery](1.3-signal-delivery.png)
+
+The remaining portion handles tracing stops and debugger release (`stop()` and `procxmt()`), then loops to honor requested stops before returning (sig.c:325-360).
 
 The `issig()` function follows a clear hierarchy of handling:
 
@@ -144,18 +196,17 @@ There are three fundamental actions a process can take:
 
 3.  **Catch (User-Defined Handler)**: This is where a process truly asserts its control. Using `sigaction()`, a process can specify a user-mode function (a "signal handler") to be executed when a specific signal is delivered. This allows applications to gracefully respond to events, such as saving state before termination (`SIGTERM`) or resetting broken network connections.
 
-The `sigaction` structure (or its conceptual SVR4 equivalent) is the heart of this customization:
+The `sigaction` structure is the heart of this customization (sys/signal.h:78-87):
 
 ```c
-// Conceptual SVR4 sigaction structure
 struct sigaction {
-    void (*sa_handler)(int);        // Pointer to the signal handler function
-    k_sigset_t sa_mask;             // Signals to block while handler runs
-    int        sa_flags;            // Special flags (SA_RESTART, SA_NOCLDSTOP, SA_RESETHAND, SA_NODEFER)
-    // ... other fields like sa_restorer for some architectures
+	int sa_flags;
+	void (*sa_handler)();
+	sigset_t sa_mask;
+	int sa_resv[2];
 };
 ```
-**Code Snippet 1.7: The `sigaction` Structure (Conceptual)**
+**Code Snippet 1.7: The `sigaction` Structure (sys/signal.h)**
 
 When a user-defined handler is invoked (`sendsig()` in `sig.c:467`), the kernel performs a meticulous setup:
 

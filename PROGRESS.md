@@ -378,3 +378,25 @@ Per CONTENT_AUDIT_REPORT.md:
 - `diagrams/4.5-rpc-call-flow.mmd` -> `src/4.5-rpc-call-flow.png`
 - `diagrams/3.7-specfs-snode.mmd` -> `src/3.7-specfs-snode.png`
 - `diagrams/3.7-specfs-open.mmd` -> `src/3.7-specfs-open.png`
+
+---
+
+## Session 2026-01-09 (Revisions)
+
+### Completed
+- ✅ **Removed simplified/abridged scaffolding** across process, signal, syscall, VM, IPC, and I/O sections.
+  - **process-lifecycle.md**: replaced u-block snippet with real `struct user` excerpt; clarified `resume()` wording.
+  - **signal-handling.md**: replaced psignal/issig snippets with real `sigtoproc()` and `issig()` excerpts; swapped in real `struct sigaction`.
+  - **system-calls.md**: expanded `sysent` table excerpt and added real `systrap` entry/argument harvest snippets from `ml/ttrap.s` and `os/trap.c`.
+  - **address-space.md**: kept full `as_map()` and `as_dup()` context, added missing `sseg` and soft-unlock detail; updated labels to excerpt.
+  - **segment-driver-vnode.md**: expanded `segvn_create()` excerpt to include `VOP_ADDMAP` and cleanup logic.
+  - **shared-memory.md**: expanded `shmid_ds` and `shmat()` excerpts to include padding and address validation.
+  - **semaphores.md**: expanded `semid_ds` and negative `semop()` logic with undo/sleep handling.
+  - **messages.md**: expanded `msqid_ds` and `msgrcv()` path including copyout, accounting, and wait logic.
+  - **process-groups.md**: expanded `sess_create()` excerpt for `setsid()` path.
+  - **dma-buffers.md**: replaced simplified `dma_breakup()` with fuller excerpt from `io/physdsk.c`.
+  - **special-files.md**: expanded `spec_open()` clone error path.
+  - **streams.md**: replaced `qenable()` and `stropen()` simplified logic with source excerpts; replaced message/data/queue structs with `sys/stream.h` definitions.
+
+### Style Cleanups
+- Removed remaining “Simplified/Conceptual/Abridged” markers in captions and prose (`clock-timers.md`, `system-initialization.md`, `process-scheduling.md`).

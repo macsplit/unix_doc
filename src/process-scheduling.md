@@ -59,7 +59,7 @@ Preemption could be triggered by several compelling forces:
 
 ![Dispatch Queues](1.2-dispatch-queues.png)
 
-To manage this dynamic ebb and flow of processes, the SVR4 kernel employs **dispatch queues**. Conceptually, these are explicit data structures, often linked lists, each corresponding to a distinct priority level. When a process transitions from a blocked state to a runnable state, it is meticulously inserted into the appropriate dispatch queue for its current priority.
+To manage this dynamic ebb and flow of processes, the SVR4 kernel employs **dispatch queues**. In practice, these are explicit data structures, often linked lists, each corresponding to a distinct priority level. When a process transitions from a blocked state to a runnable state, it is meticulously inserted into the appropriate dispatch queue for its current priority.
 
 The scheduler’s central loop, a relentless cycle of decision and execution, can be distilled into these fundamental steps:
 

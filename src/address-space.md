@@ -85,7 +85,7 @@ as_map(as, addr, size, crfp, argsp)
     return (error);
 }
 ```
-**The Parcel Grant** (vm/vm_as.c:504-551, abridged)
+**The Parcel Grant** (vm/vm_as.c:504-551, excerpt)
 
 The key idea: `as_map()` does not know what kind of segment it is creating. It calls a creation function pointer (`crfp`), allowing vnode-backed, anonymous, or device segments to establish their own rules.
 
@@ -100,7 +100,7 @@ During `fork()`, the child receives a copy of the parent's address space. `as_du
 
 ```c
 newas = as_alloc();
-seg = as->a_segs;
+sseg = seg = as->a_segs;
 if (seg != NULL) {
     do {
         newseg = seg_alloc(newas, seg->s_base, seg->s_size);
@@ -122,7 +122,7 @@ if (hat_dup(as, newas) != 0) {
     return (NULL);
 }
 ```
-**The Surveyor's Copy** (vm/vm_as.c:134-169, abridged)
+**The Surveyor's Copy** (vm/vm_as.c:134-169, excerpt)
 
 Here, the segment driver decides whether to copy or share pages. Copy-on-write is implemented in those segment drivers, not in the address space itself. The ledger merely requests a duplicate.
 
@@ -135,11 +135,14 @@ Page faults are resolved by walking the segment list and delegating to the segme
 ```c
 seg = as_segat(as, raddr);
 if (seg == NULL)
-    return (FC_NOMAP);
+	return (FC_NOMAP);
 
 res = (*seg->s_ops->fault)(seg, raddr, ssize, type, rw);
+if (res == FC_MAKE_ERR(EFAULT) && type == F_SOFTLOCK) {
+	(void) as_fault(as, raddr, ssize, F_SOFTUNLOCK, rw);
+}
 ```
-**The Boundary Dispute** (vm/vm_as.c:257-278, abridged)
+**The Boundary Dispute** (vm/vm_as.c:257-304, excerpt)
 
 If a soft-lock fails partway through, `as_fault()` revisits the already-locked pages and unlocks them with `F_SOFTUNLOCK` (vm/vm_as.c:285-304). The surveyor refuses to leave the ledger half-updated.
 

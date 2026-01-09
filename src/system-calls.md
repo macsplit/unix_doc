@@ -18,6 +18,29 @@ Upon activation of the entry instruction, control is transferred to the kernel's
 2.  **Privilege Check**: The kernel verifies that the incoming request is legitimate and that the system call number itself is valid.
 3.  **Argument Retrieval**: The arguments for the system call, which the user process pushed onto its own stack, must be safely copied from user space to kernel space. This copy is not merely a transfer; it's a careful validation, ensuring that user-provided pointers do not reference invalid or malicious memory locations within the user's or, worse, the kernel's address space.
 
+On i386, the low-level entry stub is in `ml/ttrap.s`. The system call gate saves registers, clears segment registers, and then calls `systrap()` in C (ml/ttrap.s:312-348):
+
+```assembly
+sys_call:
+	subl	$8, %esp	/ pad with dummy ERRCODE, TRAPNO
+	pusha			/ save user registers
+	pushl	%ds
+	pushl	%es
+	pushl	%fs
+	pushl	%gs
+	...
+	xorw	%ax, %ax
+	movw	%ax, %fs
+	movw	%ax, %gs
+	call	kentry_check
+	sti
+	movb	$0, u+u_sigfault
+	pushl	%esp
+	call	systrap
+	addl	$4, %esp
+```
+**Code Snippet 1.8a: The `systrap` Entry Stub (ml/ttrap.s)**
+
 ![System Call Flow](1.4-syscall-flow.png)
 
 ![System Calls - Protected Factory](cartoons/system-calls-cartoon.png)
@@ -30,17 +53,28 @@ Once safely within the kernel, the `systrap` routine consults the **`sysent` tab
 Each entry in the `sysent` table is a compact but vital record:
 
 ```c
-// Excerpt from sysent.c - The Kernel's System Call Dispatch Table
+/* Excerpt from os/sysent.c */
 struct sysent sysent[] = {
-    { 0, 0, nosys },       /* 0 = indir - Special entry, usually unused or for indirect calls */
-    { 1, 0, rexit },       /* 1 = exit - 1 argument (exit code) */
-    { 0, 0, fork },        /* 2 = fork - 0 arguments */
-    { 3, 0, read },        /* 3 = read - 3 arguments (fd, buf, count) */
-    { 3, 0, write },       /* 4 = write - 3 arguments (fd, buf, count) */
-    /* ... and many more ... */
+	0, 0, nosys,			/*  0 = indir */
+	1, 0, (int(*)())rexit,		/*  1 = exit */
+	0, 0, fork,			/*  2 = fork */
+	3, SETJUMP|ASYNC|IOSYS, read,	/*  3 = read */
+	3, SETJUMP|ASYNC|IOSYS, write,	/*  4 = write */
+	3, SETJUMP, open,		/*  5 = open */
+	1, SETJUMP, close,		/*  6 = close */
+	0, SETJUMP, wait,		/*  7 = wait */
+	2, SETJUMP, creat,		/*  8 = creat */
+	2, 0, link,			/*  9 = link */
+	1, 0, unlink,			/* 10 = unlink */
+	2, 0, exec,			/* 11 = exec */
+	1, 0, chdir,			/* 12 = chdir */
+	0, 0, gtime,			/* 13 = time */
+	3, 0, mknod,			/* 14 = mknod */
+	2, 0, chmod,			/* 15 = chmod */
+	3, 0, chown,			/* 16 = chown */
 };
 ```
-**Code Snippet 1.8: The `sysent` Table (Simplified)**
+**Code Snippet 1.8: The `sysent` Table (Excerpt)**
 
 Here, the first field typically indicates the number of arguments the system call expects, the second might hold flags, and the third is a function pointer to the actual kernel handler responsible for executing the system call's logic. This design provides an efficient and organized way for the kernel to dispatch control to the correct handler based on the system call number provided by the user process.
 
@@ -50,7 +84,27 @@ Here, the first field typically indicates the number of arguments the system cal
 
 The kernel's `systrap` entry point, having identified the correct system call handler via `sysent`, now orchestrates the transfer of arguments from the user process to the kernel handler. This is a highly sensitive operation, as the kernel must never implicitly trust data originating from user space.
 
-Arguments are typically pushed onto the user process's stack before the `INT 0x80` instruction. The kernel, using functions like `copyin()`, carefully copies these arguments from the user's virtual address space into a secure, temporary buffer within the kernel's own address space.
+Arguments are typically pushed onto the user process's stack before the `INT 0x80` instruction. The kernel reads them in `systrap()` using `lfuword()` and the per-process argument array (os/trap.c:808-836):
+
+```c
+/* Excerpt from systrap() in os/trap.c */
+u.u_syscall = r0ptr[EAX];
+if ((u.u_syscall & 0xff) >= sysentsize)
+	u.u_syscall = 0;
+scall = u.u_syscall & 0xff;
+callp = &sysent[scall];
+u.u_sysabort = 0;
+
+{
+	register u_int *sp = (u_int *)r0ptr[UESP];
+	register u_int i;
+	sp++;	/* skip return addr */
+	for (i = 0; i < callp->sy_narg; i++) {
+		u.u_arg[i] = lfuword((int *)(sp++));
+	}
+}
+```
+**Code Snippet 1.9: Argument Harvesting in `systrap()`**
 
 This `copyin()` (and its counterpart `copyout()` for returning data) is more than just a memory copy; it includes critical **validation** steps:
 
