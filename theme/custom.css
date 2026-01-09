@@ -51,16 +51,14 @@ img:not([src*="cartoon"]) {
     max-height: 5.5in !important;
 }
 
-/* Center image captions */
-img + p,
-img + p strong {
+/* Center image captions - image and caption are in same <p> tag */
+p img + strong {
+    display: block !important;
     text-align: center !important;
     font-style: italic;
-}
-
-img + p {
-    margin-top: -0.5em;
-    margin-bottom: 1.5em;
+    margin-top: 0.5em;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 /* Horizontal rules as page breaks */
@@ -105,9 +103,12 @@ hr {
     }
 
     /* Ensure captions are centered in print */
-    img + p,
-    img + p strong {
+    p img + strong {
+        display: block !important;
         text-align: center !important;
         font-style: italic;
+        margin-top: 0.5em;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
