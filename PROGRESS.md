@@ -142,24 +142,30 @@ Full implementation plan: `/home/user/.claude/plans/proud-skipping-snail.md`
   - Code from: `svr4-src/uts/i386/fs/nfs/*.c`
   - 1 diagram: NFS client architecture
   - Ghost of SVR4: Compared to modern distributed filesystems.
+- ✅ **nfs-server.md** (Network File System Server) - 300 lines
+  - Victorian metaphor: The Colonial Office
+  - Technical content: nfsd, exports, authentication
+  - Code from: `svr4-src/uts/i386/fs/nfs/*.c`
+  - 0 diagrams
+  - Ghost of SVR4: Compared to modern object storage gateways.
 
 ### In Progress
-- **nfs-server.md** (Network File System Server) - Ready to write
-  - Source code reviewed: `svr4-src/uts/i386/fs/nfs/*.c`
+- **boot.md** (System Boot Process) - Ready to write
+  - Source code reviewed: `svr4-src/uts/i386/boot/*.c`
   - Key concepts identified:
-    * `nfsd` daemons
-    * `exports` table
-  - Victorian metaphor candidate: The Colonial Office.
-  - Modern comparison: Modern object storage gateways.
+    * Boot block, kernel loading
+    * Transition to protected mode
+  - Victorian metaphor candidate: The Great Engine's Ignition.
+  - Modern comparison: UEFI and secure boot.
 
-### Next Steps (Filesystems)
-1. Write nfs-server.md (300-400 lines, COMPLEX)
-2. Write boot.md (200-300 lines, MEDIUM)
+### Next Steps (System Infrastructure)
+1. Write boot.md (200-300 lines, MEDIUM)
+2. Write driver-framework.md (200-300 lines, MEDIUM)
 3. Enhancement Pass
 
 ## Statistics
-- **Total sections completed:** 9/25 placeholder sections
-- **Lines written today:** 1700
+- **Total sections completed:** 10/25 placeholder sections
+- **Lines written today:** 2000
 - **Diagrams created:** 7
 - **Commits:** 0
 
