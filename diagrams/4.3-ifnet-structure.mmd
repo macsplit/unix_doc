@@ -1,6 +1,9 @@
 flowchart TD
-    A[ifnet struct] --> B[identity name unit mtu flags]
-    A --> C[output queue if_snd]
-    A --> D[function pointers init output ioctl watchdog]
-    A --> E[statistics counters]
-    A --> F[links upper lower]
+    A["<b>ifnet Structure</b>"]
+    B["<b>Identity Fields</b><br/>name, unit, mtu, flags"]
+    C["<b>Output Queue</b><br/>if_snd"]
+    D["<b>Function Pointers</b><br/>init, output, ioctl, watchdog"]
+    E["<b>Statistics</b><br/>packet counters"]
+    F["<b>Links</b><br/>upper, lower"]
+
+    A --> B --> C --> D --> E --> F

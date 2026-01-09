@@ -1,14 +1,15 @@
 graph TD
-    subgraph "S5FS Inode"
-        A["Mode & Type<br/>(file type, permissions)"] --> B("Link Count")
-        B --> C("Owner (UID) & Group (GID)")
-        C --> D("Size (in bytes)")
-        D --> E("Timestamps<br/>(access, modify, change)")
-        E --> F("Direct Blocks [0-9]<br/>(pointers to data blocks)")
-        F --> G("Single Indirect<br/>(pointer to a block of pointers)")
-        G --> H("Double Indirect<br/>(pointer to a block of single indirect pointers)")
-        H --> I("Triple Indirect<br/>(pointer to a block of double indirect pointers)")
-    end
+    A["<b>Mode & Type</b><br/>file type, permissions"]
+    B["<b>Link Count</b>"]
+    C["<b>Owner</b><br/>UID & GID"]
+    D["<b>Size</b><br/>in bytes"]
+    E["<b>Timestamps</b><br/>access, modify, change"]
+    F["<b>Direct Blocks [0-9]</b><br/>data block pointers"]
+    G["<b>Single Indirect</b><br/>block of pointers"]
+    H["<b>Double Indirect</b><br/>block of single indirect"]
+    I["<b>Triple Indirect</b><br/>block of double indirect"]
+
+    A --> B --> C --> D --> E --> F --> G --> H --> I
 
     style A fill:#cff,stroke:#333,stroke-width:2px
     style B fill:#cff,stroke:#333,stroke-width:2px

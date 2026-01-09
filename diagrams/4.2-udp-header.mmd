@@ -1,9 +1,11 @@
 graph TD
-    subgraph "UDP Header (8 bytes)"
-        A["Source Port\n(16 bits)"] --> B("Destination Port\n(16 bits)")
-        B --> C("Length\n(16 bits)")
-        C --> D("Checksum\n(16 bits)")
-    end
+    A["<b>Source Port</b><br/>16 bits"]
+    B["<b>Destination Port</b><br/>16 bits"]
+    C["<b>Length</b><br/>16 bits"]
+    D["<b>Checksum</b><br/>16 bits"]
+
+    A --> B --> C --> D
+
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#f9f,stroke:#333,stroke-width:2px
     style C fill:#f9f,stroke:#333,stroke-width:2px

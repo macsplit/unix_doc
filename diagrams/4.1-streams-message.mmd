@@ -1,6 +1,8 @@
 graph TD
-    A[M_DATA] --> B[Normal data path]
-    C[M_PROTO] --> D[Protocol control]
-    E[M_PCPROTO] --> F[Priority control]
-    G[M_IOCTL] --> H[Configuration]
-    I[M_FLUSH] --> J[Queue reset]
+    A["<b>M_DATA</b><br/>Normal data path"]
+    B["<b>M_PROTO</b><br/>Protocol control"]
+    C["<b>M_PCPROTO</b><br/>Priority control"]
+    D["<b>M_IOCTL</b><br/>Configuration"]
+    E["<b>M_FLUSH</b><br/>Queue reset"]
+
+    A --> B --> C --> D --> E
