@@ -51,6 +51,22 @@ img:not([src*="cartoon"]) {
     max-height: 5.5in !important;
 }
 
+/* Center image captions */
+img + p {
+    text-align: center;
+    font-style: italic;
+    margin-top: -0.5em;
+    margin-bottom: 1.5em;
+}
+
+/* Horizontal rules as page breaks */
+hr {
+    border: none;
+    height: 0;
+    page-break-after: always;
+    margin: 2em 0;
+}
+
 /* Print media query for PDF output */
 @media print {
     /* Cartoons in print */
@@ -74,5 +90,13 @@ img:not([src*="cartoon"]) {
 
     figure {
         page-break-inside: avoid;
+    }
+
+    /* Ensure horizontal rules stay as page breaks in print */
+    hr {
+        border: none;
+        height: 0;
+        page-break-after: always;
+        margin: 0;
     }
 }
