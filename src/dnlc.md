@@ -19,6 +19,9 @@ In the SVR4 kernel, pathname resolution—the act of translating a string like `
 
 This is the *card catalog walk* made manifest in silicon and spinning platters. The DNLC, residing entirely in DRAM, short-circuits this process by caching the most recent `(parent_directory_vnode, filename) → child_vnode` mappings. When a lookup succeeds in the cache—a "hit"—the kernel avoids the directory scan entirely, retrieving the answer with the speed of a memory reference rather than the latency of disk I/O.
 
+![DNLC - Librarian's Pocket Notebook](cartoons/dnlc-cartoon.png)
+**DNLC - Librarian's Pocket Notebook**
+
 ### The Ledger Entry: `struct ncache`
 
 Each entry in the DNLC is a `struct ncache`, defined in `sys/dnlc.h`:

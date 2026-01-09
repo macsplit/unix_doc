@@ -30,6 +30,9 @@ When a character arrives at the serial port, an interrupt is generated. The `asy
 
 <br/>
 
+![Console Terminal - Telegraph Station](cartoons/console-terminal-cartoon.png)
+**Console Terminal - Telegraph Station**
+
 ## The Formatting Clerk: The `ldterm` Module
 
 The raw bytes sent up from the `asy` operator are not yet fit for consumption by a user application. A user typing "h", "e", "l", "l", "o", "backspace", "p" expects the application to read the line "help". The task of interpreting these raw keystrokes, handling line-editing conventions, processing special characters, and assembling complete lines falls to the formatting clerk: the **line discipline module**, `ldterm`.

@@ -34,6 +34,9 @@ This comprehensive work order specifies the source (`reqrbufs`), the destination
 
 <br/>
 
+![DMA Buffers - Warehouse Loading Docks](cartoons/dma-buffers-cartoon.png)
+**DMA Buffers - Warehouse Loading Docks**
+
 ## The Scribe's Assistant: `dma_breakup`
 
 The most common and vexing problem is a single I/O request that is too large to be handled in one go, especially if it crosses a memory boundary that the hardware cannot traverse (such as the 16MB boundary for an ISA device). In this case, a scribe's assistant must intervene to break the large, contiguous request into a series of smaller, manageable transfers. This assistant is the `dma_breakup()` function.

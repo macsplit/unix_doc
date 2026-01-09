@@ -41,6 +41,9 @@ The CPU then **atomically**:
 
 <br/>
 
+![Interrupts - Butler in Manor](cartoons/interrupts-cartoon.png)
+**Interrupts - Butler in Manor**
+
 ## The Trap Gate: Entry from User Mode
 
 SVR4 distinguishes between **traps** (synchronous exceptions arising from program execution, like page faults or system calls) and **interrupts** (asynchronous hardware events). Both, however, share a common entry mechanism on i386: the **trap gate** or **interrupt gate** in the IDT.

@@ -36,6 +36,9 @@ These flags are the seals on the ticket. They are set by `setsockopt`, tested by
 
 <br/>
 
+![Socket Layer - Telephone Exchange](cartoons/socket-layer-cartoon.png)
+**Socket Layer - Telephone Exchange**
+
 ## The Call Ledger: `struct socket`
 
 The kernel's per-socket ledger is defined in `sys/socketvar.h`. It records the socket's type, state, connection queues, and buffer state (sys/socketvar.h:42-98).

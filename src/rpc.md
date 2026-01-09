@@ -31,6 +31,9 @@ The call body records the program, version, procedure number, and two authentica
 
 <br/>
 
+![RPC Protocol - Royal Court Dispatches](cartoons/rpc-cartoon.png)
+**RPC Protocol - Royal Court Dispatches**
+
 ## Versioning and Port Conventions
 
 SVR4's RPC wire format declares its version explicitly: `RPC_MSG_VERSION` is 2 (rpc/rpc_msg.h:42). The subsystem also defines a service port constant for kernel RPC services (rpc/rpc_msg.h:42-43). These constants are the dispatch office's registry. The client and server both know which version they are speaking, and the reply can report `PROG_MISMATCH` or `RPC_MISMATCH` if the versions disagree (rpc/rpc_msg.h:61-72).

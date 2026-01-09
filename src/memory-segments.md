@@ -1,5 +1,8 @@
 Memory Segments
 
+![Memory Segments - Medieval Castle](cartoons/memory-segments-cartoon.png)
+**Memory Segments - Medieval Castle**
+
 ## Overview
 
 Segments represent contiguous virtual address ranges with uniform properties. The `seg` structure provides a framework for managing different types of memory regions through pluggable segment drivers. Each segment type implements operations for fault handling, protection changes, and synchronization.

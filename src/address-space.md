@@ -38,6 +38,9 @@ The comment in `as.h` makes the division of labor explicit: "All the hard work i
 
 <br/>
 
+![Address Space - Kingdom Provinces](cartoons/address-space-cartoon.png)
+**Address Space - Kingdom Provinces**
+
 ## Establishing a Parcel: `as_map()`
 
 When the kernel maps a new range, it calls `as_map()` in `vm_as.c`. The function rounds the range to page boundaries, checks resource limits, allocates a segment, and invokes the segment driver's create routine (vm/vm_as.c:504-551).

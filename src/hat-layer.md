@@ -25,6 +25,9 @@ The HAT keeps a list of page tables and a locality hint (`hat_ptlast`) to speed 
 
 <br/>
 
+![HAT Layer - Royal Milliner's Shop](cartoons/hat-layer-cartoon.png)
+**HAT Layer - Royal Milliner's Shop**
+
 ## The Operation Set: `hat.h`
 
 The HAT interface exposes a standardized set of operations for segment drivers and the VM system (vm/hat.h:81-147). These include loading mappings, unloading them, and syncing page state.

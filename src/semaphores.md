@@ -28,6 +28,9 @@ Each set holds a contiguous array of `struct sem` entries, allowing multiple ope
 
 <br/>
 
+![Semaphores - Railway Station Turnstiles](cartoons/semaphores-cartoon.png)
+**Semaphores - Railway Station Turnstiles**
+
 ## The Turnstile: `struct sem`
 
 Each semaphore maintains its value and the number of waiters for two conditions (sys/sem.h:85-90).

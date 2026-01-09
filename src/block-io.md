@@ -51,6 +51,9 @@ The dual-linking scheme is ingenious. Every buffer lives on a hash queue so it c
 
 <br/>
 
+![Block I/O - Postal Sorting Center](cartoons/block-io-cartoon.png)
+**Block I/O - Postal Sorting Center**
+
 ## Checking Out a Block: `getblk` and `bread`
 
 When a process requires a block, it calls upon `bread()` (Block Read), which serves as the public-facing clerk of the lending library. The `bread` function's primary duty is to acquire the block using `getblk()` and, if the block's data is not already valid, to initiate a read from the device.

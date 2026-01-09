@@ -30,6 +30,9 @@ Interface discovery functions such as `ifunit()` and `ifa_ifwithaddr()` are decl
 
 <br/>
 
+![Network Interfaces - City Ports](cartoons/network-interfaces-cartoon.png)
+**Network Interfaces - City Ports**
+
 ## Flags and Civic Status
 
 An interface also carries a civic status, recorded as flags in `ifnet`. These flags tell the stack whether a link is up, looped back, broadcasting, or operating in promiscuous mode (net/if.h:133-144).

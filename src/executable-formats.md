@@ -33,6 +33,9 @@ The kernel maintains a global array, `execsw[]`, and a count of its entries, `ne
 
 <br/>
 
+![Executable Formats - Customs House](cartoons/executable-formats-cartoon.png)
+**Executable Formats - Customs House**
+
 ## The Master Artisan's Method: `gexec()`
 
 The master artisan who presides over this process is the `gexec()` function, found in `os/exec.c`. When a user calls `exec()`, the generic system call logic performs initial setup (locating the file, checking basic permissions) and then hands control to `gexec()` to perform the magic.

@@ -53,6 +53,9 @@ Two arrays, `bdevsw[]` and `cdevsw[]`, carry these entries, while `bdevcnt` and 
 
 <br/>
 
+![Driver Framework - Machine Factory](cartoons/driver-framework-cartoon.png)
+**Driver Framework - Machine Factory**
+
 ## Tickets, Majors, and Dispatch
 
 When user space opens a device node under `/dev`, the kernel routes the call through the special file system layer. `spec_open()` extracts the major number and dispatches into the appropriate switch table. The mechanism is deliberate and unromantic: a single array lookup, followed by a function pointer call (fs/specfs/specvnops.c:283-357).

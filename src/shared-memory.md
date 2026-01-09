@@ -34,6 +34,9 @@ The crucial field is **`shm_amp`**, an `anon_map` that represents the shared ano
 
 <br/>
 
+![Shared Memory - Shared Courtyard](cartoons/shared-memory-cartoon.png)
+**Shared Memory - Shared Courtyard**
+
 ## Attaching the Courtyard: `shmat()`
 
 The `shmat()` system call validates permissions and maps the `anon_map` into the process address space. In `os/shm.c`, the kernel picks or validates an address, then calls `as_map()` with `segvn_create` (os/shm.c:168-246).

@@ -43,6 +43,9 @@ This `clock()` function is the tireless keeper of time. On every invocation, it:
 
 <br/>
 
+![Clock and Timers - City Clock Tower](cartoons/clock-timers-cartoon.png)
+**Clock and Timers - City Clock Tower**
+
 ## The Bulletin Board: The `callout` Table
 
 Affixed to the base of the clock tower is a public bulletin board where any part of the kernel can post a notice for a future action. This is the **`callout` table**, a simple array of `callo` structures defined in `sys/callo.h`.

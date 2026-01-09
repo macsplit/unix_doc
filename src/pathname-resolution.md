@@ -1,5 +1,8 @@
 Pathname Resolution
 
+![Pathname Resolution - Postal Carrier](cartoons/pathname-resolution-cartoon.png)
+**Pathname Resolution - Postal Carrier**
+
 ## Overview
 
 Pathname resolution translates textual path names into vnodes. The process handles multiple pathname components, mount points, symbolic links, and permission checking. The central function `lookuppn()` iterates through path components, invoking `VOP_LOOKUP()` on each directory.

@@ -20,6 +20,9 @@ Upon activation of the entry instruction, control is transferred to the kernel's
 
 ![System Call Flow](1.4-syscall-flow.png)
 
+![System Calls - Protected Factory](cartoons/system-calls-cartoon.png)
+**System Calls - Protected Factory**
+
 ## The `sysent` Table: The Kernel's Service Directory
 
 Once safely within the kernel, the `systrap` routine consults the **`sysent` table** (defined in `sysent.c`), which serves as the kernel's authoritative directory of all available system calls. This table is an array of `struct sysent` entries, indexed directly by the system call number (the value initially placed in `EAX`).

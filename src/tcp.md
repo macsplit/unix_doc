@@ -92,6 +92,9 @@ Upon completion of this exchange, the connection is `ESTABLISHED`, and data tran
 >
 > "Ah, the simple, elegant dance of the three-way handshake. It was a robust and reliable method in its day, and remains the foundation of TCP connections even now, in your far-flung future of 2026. But the world has grown so much faster, so much more concerned with latency. Your modern TCP stacks have learned new tricks. 'TCP Fast Open' (TFO), for instance, allows data to be sent in the very first `SYN` packet, a brazen violation of the old etiquette, all in the name of shaving off a few precious milliseconds. We, in our time, valued correctness and a clear separation of concerns above all. The handshake was for synchronization, and only once the line was declared open would data ever be transmitted. A more civilized age, perhaps."
 
+![TCP - Telegraph Office](cartoons/tcp-cartoon.png)
+**TCP - Telegraph Office**
+
 ## Reliable Delivery and Flow Control
 
 TCP's primary mandate is reliability. It achieves this through several key mechanisms:

@@ -42,6 +42,9 @@ Once the kernel is loaded into memory, the bootloader's final task is to transfe
 >
 > "Our ignition sequence was a marvel of minimalist engineering, a carefully crafted chain of small programs, each one handing off to the next, to pull the kernel up by its own bootstraps. But it was a system built on trust. The BIOS trusted the MBR, the MBR trusted the boot block, and the bootloader trusted the kernel. There were no digital signatures, no secure enclaves, no cryptographic handshakes. In your time, you have built fortresses around this process. Your UEFI (Unified Extensible Firmware Interface) and its 'Secure Boot' protocol are a response to a world of threats we could scarcely have imagined. Your bootloaders are signed and verified, your kernels are measured and attested. You have traded the simple elegance of our ignition sequence for the complex, but necessary, security of a world where the very foundations of the system are under constant attack."
 
+![Boot Process - Theater Opening Night](cartoons/boot-cartoon.png)
+**Boot Process - Theater Opening Night**
+
 ## Conclusion
 
 The boot process is the critical, and often unseen, foundation upon which the entire operating system is built. It is the Great Engine's Ignition, the carefully choreographed sequence of events that transforms a dormant piece of hardware into a living, breathing system. The SVR4 boot process, with its multi-stage loader and its transition from the simple world of the BIOS to the sophisticated world of the protected-mode kernel, is a classic example of this process, a testament to the ingenuity of the engineers who first brought these great engines to life.

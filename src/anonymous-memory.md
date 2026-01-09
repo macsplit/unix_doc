@@ -1,5 +1,8 @@
 Anonymous Memory
 
+![Anonymous Memory - Lost and Found](cartoons/anonymous-memory-cartoon.png)
+**Anonymous Memory - Lost and Found**
+
 ## Overview
 
 The anonymous memory layer manages physical pages that have no permanent identity in the file system. This includes stack pages, heap allocations, and copy-on-write pages created during fork(). Anonymous pages use swap space for backing storage and are discarded when all references are removed.

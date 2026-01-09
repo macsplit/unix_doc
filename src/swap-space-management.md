@@ -31,6 +31,9 @@ The `si_anon` array is the true map of vault slots. Free slots are linked throug
 
 <br/>
 
+![Swap Space - Underground Vaults](cartoons/swap-space-management-cartoon.png)
+**Swap Space - Underground Vaults**
+
 ## Logical Concatenation and Load Balancing
 
 SVR4 treats swap as one logical array of anon slots, even though the physical devices are separate. The allocator walks the `swapinfo` list, rotating across devices after `swap_maxcontig` consecutive allocations (vm/vm_swap.c:107-160).

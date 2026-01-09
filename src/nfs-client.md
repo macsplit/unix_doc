@@ -23,6 +23,9 @@ To ensure that diplomatic cables can be understood by all parties, regardless of
 
 The `nfs_xdr.c` file contains the XDR routines for all the NFS data structures. These functions are responsible for encoding and decoding the arguments and results of the RPC calls, translating between the kernel's internal data structures and the standardized format used on the wire.
 
+![NFS Client - Merchant Agent](cartoons/nfs-client-cartoon.png)
+**NFS Client - Merchant Agent**
+
 ## The `rnode`: The Ambassador's Dossier
 
 For each remote file that the client is accessing, it maintains an `rnode` (remote inode). This is the ambassador's dossier on that file, a local repository of all the information needed to interact with it. The `rnode` contains the file handle (the server's unique identifier for the file), the file's attributes, and other client-side state.

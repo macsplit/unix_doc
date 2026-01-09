@@ -10,6 +10,9 @@ Having explored the STREAMS-based networking architecture from the application p
 
 At the core of STREAMS lies a trinity of structures that together embody the essence of message-based I/O:
 
+![STREAMS - Victorian Postal System](cartoons/streams-cartoon.png)
+**STREAMS - Victorian Postal System**
+
 ### The Message Block (`mblk_t`)
 
 A message block is a lightweight descriptor, the handle by which STREAMS code manipulates data. It does not own the data itself; rather, it **points** to a data block and maintains metadata about the message's position within that data:

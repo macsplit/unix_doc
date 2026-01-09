@@ -40,6 +40,9 @@ The ceremony begins:
 
 <br/>
 
+![System Init - World's Fair Opening](cartoons/system-initialization-cartoon.png)
+**System Init - World's Fair Opening**
+
 ## The Grand Procession of Subsystems
 
 With the foundations laid and the clock ticking, `main()` turns its attention to the great exhibits of the fair—the kernel's subsystems. It does not call each one by name. Instead, it defers to two great tables of function pointers, `io_init` and `init_tbl`, which constitute the guest list for the ceremony.

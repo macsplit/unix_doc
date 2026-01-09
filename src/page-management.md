@@ -44,6 +44,9 @@ The ledger is also aware of noncontiguous physical memory. `pageac` describes ea
 
 <br/>
 
+![Page Management - Farmer's Field](cartoons/page-management-cartoon.png)
+**Page Management - Farmer's Field**
+
 ## The Two Free Lists: Empty Rooms and Remembered Rooms
 
 `page_free()` is the clerk's act of returning a room to the pool. SVR4 does not use a single list; it keeps two circular lists: `page_freelist` for pages with no vnode identity and `page_cachelist` for pages that still remember their former contents (vm/vm_page.c:764-888).

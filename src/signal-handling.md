@@ -47,6 +47,9 @@ For the currently executing process, a special flag (`u.u_sigevpend`) is set. Th
 
 <br/>
 
+![Signal Handling - Whispers and Nudges](cartoons/signal-handling-cartoon.png)
+**Signal Handling - Whispers and Nudges**
+
 ## The Sentry's Gate: Signal Masks and Sets
 
 ![Signal Masks Diagram](1.3-signal-masks.png)

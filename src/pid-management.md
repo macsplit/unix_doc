@@ -23,6 +23,9 @@ Each `pid` entry links to a process group list and tracks reference counts and t
 
 <br/>
 
+![PID Management - Registrar's Office](cartoons/pid-management-cartoon.png)
+**PID Management - Registrar's Office**
+
 ## Assigning a New Name: `pid_assign()`
 
 `pid_assign()` handles PID allocation at fork time (os/pid.c:96-182). It enforces process limits, allocates a `proc_t` and `pid` structure, and then searches for the next free PID.

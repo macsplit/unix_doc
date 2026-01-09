@@ -60,6 +60,9 @@ The structure is a ledger in the literal sense: it documents identity, stores pe
 
 <br/>
 
+![Network Drivers - Dock Workers](cartoons/network-drivers-cartoon.png)
+**Network Drivers - Dock Workers**
+
 ## The Queue Discipline: `if_snd` and the Macros of Order
 
 SVR4's network drivers are expected to respect a simple, explicit queue discipline. The output queue is managed by macros that enforce length limits and track drops (net/if.h:150-208).

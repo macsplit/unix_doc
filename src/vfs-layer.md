@@ -1,5 +1,8 @@
 Virtual File System (VFS) Layer
 
+![VFS Layer - Customs House](cartoons/vfs-layer-cartoon.png)
+**VFS Layer - Customs House**
+
 ## Overview
 
 The VFS layer provides a uniform interface to multiple file system types. It allows the kernel to support different file systems simultaneously through a common set of operations. Each mounted file system has a vfs structure containing function pointers for filesystem-specific operations.

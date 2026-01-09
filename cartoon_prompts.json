@@ -1,280 +1,280 @@
 {
   "cartoons": [
     {
-      "chapter": "address-space.md",
+      "chapter": "address-space-cartoon.png",
       "section": "1.1",
       "title": "Address Space - Kingdom Provinces",
-      "prompt": "white background, black lines, sketch, monochrome: A map of a medieval kingdom divided into colored provinces with borders, a viceroy on horseback surveying the realm"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A map of a medieval kingdom divided into colored provinces with borders, a viceroy on horseback surveying the realm"
     },
     {
-      "chapter": "anonymous-memory.md",
+      "chapter": "anonymous-memory-cartoon.png",
       "section": "2.2",
       "title": "Anonymous Memory - Lost and Found",
-      "prompt": "white background, black lines, sketch, monochrome: A library's lost-and-found shelf with stacked unmarked boxes and an archivist holding a ledger"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A library's lost-and-found shelf with stacked unmarked boxes and an archivist holding a ledger"
     },
     {
-      "chapter": "block-io.md",
+      "chapter": "block-io-cartoon.png",
       "section": "2.5",
       "title": "Block I/O - Postal Sorting Center",
-      "prompt": "white background, black lines, sketch, monochrome: A Victorian postal sorting center with mail bags being bundled by workers at sorting tables"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A Victorian postal sorting center with mail bags being bundled by workers at sorting tables"
     },
     {
-      "chapter": "boot.md",
+      "chapter": "boot-cartoon.png",
       "section": "5.7",
       "title": "Boot Process - Theater Opening Night",
-      "prompt": "white background, black lines, sketch, monochrome: A stage manager with clipboard standing before a theater stage with curtains and stage lights being set up"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A stage manager with clipboard standing before a theater stage with curtains and stage lights being set up"
     },
     {
-      "chapter": "character-io.md",
+      "chapter": "character-io-cartoon.png",
       "section": "2.6",
       "title": "Character I/O - Telegraph Office",
-      "prompt": "white background, black lines, sketch, monochrome: A telegraph office with operators at their desks, one tapping out messages on a telegraph key"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A telegraph office with operators at their desks, one tapping out messages on a telegraph key"
     },
     {
-      "chapter": "clock-timers.md",
+      "chapter": "clock-timers-cartoon.png",
       "section": "5.8",
       "title": "Clock and Timers - City Clock Tower",
-      "prompt": "white background, black lines, sketch, monochrome: A tall city clock tower with multiple bells ringing, showing mechanisms and gear wheels inside"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A tall city clock tower with multiple bells ringing, showing mechanisms and gear wheels inside"
     },
     {
-      "chapter": "console-terminal.md",
+      "chapter": "console-terminal-cartoon.png",
       "section": "5.10",
       "title": "Console Terminal - Telegraph Station",
-      "prompt": "white background, black lines, sketch, monochrome: A colonial telegraph station with operators at desks, telegraph equipment, and message routing boards on walls"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A colonial telegraph station with operators at desks, telegraph equipment, and message routing boards on walls"
     },
     {
-      "chapter": "credentials.md",
+      "chapter": "credentials-cartoon.png",
       "section": "1.7",
       "title": "Credentials - Royal Seals",
-      "prompt": "white background, black lines, sketch, monochrome: A medieval kingdom's gate with guards checking documents, official seals, and credentials from travelers"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A medieval kingdom's gate with guards checking documents, official seals, and credentials from travelers"
     },
     {
-      "chapter": "dma-buffers.md",
+      "chapter": "dma-buffers-cartoon.png",
       "section": "5.9",
       "title": "DMA Buffers - Warehouse Loading Docks",
-      "prompt": "white background, black lines, sketch, monochrome: A warehouse with special loading docks, workers loading cargo directly onto trucks bypassing the sorting area"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A warehouse with special loading docks, workers loading cargo directly onto trucks bypassing the sorting area"
     },
     {
-      "chapter": "dnlc.md",
+      "chapter": "dnlc-cartoon.png",
       "section": "3.4",
       "title": "DNLC - Librarian's Pocket Notebook",
-      "prompt": "white background, black lines, sketch, monochrome: A busy librarian at her desk with a leather pocket notebook in hand, sticky notes visible, surrounded by books"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A busy librarian at her desk with a leather pocket notebook in hand, sticky notes visible, surrounded by books"
     },
     {
-      "chapter": "driver-framework.md",
+      "chapter": "driver-framework-cartoon.png",
       "section": "5.4",
       "title": "Driver Framework - Machine Factory",
-      "prompt": "white background, black lines, sketch, monochrome: A modular machine factory with standardized components and workers installing interchangeable parts into devices"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A modular machine factory with standardized components and workers installing interchangeable parts into devices"
     },
     {
-      "chapter": "executable-formats.md",
+      "chapter": "executable-formats-cartoon.png",
       "section": "1.12",
       "title": "Executable Formats - Customs House",
-      "prompt": "white background, black lines, sketch, monochrome: A customs house at a port examining cargo from ships, workers converting goods into standard containers"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A customs house at a port examining cargo from ships, workers converting goods into standard containers"
     },
     {
-      "chapter": "fdfs.md",
+      "chapter": "fdfs-cartoon.png",
       "section": "1.8",
       "title": "File Descriptors - File Drawer System",
-      "prompt": "white background, black lines, sketch, monochrome: A wooden filing cabinet with numbered drawers, some open showing indexed contents, a clerk holding an inventory list"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A wooden filing cabinet with numbered drawers, some open showing indexed contents, a clerk holding an inventory list"
     },
     {
-      "chapter": "fifo.md",
+      "chapter": "fifo-cartoon.png",
       "section": "3.7",
       "title": "FIFO - Theater Queue",
-      "prompt": "white background, black lines, sketch, monochrome: People waiting in a single-file queue at a theater ticket window, first person approaching the counter"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, People waiting in a single-file queue at a theater ticket window, first person approaching the counter"
     },
     {
-      "chapter": "hat-layer.md",
+      "chapter": "hat-layer-cartoon.png",
       "section": "2.4",
       "title": "HAT Layer - Royal Milliner's Shop",
-      "prompt": "white background, black lines, sketch, monochrome: A royal milliner's shop with hatmaker at work, abstract hat designs on shelves, region-specific hats being fitted"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A royal milliner's shop with hatmaker at work, abstract hat designs on shelves, region-specific hats being fitted"
     },
     {
-      "chapter": "interrupts.md",
+      "chapter": "interrupts-cartoon.png",
       "section": "5.3",
       "title": "Interrupts - Butler in Manor",
-      "prompt": "white background, black lines, sketch, monochrome: A butler in a grand manor interrupting his master from reading, delivering an urgent message on a silver tray"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A butler in a grand manor interrupting his master from reading, delivering an urgent message on a silver tray"
     },
     {
-      "chapter": "ip.md",
+      "chapter": "ip-cartoon.png",
       "section": "4.3",
       "title": "IP Protocol - Postal Routing Center",
-      "prompt": "white background, black lines, sketch, monochrome: A postal routing center with workers examining addressed packages, sorting them onto different delivery routes"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A postal routing center with workers examining addressed packages, sorting them onto different delivery routes"
     },
     {
-      "chapter": "memory-segments.md",
+      "chapter": "memory-segments-cartoon.png",
       "section": "2.1",
       "title": "Memory Segments - Medieval Castle",
-      "prompt": "white background, black lines, sketch, monochrome: A cross-section of a medieval castle showing different areas: tower, dungeon, great hall, each with distinct architecture"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A cross-section of a medieval castle showing different areas: tower, dungeon, great hall, each with distinct architecture"
     },
     {
-      "chapter": "messages.md",
+      "chapter": "messages-cartoon.png",
       "section": "1.10",
       "title": "Messages IPC - Post Box",
-      "prompt": "white background, black lines, sketch, monochrome: A post office mailbox with sealed envelopes inside marked with type labels, a clerk reaching in to retrieve one"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A post office mailbox with sealed envelopes inside marked with type labels, a clerk reaching in to retrieve one"
     },
     {
-      "chapter": "network-drivers.md",
+      "chapter": "network-drivers-cartoon.png",
       "section": "4.7",
       "title": "Network Drivers - Dock Workers",
-      "prompt": "white background, black lines, sketch, monochrome: Dock workers coordinating cargo movement between ships and warehouse, managing multiple simultaneous operations"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, Dock workers coordinating cargo movement between ships and warehouse, managing multiple simultaneous operations"
     },
     {
-      "chapter": "network-interfaces.md",
+      "chapter": "network-interfaces-cartoon.png",
       "section": "4.5",
       "title": "Network Interfaces - City Ports",
-      "prompt": "white background, black lines, sketch, monochrome: A city harbor with multiple distinct docks and piers, different ships loading and unloading at each port"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A city harbor with multiple distinct docks and piers, different ships loading and unloading at each port"
     },
     {
-      "chapter": "network-stack-overview.md",
+      "chapter": "network-stack-overview-cartoon.png",
       "section": "4.1",
       "title": "Network Stack - Trading Post",
-      "prompt": "white background, black lines, sketch, monochrome: A multi-story trading post with merchants at different levels negotiating at top, moving goods at the bottom"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A multi-story trading post with merchants at different levels negotiating at top, moving goods at the bottom"
     },
     {
-      "chapter": "nfs-client.md",
+      "chapter": "nfs-client-cartoon.png",
       "section": "3.6",
       "title": "NFS Client - Merchant Agent",
-      "prompt": "white background, black lines, sketch, monochrome: A merchant agent in a distant city at a desk with ledgers, arranging shipments from a central warehouse"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A merchant agent in a distant city at a desk with ledgers, arranging shipments from a central warehouse"
     },
     {
-      "chapter": "nfs-server.md",
+      "chapter": "nfs-server-cartoon.png",
       "section": "3.5",
       "title": "NFS Server - Central Warehouse",
-      "prompt": "white background, black lines, sketch, monochrome: A grand central warehouse with massive inventory, clerks managing catalogs and coordinating shipments to distant branches"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A grand central warehouse with massive inventory, clerks managing catalogs and coordinating shipments to distant branches"
     },
     {
-      "chapter": "page-management.md",
+      "chapter": "page-management-cartoon.png",
       "section": "2.3",
       "title": "Page Management - Farmer's Field",
-      "prompt": "white background, black lines, sketch, monochrome: A farmer in a field with plots divided into sections, crops planted, fences being adjusted, harvest being recorded"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A farmer in a field with plots divided into sections, crops planted, fences being adjusted, harvest being recorded"
     },
     {
-      "chapter": "page-replacement-paging.md",
+      "chapter": "page-replacement-paging-cartoon.png",
       "section": "2.8",
       "title": "Page Replacement - Theater Understudy",
-      "prompt": "white background, black lines, sketch, monochrome: A theater stage with main performers acting while backup understudies wait in the wings ready to step in"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A theater stage with main performers acting while backup understudies wait in the wings ready to step in"
     },
     {
-      "chapter": "pathname-resolution.md",
+      "chapter": "pathname-resolution-cartoon.png",
       "section": "3.3",
       "title": "Pathname Resolution - Postal Carrier",
-      "prompt": "white background, black lines, sketch, monochrome: A postal carrier walking through city streets, checking house numbers and street signs, following hierarchical pathways"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A postal carrier walking through city streets, checking house numbers and street signs, following hierarchical pathways"
     },
     {
-      "chapter": "pid-management.md",
+      "chapter": "pid-management-cartoon.png",
       "section": "1.5",
       "title": "PID Management - Registrar's Office",
-      "prompt": "white background, black lines, sketch, monochrome: A registrar's office with clerks at desks maintaining large ledgers, filing documents with identification numbers"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A registrar's office with clerks at desks maintaining large ledgers, filing documents with identification numbers"
     },
     {
-      "chapter": "process-groups.md",
+      "chapter": "process-groups-cartoon.png",
       "section": "1.9",
       "title": "Process Groups - Military Regiment",
-      "prompt": "white background, black lines, sketch, monochrome: A military regiment on parade organized into companies and squads, a commander sending messages that reach all soldiers"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A military regiment on parade organized into companies and squads, a commander sending messages that reach all soldiers"
     },
     {
-      "chapter": "process-lifecycle.md",
+      "chapter": "process-lifecycle-cartoon.png",
       "section": "1.1",
       "title": "Process Lifecycle - Theater Troupe",
-      "prompt": "white background, black lines, sketch, monochrome: A theater troupe at different stages: audition, rehearsal, and final bows, with understudies waiting in background"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A theater troupe at different stages: audition, rehearsal, and final bows, with understudies waiting in background"
     },
     {
-      "chapter": "process-scheduling.md",
+      "chapter": "process-scheduling-cartoon.png",
       "section": "1.2",
       "title": "Process Scheduling - Restaurant Kitchen",
-      "prompt": "white background, black lines, sketch, monochrome: A busy kitchen with a chef at the stove managing multiple pots and dishes simultaneously, deciding which gets attention next"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A busy kitchen with a chef at the stove managing multiple pots and dishes simultaneously, deciding which gets attention next"
     },
     {
-      "chapter": "rpc.md",
+      "chapter": "rpc-cartoon.png",
       "section": "4.6",
       "title": "RPC Protocol - Royal Court Dispatches",
-      "prompt": "white background, black lines, sketch, monochrome: A royal court with messengers delivering sealed dispatch envelopes between provinces, clerks reading standardized messages"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A royal court with messengers delivering sealed dispatch envelopes between provinces, clerks reading standardized messages"
     },
     {
-      "chapter": "s5fs.md",
+      "chapter": "s5fs-cartoon.png",
       "section": "3.2",
       "title": "S5FS - Provincial Library",
-      "prompt": "white background, black lines, sketch, monochrome: A modest provincial lending library with simple wooden shelves, a basic card catalog, and a small staff"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A modest provincial lending library with simple wooden shelves, a basic card catalog, and a small staff"
     },
     {
-      "chapter": "semaphores.md",
+      "chapter": "semaphores-cartoon.png",
       "section": "1.11",
       "title": "Semaphores - Railway Station Turnstiles",
-      "prompt": "white background, black lines, sketch, monochrome: A railway station with turnstiles, passengers queuing and passing through in orderly fashion, turnstile operators managing access"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A railway station with turnstiles, passengers queuing and passing through in orderly fashion, turnstile operators managing access"
     },
     {
-      "chapter": "shared-memory.md",
+      "chapter": "shared-memory-cartoon.png",
       "section": "1.10",
       "title": "Shared Memory - Shared Courtyard",
-      "prompt": "white background, black lines, sketch, monochrome: A walled courtyard shared by multiple households, families with keys opening the gate, a clerk tracking key distribution"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A walled courtyard shared by multiple households, families with keys opening the gate, a clerk tracking key distribution"
     },
     {
-      "chapter": "signal-handling.md",
+      "chapter": "signal-handling-cartoon.png",
       "section": "1.3",
       "title": "Signal Handling - Whispers and Nudges",
-      "prompt": "white background, black lines, sketch, monochrome: A person being disrupted by urgent whispers, sharp nudges, and shouts arriving unexpectedly during their work"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A person being disrupted by urgent whispers, sharp nudges, and shouts arriving unexpectedly during their work"
     },
     {
-      "chapter": "socket-layer.md",
+      "chapter": "socket-layer-cartoon.png",
       "section": "4.2",
       "title": "Socket Layer - Telephone Exchange",
-      "prompt": "white background, black lines, sketch, monochrome: A public telephone exchange with brass sockets and a clerk binding lines and routing connections between operators"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A public telephone exchange with brass sockets and a clerk binding lines and routing connections between operators"
     },
     {
-      "chapter": "special-files.md",
+      "chapter": "special-files-cartoon.png",
       "section": "3.8",
       "title": "Special Files - Instruments Cabinet",
-      "prompt": "white background, black lines, sketch, monochrome: A city's cabinet filled with instruments (valves, levers, wheels) that appear ordinary but open onto hardware and exotic endpoints"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A city's cabinet filled with instruments (valves, levers, wheels) that appear ordinary but open onto hardware and exotic endpoints"
     },
     {
-      "chapter": "streams.md",
+      "chapter": "streams-cartoon.png",
       "section": "4.9",
       "title": "STREAMS - Victorian Postal System",
-      "prompt": "white background, black lines, sketch, monochrome: A Victorian postal system with packets as letters in cream envelopes, mahogany sorting offices, clerks examining each message"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A Victorian postal system with packets as letters in cream envelopes, mahogany sorting offices, clerks examining each message"
     },
     {
-      "chapter": "swap-space-management.md",
+      "chapter": "swap-space-management-cartoon.png",
       "section": "2.9",
       "title": "Swap Space - Underground Vaults",
-      "prompt": "white background, black lines, sketch, monochrome: A grid of sealed vaults beneath a city, a surface clerk maintaining ledgers of vault contents, various tunnels connecting them"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A grid of sealed vaults beneath a city, a surface clerk maintaining ledgers of vault contents, various tunnels connecting them"
     },
     {
-      "chapter": "system-calls.md",
+      "chapter": "system-calls-cartoon.png",
       "section": "1.4",
       "title": "System Calls - Protected Factory",
-      "prompt": "white background, black lines, sketch, monochrome: A protected factory floor with a very specific gateway door, workers requesting raw materials from warehouse through the entrance"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A protected factory floor with a very specific gateway door, workers requesting raw materials from warehouse through the entrance"
     },
     {
-      "chapter": "system-initialization.md",
+      "chapter": "system-initialization-cartoon.png",
       "section": "5.7",
       "title": "System Init - World's Fair Opening",
-      "prompt": "white background, black lines, sketch, monochrome: A grand world's fair with a master of ceremonies preparing exhibits, lighting gas lamps, preparing for gates to open"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A grand world's fair with a master of ceremonies preparing exhibits, lighting gas lamps, preparing for gates to open"
     },
     {
-      "chapter": "tcp.md",
+      "chapter": "tcp-cartoon.png",
       "section": "4.2",
       "title": "TCP - Telegraph Office",
-      "prompt": "white background, black lines, sketch, monochrome: A bustling Victorian telegraph office with clerks at desks maintaining ledgers, telegraph operators sending and receiving dispatches"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A bustling Victorian telegraph office with clerks at desks maintaining ledgers, telegraph operators sending and receiving dispatches"
     },
     {
-      "chapter": "udp.md",
+      "chapter": "udp-cartoon.png",
       "section": "4.4",
       "title": "UDP - Simple Postal Service",
-      "prompt": "white background, black lines, sketch, monochrome: A simple, no-frills postal service with workers quickly dispatching mail in bags without checking contents or guarantees"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A simple, no-frills postal service with workers quickly dispatching mail in bags without checking contents or guarantees"
     },
     {
-      "chapter": "ufs.md",
+      "chapter": "ufs-cartoon.png",
       "section": "3.1",
       "title": "UFS - Grand Library",
-      "prompt": "white background, black lines, sketch, monochrome: A grand library with tall shelves of books, reading rooms, a vast card catalog table, and librarians keeping everything orderly"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A grand library with tall shelves of books, reading rooms, a vast card catalog table, and librarians keeping everything orderly"
     },
     {
-      "chapter": "vfs-layer.md",
+      "chapter": "vfs-layer-cartoon.png",
       "section": "3.0",
       "title": "VFS Layer - Customs House",
-      "prompt": "white background, black lines, sketch, monochrome: A neutral customs house at a border, workers examining goods from diverse origins and routing shipments to specialized handlers"
+      "prompt": "black lines, white, unshaded, doodle, line sketch, A neutral customs house at a border, workers examining goods from diverse origins and routing shipments to specialized handlers"
     }
   ]
 }

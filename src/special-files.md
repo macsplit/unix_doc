@@ -41,6 +41,9 @@ The `s_commonvp` is the shared shelf where cached pages live. Multiple filesyste
 
 <br/>
 
+![Special Files - Instruments Cabinet](cartoons/special-files-cartoon.png)
+**Special Files - Instruments Cabinet**
+
 ## Creating a Device Door: `specvp()`
 
 When the kernel encounters a device vnode, it wraps it in an snode and associates it with the common vnode for that device (specfs/specsubr.c:80-144). This is the point where the cabinet's index card is created.

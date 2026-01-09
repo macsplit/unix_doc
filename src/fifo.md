@@ -27,6 +27,9 @@ When `mknod()` is called with the appropriate mode flags, it creates a special e
 
 <br/>
 
+![FIFO - Theater Queue](cartoons/fifo-cartoon.png)
+**FIFO - Theater Queue**
+
 ## Opening FIFOs with `fifo_open()`
 
 Once a FIFO is created, processes can open it using the `open()` system call. The kernel internally invokes the `fifo_open()` function to handle the opening of FIFO files.

@@ -12,6 +12,9 @@ In the SVR4 kernel, the FDFS subsystem allows processes to access their file des
 
 <br/>
 
+![File Descriptors - File Drawer System](cartoons/fdfs-cartoon.png)
+**File Descriptors - File Drawer System**
+
 ## The `fdfsget()` Function
 
 When a process attempts to access a file descriptor via the FDFS, the kernel invokes the `fdfsget()` function. This function is responsible for parsing the numeric name provided in the pathname and creating a vnode that represents the corresponding file descriptor.

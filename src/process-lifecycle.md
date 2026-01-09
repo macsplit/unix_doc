@@ -43,6 +43,9 @@ More often than not, this newborn child process hungers for its own destiny, a p
 
 <br/>
 
+![Process Lifecycle - Theater Troupe](cartoons/process-lifecycle-cartoon.png)
+**Process Lifecycle - Theater Troupe**
+
 ### `fork()` vs. `vfork()`: A Tale of Two Births and Kernel Optimization
 
 But SVR4, ever the pragmatist, offered a sibling to `fork()`: the enigmatic `vfork()`. This wasn't merely a naming convention; it was an optimization born from the austere memory landscapes of 1988. Unlike its memory-duplicating cousin, `vfork()` was a gambit. The child, rather than receiving its own pristine copy of the parent's address space, was instead granted temporary stewardship *within the parent's very own address space*.

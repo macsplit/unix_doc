@@ -36,6 +36,9 @@ Two fields govern flow:
 
 <br/>
 
+![Messages IPC - Post Box](cartoons/messages-cartoon.png)
+**Messages IPC - Post Box**
+
 ## The Message Header: `struct msg`
 
 Each enqueued message has a header that links it into the queue and points into the shared message pool (sys/msg.h:136-141).

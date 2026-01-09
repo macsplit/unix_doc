@@ -36,6 +36,9 @@ The superblock contains a small cache of free block numbers. When a new block is
 >
 > "The System V filesystem was our workhorse, our trusted retainer. It was not as clever or as fast as the newfangled filesystem from Berkeley, but it was reliable and we understood it intimately. It was a filesystem from a time when disks were small and fragmentation was a problem to be solved by the system administrator, not by the kernel itself. In your time, you have filesystems like FAT32, which, in their own way, share a similar design philosophy. They are not the fastest or the most scalable, but their simplicity makes them universally understood and easily implemented, a common tongue for a world of disparate devices. Our s5fs was much the same, a simple tool for a simpler time."
 
+![S5FS - Provincial Library](cartoons/s5fs-cartoon.png)
+**S5FS - Provincial Library**
+
 ## Conclusion
 
 The System V. File System is a window into the history of UNIX. It is a simple, robust, and reliable filesystem, but one that was already showing its age by the time of SVR4. Its lack of performance optimizations and its inability to scale to larger disks meant that it was destined to be supplanted by its more sophisticated UFS cousin. Nevertheless, it remains an important part of the SVR4 story, a reminder of the solid, simple foundations upon which the more complex systems of the future would be built.

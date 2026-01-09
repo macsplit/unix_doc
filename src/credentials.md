@@ -34,6 +34,9 @@ Two distinctions matter:
 
 <br/>
 
+![Credentials - Royal Seals](cartoons/credentials-cartoon.png)
+**Credentials - Royal Seals**
+
 ## Reference Counts and Copy-on-Write
 
 Credentials are shared to reduce memory churn. When a process needs to modify its credentials, it must first obtain a private copy. The core routines live in `os/cred.c`.

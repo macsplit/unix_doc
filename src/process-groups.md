@@ -44,6 +44,9 @@ Each group keeps a linked list of members via `pid_pglink`. The `pid_pgorphaned`
 
 <br/>
 
+![Process Groups - Military Regiment](cartoons/process-groups-cartoon.png)
+**Process Groups - Military Regiment**
+
 ## Signaling the Cast: `pgsignal()`
 
 When the kernel needs to signal a whole group, it walks the group list and delivers the signal to each member (os/pgrp.c:65-72).

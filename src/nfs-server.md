@@ -36,6 +36,9 @@ When a client performs a lookup on a file, the server returns a file handle. The
 >
 > "Our Colonial Office was a product of its time, a time of open protocols and assumed trust. We could not have foreseen a world where the network would be such a hostile place. Your modern storage systems, with their end-to-end encryption and their complex, multi-factor authentication schemes, are a response to this new reality. And our simple model of exporting filesystems has been supplanted by new paradigms. Your object stores, with their simple `PUT` and `GET` operations, and your modern, clustered filesystems, which distribute data across hundreds or even thousands of machines, are a far cry from our humble `nfsd`s, serving up files from a single, monolithic kernel."
 
+![NFS Server - Central Warehouse](cartoons/nfs-server-cartoon.png)
+**NFS Server - Central Warehouse**
+
 ## Conclusion
 
 The NFS server in SVR4 is a classic example of a client-server system, a well-defined protocol for sharing files across a network. It is the Colonial Office to the client's Foreign Office, the guardian of the local filesystem, and the gatekeeper to its resources. While its security model may be dated and its performance limited by its stateless design, it was a robust and reliable system that laid the foundation for the distributed computing environments of the future.

@@ -28,6 +28,9 @@ The primary dramatis personae in this scheduling theater were:
 
 <br/>
 
+![Process Scheduling - Restaurant Kitchen](cartoons/process-scheduling-cartoon.png)
+**Process Scheduling - Restaurant Kitchen**
+
 ## The SVR4 Scheduler: A Priority-Driven Maestro
 
 At the operational core of the SVR4 scheduler lies a finely tuned priority system, managed through a series of **run queues**. Imagine a grand antechamber with many doors, each labeled with a priority level within a specific scheduling class. When a process becomes runnable—awakening from a sleep, or finishing an I/O operation—it is meticulously placed onto its appropriate run queue.

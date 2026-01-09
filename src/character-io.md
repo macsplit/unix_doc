@@ -34,6 +34,9 @@ When a process opens a character device file, the kernel consults this table usi
 
 <br/>
 
+![Character I/O - Telegraph Office](cartoons/character-io-cartoon.png)
+**Character I/O - Telegraph Office**
+
 ## The Blueprints of a Tube Line: `streamtab` and `queue`
 
 The `d_str` field in `cdevsw` points to a `streamtab` structure, the blueprint for a STREAMS module or driver. It defines the processing procedures for both the upstream (read-side) and downstream (write-side) flow of data.

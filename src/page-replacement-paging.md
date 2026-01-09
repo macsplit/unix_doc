@@ -39,6 +39,9 @@ It checks `freemem` against `minfree` to decide how large the bundle can be, con
 
 <br/>
 
+![Page Replacement - Theater Understudy](cartoons/page-replacement-paging-cartoon.png)
+**Page Replacement - Theater Understudy**
+
 ## Completing the Delivery: `pvn_done()`
 
 When the I/O completes, `pvn_done()` handles each page in the buffer. It clears `p_intrans`, checks for errors, releases the page, and, if the caller requested invalidation, aborts the page (vm/vm_pvn.c:274-379).

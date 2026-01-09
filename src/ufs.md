@@ -48,6 +48,9 @@ The allocation policy attempts to keep all the blocks of a file in the same cyli
 >
 > "Our Grand Library was a marvel of its time, a carefully designed system for the orderly storage and retrieval of information. But it was a fragile place. A sudden loss of power during a busy day of reshelving could leave the catalog in a state of disarray, requiring the painstaking efforts of the `fsck` program, our head catalog-keeper, to restore order. Your modern filesystems, with their 'journaling', are a different breed. They are like librarians who keep a meticulous log of every intended change before they make it. If the lights go out, they simply consult their log to quickly restore the library to a consistent state. And your 'copy-on-write' filesystems like ZFS are even more remarkable. They never change a book once it is written; they simply write a new, updated version in a new location and update the catalog to point to it. It is a world of incredible resilience, a world that we, with our delicate, in-place modifications, could only dream of."
 
+![UFS - Grand Library](cartoons/ufs-cartoon.png)
+**UFS - Grand Library**
+
 ## Conclusion
 
 UFS, as implemented in SVR4, is a classic, BSD-derived filesystem, a testament to the power of good design and the principle of locality. It is a well-organized library, with a detailed catalog, a clear layout, and a set of intelligent librarians working to keep everything in its proper place. While it may lack the resilience and advanced features of its modern descendants, it was a reliable and performant workhorse for its time, the foundation upon which the SVR4 system was built.

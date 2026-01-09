@@ -55,6 +55,9 @@ Every module and driver speaks in these `mblk_t` units. That shared format is wh
 
 <br/>
 
+![Network Stack - Trading Post](cartoons/network-stack-overview-cartoon.png)
+**Network Stack - Trading Post**
+
 ## Message Types: Labels on the Cars
 
 STREAMS classifies messages by type. The common workhorse is `M_DATA`, while `M_PROTO` and `M_PCPROTO` carry control data, and control messages like `M_IOCTL` or `M_FLUSH` can rewrite the route (sys/stream.h:332-339).
