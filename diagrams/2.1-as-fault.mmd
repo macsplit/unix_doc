@@ -1,0 +1,10 @@
+flowchart TD
+    A[fault at addr] --> B[round range]
+    B --> C[as_segat]
+    C --> D{segment found}
+    D -->|no| E[FC_NOMAP]
+    D -->|yes| F[seg ops fault]
+    F --> G{more range}
+    G -->|yes| H[next segment]
+    H --> F
+    G -->|no| I[return]

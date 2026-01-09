@@ -1,12 +1,12 @@
-graph TD
-    A[BIOS] --> B(Master Boot Record<br/>MBR)
-    B --> C{Active Partition Boot Sector}
-    C --> D["`start.s` & `bstart.s`<br/>(Initial 16-bit real mode setup)"]
-    D --> E["`boot.c`<br/>(Main C bootloader)"]
-    E --> F["Reads /etc/default/boot"]
-    E --> G["Presents boot prompt"]
-    G --> H["`load.c`<br/>(Loads kernel e.g., /stand/unix)"]
-    H --> I["Transition to 32-bit Protected Mode"]
-    I --> J[Kernel Initialization<br/>`main()`]
+flowchart TD
+    A[BIOS] --> B[Master Boot Record MBR]
+    B --> C{Active partition boot sector}
+    C --> D[start.s and bstart.s]
+    D --> E[boot.c]
+    E --> F[Reads etc default boot]
+    E --> G[Presents boot prompt]
+    G --> H[load.c loads kernel stand unix]
+    H --> I[Transition to 32 bit protected mode]
+    I --> J[Kernel initialization main]
 
     style J fill:#lightgreen,stroke:#333,stroke-width:2px

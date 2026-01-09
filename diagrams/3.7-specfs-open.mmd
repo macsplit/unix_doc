@@ -1,0 +1,14 @@
+graph TD
+    A[open device node] --> B[spec_open]
+    B --> C{character?}
+    C -->|yes| D[check cdevsw]
+    C -->|no| E[check bdevsw]
+    D --> F{STREAMS?}
+    F -->|yes| G[stropen]
+    F -->|no| H[d_open]
+    G --> I{clone?}
+    H --> I
+    I -->|yes| J[makespecvp newdev]
+    I -->|no| K[reuse vnode]
+    J --> L[return new vnode]
+    K --> L

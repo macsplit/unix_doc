@@ -1,22 +1,13 @@
-graph TD
-    subgraph "User Process"
-        A[System Call e.g., read(), write()] --> B{VFS Interface}
-    end
-
-    subgraph "Kernel"
-        B --> C{NFS Client Vnode Ops}
-        C --> D{RPC Client}
-        D --> E{XDR Encoder}
-        E --> F[Network<br/>(Diplomatic Cables)]
-        F --> G{XDR Decoder}
-        G --> H{RPC Server}
-        H --> I{NFS Server Vnode Ops}
-        I --> J[Remote Filesystem]
-    end
-
-    subgraph "NFS Server"
-        F --> G
-    end
+flowchart TD
+    A[System call read write] --> B{VFS interface}
+    B --> C[NFS client vnode ops]
+    C --> D[RPC client]
+    D --> E[XDR encoder]
+    E --> F[Network]
+    F --> G[XDR decoder]
+    G --> H[RPC server]
+    H --> I[NFS server vnode ops]
+    I --> J[Remote filesystem]
 
     style A fill:#lightblue,stroke:#333,stroke-width:2px
     style J fill:#lightgreen,stroke:#333,stroke-width:2px

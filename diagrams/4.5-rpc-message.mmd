@@ -1,0 +1,9 @@
+graph TD
+    A[rpc_msg] --> B[rm_xid]
+    A --> C[rm_direction]
+    C --> D[CALL]
+    C --> E[REPLY]
+    D --> F[cb_prog, cb_vers, cb_proc]
+    D --> G[cb_cred + cb_verf]
+    E --> H[accepted_reply]
+    E --> I[rejected_reply]

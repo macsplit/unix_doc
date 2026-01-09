@@ -22,6 +22,9 @@ The `mknod()` function takes three parameters:
 
 When `mknod()` is called with the appropriate mode flags, it creates a special entry in the filesystem that represents the FIFO.
 
+![FIFO Creation](3.6-fifo-creation.png)
+**Figure 3.6.1: Creating a FIFO Node**
+
 <br/>
 
 ## Opening FIFOs with `fifo_open()`
@@ -100,6 +103,9 @@ The `fifo_write()` function performs the following steps:
 - **Check Readers**: If there are no readers, it returns `EPIPE` (broken pipe).
 - **Write Data**: It writes data from the user's buffer into the FIFO buffer.
 - **Update Pointers**: It updates the tail pointer and size of the buffer.
+
+![FIFO Read and Write Flow](3.6-read-write-flow.png)
+**Figure 3.6.2: Read and Write Paths Through the FIFO**
 
 <br/>
 

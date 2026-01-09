@@ -1,79 +1,113 @@
-Swap Space Management
+# Swap Space Management: The Underground Reserve
 
-## Overview
+Beneath the city lies a reserve of sealed vaults. The clerk on the surface does not care which tunnel leads to which vault. She cares only that every sealed slot can be found again and that no vault is overused. This is swap space in SVR4: a virtual device made from a chain of physical swap areas, managed as one ledger of anonymous slots.
 
-The swap space manager provides backing storage for anonymous pages. It presents a logical concatenation of multiple physical swap devices as a single virtual swap device. Each swap area contains an anon array representing available slots, with allocation balancing load across all active swap devices.
+<br/>
 
-## Swapinfo Structure
+## The Swap Area Ledger: `struct swapinfo`
 
-Each swap area is tracked by a swapinfo structure (swap.h):
+Each swap area is tracked by a `swapinfo` entry, which holds the vnode, offset range, and the free-list head for its anon slots (sys/swap.h:133-151).
 
 ```c
 struct swapinfo {
-    struct swapinfo *si_next;    /* next swap area */
-    struct vnode *si_vp;         /* swap device vnode */
-    uint si_soff;                /* start offset in swap device */
-    uint si_eoff;                /* end offset */
-    struct anon **si_anon;       /* array of anon slot pointers */
-    uint si_allocs;              /* allocation count */
-    uint si_npgs;                /* number of pages */
-    uint si_nfpgs;               /* number of free pages */
+	struct	vnode *si_vp;
+	struct	vnode *si_svp;
+	uint	si_soff;
+	uint	si_eoff;
+	struct	anon *si_anon;
+	struct	anon *si_eanon;
+	struct	anon *si_free;
+	int	si_allocs;
+	struct	swapinfo *si_next;
+	short	si_flags;
+	ulong	si_npgs;
+	ulong	si_nfpgs;
+	char	*si_pname;
 };
 ```
+**The Vault Ledger** (sys/swap.h:133-151)
 
-The `si_anon` array holds anon structures for the swap area. Free slots are linked into a free list through the `an_next` field in the anon structure.
+The `si_anon` array is the true map of vault slots. Free slots are linked through each anon's `un.an_next` pointer. The `si_allocs` counter helps spread allocations across devices, and `si_flags` tracks deletion and in-progress state.
 
-## Logical Concatenation
+<br/>
 
-The swap device provides a logical address space formed by concatenating all swap areas sequentially (vm_swap.c:38):
+## Logical Concatenation and Load Balancing
 
-"Each physical swap area has an associated anon array representing its physical storage. These anon arrays are logically concatenated sequentially to form the overall swap device anon array. Thus, the offset of a given entry within this logical array is computed as the sum of the sizes of each area preceding the entry plus the offset within the area containing the entry."
-
-This design allows the system to add and remove swap devices dynamically without changing the virtual swap interface.
-
-## Adding Swap Space
-
-The `swapadd()` function (vm_swap.c:565) adds a new swap area:
+SVR4 treats swap as one logical array of anon slots, even though the physical devices are separate. The allocator walks the `swapinfo` list, rotating across devices after `swap_maxcontig` consecutive allocations (vm/vm_swap.c:107-160).
 
 ```c
-STATIC int
-swapadd(vp, lowblk, nblks, swapname)
-    struct vnode *vp;
-    uint lowblk;
-    uint nblks;
-    char *swapname;
+STATIC int swap_maxcontig = 1024 * 1024 / PAGESIZE; /* 1MB of pages */
+
+struct anon *
+swap_alloc()
 {
-    register struct anon *ap, *ap2;
-    register struct swapinfo **sipp, *nsip;
-    register struct vnode *cvp;
-    struct vattr vattr;
-    register uint pages;
-    uint soff, eoff, off;
-    int error;
-
-    if (error = VOP_OPEN(&vp, FREAD|FWRITE, u.u_cred)) {
-        return error;
-    }
-    cvp = common_specvp(vp);
+	do {
+		if ((sip->si_flags & ST_INDEL) == 0) {
+			ap = sip->si_free;
+			if (ap) {
+				sip->si_free = ap->un.an_next;
+				sip->si_nfpgs--;
+				if (++sip->si_allocs >= swap_maxcontig)
+					sip = sip->si_next ? sip->si_next : swapinfo;
+				return (ap);
+			}
+			sip->si_allocs = 0;
+		}
+		sip = sip->si_next ? sip->si_next : swapinfo;
+	} while (sip != silast);
+	return (NULL);
+}
 ```
+**The Interleaved Allocation** (vm/vm_swap.c:107-160, abridged)
 
-The function opens the swap device, validates the partition size, allocates the swapinfo structure and anon array, then links the new area into the global swap list.
+This simple rotation prevents a single swap area from becoming a hot spot. The vaults are spread across the underground grid, balancing wear and contention.
 
-## Swap Allocation
+![Swap Allocation Flow](2.9-swap-management.png)
+**Figure 2.9.1: Swapinfo Rotation and Free Slot Selection**
 
-The `swap_alloc()` function allocates an anon slot from the most appropriate swap area. It attempts to balance allocation across areas by selecting the area with the most free slots relative to its size. This load balancing ensures even wear on swap devices and prevents any single area from becoming a bottleneck.
+<br/>
 
-## Swap Translation
+## Translating a Slot: `swap_xlate()` and `an_bap`
 
-The `swap_xlate()` function translates an anon pointer to a vnode/offset pair for I/O operations. It traverses the an_bap indirection chain to handle deleted swap areas:
+An anon slot is not a disk address. It is a pointer into one of the swap area's anon arrays. `swap_xlate()` resolves that pointer into a `<vnode, offset>` pair when the VM needs to issue I/O (vm/vm_swap.c:215-244). If the slot has been moved during a swap deletion, it uses `an_bap` indirection to find the new home (vm/vm_swap.c:223-234, vm/anon.h:54-68).
 
-"When we delete a swap device, since it is too complicated to find and relocate all the data structures that point to our anon slots, we use the an_bap field to go indirect to the new backing anon slot."
+```c
+void
+swap_xlate(ap, vpp, offsetp)
+	register struct anon *ap;
+	register struct vnode **vpp;
+	register uint *offsetp;
+{
+	if (ap->an_bap)
+		ap = ap->an_bap;
+	...
+	*offsetp = sip->si_soff + ((ap - sip->si_anon) << PAGESHIFT);
+	*vpp = sip->si_vp;
+}
+```
+**The Vault Addressing** (vm/vm_swap.c:215-240, abridged)
 
-This indirection allows swap removal without invalidating existing anon pointers.
+The back pointer is the keeper's forwarding note. When an area is deleted, the old slot points to the new slot, preserving identity without rewriting every anonymous map in the system.
 
-## Swap Deletion
+![Swap Indirection](2.9-swap-indirection.png)
+**Figure 2.9.2: `an_bap` Forwarding When Areas Are Removed**
 
-The `swapdel()` function removes a swap area by relocating all allocated pages to other areas, updating an_bap pointers, then freeing the swapinfo structure. This process ensures that removing swap space does not lose any active data.
+<br/>
 
+## Adding and Deleting Vaults
 
-![](2.9-swap-management.png)
+`swapadd()` opens a swap vnode, verifies the partition bounds, allocates a new `swapinfo`, and builds the anon free list by linking entries from the end back to the head (vm/vm_swap.c:565-749). The free list is initialized so the first usable entry is at `si_free`.
+
+`swapdel()` walks the list, marks an area deleted, and relocates active anon slots by installing `an_bap` indirections before finally freeing the swapinfo structure (vm/vm_swap.c:768-868). The vault is closed only after every active slot has a forwarding address.
+
+<br/>
+
+> **The Ghost of SVR4:**
+>
+> We treated swap like a row of vaults and accepted that our clerk had to walk the list. Your systems now hide swap behind layered devices, compressed caches, and memory tiers. Some keep a hot in-memory shadow (zswap), others compress pages before they ever touch a disk. Yet even in 2026, the oldest rule remains: you cannot lose the address of a sealed vault, and you cannot keep every room in memory forever.
+
+<br/>
+
+## The Reserve Holds
+
+Swap space management is not about speed. It is about endurance. The ledger of `swapinfo`, the rotating allocator, and the indirection mechanism keep the reserve usable even as devices come and go. The vaults hold, and the city keeps running.

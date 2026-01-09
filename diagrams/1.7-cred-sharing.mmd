@@ -1,0 +1,6 @@
+flowchart TD
+    A[process holds cred] --> B[cr_ref > 1]
+    B --> C[crcopy or crdup]
+    C --> D[new cred]
+    D --> E[update fields]
+    E --> F[old cred ref--]

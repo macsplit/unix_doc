@@ -1,0 +1,5 @@
+flowchart LR
+    A[destination] --> B[route lookup]
+    B --> C[rtentry]
+    C --> D[rt_ifp interface]
+    D --> E[if_output]

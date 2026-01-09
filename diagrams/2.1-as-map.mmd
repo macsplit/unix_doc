@@ -1,0 +1,7 @@
+flowchart TD
+    A[request mapping] --> B[round to pages]
+    B --> C[check rlimit]
+    C --> D[seg_alloc]
+    D --> E[segment create]
+    E --> F[update a_size]
+    F --> G[optional as_ctl lock]

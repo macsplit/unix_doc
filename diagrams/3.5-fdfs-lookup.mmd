@@ -1,5 +1,5 @@
-graph TD
-    A[Access /dev/fd/N] --> B{Is name a digit?}
+flowchart TD
+    A[Access dev fd N] --> B{Name is a digit}
     B -->|yes| C[Convert to integer]
     B -->|no| D[Return ENOENT]
     C --> E{FD valid?}

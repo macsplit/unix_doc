@@ -1,0 +1,7 @@
+graph TD
+    A[anon slot] --> B{an_bap set?}
+    B -->|no| C[use current slot]
+    B -->|yes| D[follow an_bap]
+    D --> C
+    C --> E[swap_xlate]
+    E --> F[vnode + offset]

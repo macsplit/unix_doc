@@ -1,6 +1,12 @@
 graph TD
-    A[page_freelist] --> B[page_get: allocate]
-    B --> C[Remove from list]
-    C --> D[page_free: return]
-    D --> E[Add to list head]
-    E --> F[page_lookup by hash]
+    A[page_get request] --> B{freelist has page?}
+    B -->|yes| C[page_sub freelist]
+    B -->|no| D{cachelist has page?}
+    D -->|yes| E[page_reclaim]
+    D -->|no| F[outofmem -> pageout]
+    C --> G[return page]
+    E --> G
+    G --> H[page_free]
+    H --> I{vnode identity?}
+    I -->|no| J[page_freelist head]
+    I -->|yes| K[page_cachelist tail]

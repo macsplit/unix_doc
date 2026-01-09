@@ -1,0 +1,9 @@
+flowchart TD
+    A[semop list] --> B[validate ops]
+    B --> C[apply op]
+    C --> D{need to wait}
+    D -->|yes| E[sleep or EAGAIN]
+    D -->|no| F[next op]
+    F --> G{all ops done}
+    G -->|no| C
+    G -->|yes| H[update sempid and sem_otime]

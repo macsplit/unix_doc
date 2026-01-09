@@ -1,0 +1,9 @@
+graph TD
+    A[pvn_vplist_dirty] --> B[insert marker pages]
+    B --> C[scan v_pages ring]
+    C --> D{dirty page?}
+    D -->|yes| E[VOP_PUTPAGE]
+    D -->|no| C
+    E --> F[pvn_done]
+    F --> G[page_abort or clear intrans]
+    G --> H[page_free or cache]

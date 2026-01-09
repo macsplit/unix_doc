@@ -1,0 +1,6 @@
+flowchart TD
+    A[setsid] --> B[pgexit current group]
+    B --> C[allocate sess_t]
+    C --> D[set s_sidp to pid]
+    D --> E[pgjoin to new pgrp]
+    E --> F[PID_HOLD session id]

@@ -8,4 +8,6 @@ It also uses the **Space Mono font**, Copyright 2016 Google LLC (https://github.
 
 The full license text for Space Mono is available at: `https://scripts.sil.org/OFL`
 
+*This work is a hybrid collaboration between Lee Hanken and Large Language Models. While generative systems were used to synthesize technical data and initial drafts, the narrative structure, technical verification, and final editorial curation were performed by the human author. The author assumes full responsibility for the accuracy and integrity of this work.*
+
 ---

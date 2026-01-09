@@ -1,0 +1,5 @@
+flowchart LR
+    A[user socket call] --> B[sockmod STREAMS]
+    B --> C[pr_usrreq in protosw]
+    C --> D[protocol stack TCP UDP]
+    D --> E[network interfaces]

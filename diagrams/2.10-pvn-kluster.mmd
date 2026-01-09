@@ -1,6 +1,9 @@
 graph TD
-    A[pvn_kluster] --> B[Search backward for pages]
-    B --> C[Search forward for pages]
-    C --> D[Calculate range]
-    D --> E[Allocate and read pages]
-    E --> F[Return page list]
+    A[fault at offset] --> B[compute bytesavail]
+    B --> C{page exists?}
+    C -->|yes| D[return NULL]
+    C -->|no| E[scan forward/back]
+    E --> F[seg->kluster checks]
+    F --> G[rm_allocpage]
+    G --> H[mark p_intrans + p_pagein]
+    H --> I[return page list]

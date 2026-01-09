@@ -1,0 +1,10 @@
+flowchart TD
+    A[msgsnd] --> B[check permissions]
+    B --> C[validate size]
+    C --> D{queue space}
+    D -->|no| E[sleep or EAGAIN]
+    D -->|yes| F[alloc msg header]
+    F --> G[alloc text slot]
+    G --> H[copyin type and text]
+    H --> I[link on queue]
+    I --> J[wake receivers]

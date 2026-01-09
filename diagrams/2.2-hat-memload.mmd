@@ -1,0 +1,6 @@
+flowchart TD
+    A[seg fault] --> B[hat_memload]
+    B --> C[ensure page table]
+    C --> D[write PTE]
+    D --> E[set flags]
+    E --> F[return mapping]

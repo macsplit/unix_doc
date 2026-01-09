@@ -1,0 +1,9 @@
+flowchart LR
+    A[boot fix_swtbls] --> B{d_flag has D_OLD?}
+    B -->|yes| C[save original entry in shadow*sw]
+    C --> D[replace entry with gen_* wrapper]
+    D --> E[gen_* translates args then calls shadow*sw entry]
+    B -->|no| F[leave entry unchanged]
+    A --> G{d_flag has D_NOBRKUP?}
+    G -->|no| H[wrap d_strategy with gen_strategy]
+    G -->|yes| F

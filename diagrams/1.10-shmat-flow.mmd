@@ -1,0 +1,7 @@
+flowchart TD
+    A[shmat] --> B[check permissions]
+    B --> C[pick or validate addr]
+    C --> D[prepare segvn args]
+    D --> E[as_map]
+    E --> F[sa_add record]
+    F --> G[increment anon_map refcnt]

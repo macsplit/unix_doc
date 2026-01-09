@@ -1,0 +1,6 @@
+flowchart TD
+    A[fork] --> B[check limits]
+    B --> C[alloc proc and pid]
+    C --> D[find free mpid]
+    D --> E[insert into hash]
+    E --> F[link into practive]

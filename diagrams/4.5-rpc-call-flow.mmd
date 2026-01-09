@@ -1,0 +1,8 @@
+graph TD
+    A[Client builds rpc_msg] --> B[xdr_callmsg]
+    B --> C[Send over transport]
+    C --> D[Server decodes]
+    D --> E[Dispatch procedure]
+    E --> F[Build reply]
+    F --> G[xdr_replymsg]
+    G --> H[Return to client]

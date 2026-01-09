@@ -1,0 +1,6 @@
+graph TD
+    A[Filesystem device vnode] --> B[snode]
+    B --> C[s_realvp]
+    B --> D[s_commonvp]
+    D --> E[common cache vnode]
+    B --> F[s_vnode wrapper]

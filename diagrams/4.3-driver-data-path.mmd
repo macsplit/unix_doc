@@ -1,0 +1,9 @@
+flowchart LR
+    A[protocol output] --> B[if_output]
+    B --> C[driver queue if_snd]
+    C --> D[device transmit]
+    D --> E[wire]
+    E --> F[device receive]
+    F --> G[driver interrupt]
+    G --> H[protocol input queue]
+    H --> I[network stack]

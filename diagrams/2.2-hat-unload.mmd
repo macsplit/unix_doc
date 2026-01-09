@@ -1,0 +1,5 @@
+flowchart TD
+    A[hat_unload] --> B[clear PTEs]
+    B --> C[optional page release]
+    C --> D[TLB invalidate]
+    D --> E[return]

@@ -1,0 +1,7 @@
+flowchart TD
+    A[parent exits] --> B[scan child groups]
+    B --> C{group orphaned}
+    C -->|yes| D{stopped members}
+    D -->|yes| E[send SIGHUP]
+    E --> F[send SIGCONT]
+    C -->|no| G[leave group]

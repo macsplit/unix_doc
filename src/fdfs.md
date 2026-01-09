@@ -16,6 +16,9 @@ In the SVR4 kernel, the FDFS subsystem allows processes to access their file des
 
 When a process attempts to access a file descriptor via the FDFS, the kernel invokes the `fdfsget()` function. This function is responsible for parsing the numeric name provided in the pathname and creating a vnode that represents the corresponding file descriptor.
 
+![FDFS Lookup Flow](3.5-fdfs-lookup.png)
+**Figure 3.5.1: Parsing and Validating /dev/fd/N**
+
 **The `fdfsget()` Function** (fs/fdfs/fdops.c:123):
 ```c
 int fdfsget(struct vnode *vp, char *name, struct vnode **vpp) {
@@ -42,6 +45,9 @@ The `fdfsget()` function performs the following steps:
 ## Vnode Creation and the VDUP Flag
 
 The creation of vnodes in FDFS is unique due to the use of the `VDUP` flag. This flag indicates that the vnode does not represent a new file but rather a duplicate reference to an existing file descriptor. This mechanism allows processes to manipulate file descriptors as if they were regular files, facilitating operations such as redirection and sharing.
+
+![VDUP Vnode Creation](3.5-vnode-creation.png)
+**Figure 3.5.2: The VDUP Vnode Construction**
 
 **The Vnode Creation Process** (fs/fdfs/fdops.c:150):
 ```c

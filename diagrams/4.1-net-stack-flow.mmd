@@ -1,0 +1,13 @@
+graph TD
+    A[User process] --> B[Socket layer]
+    B --> C[Socket module]
+    C --> D[TCP or UDP]
+    D --> E[IP]
+    E --> F[Interface driver]
+    F --> G[Network]
+    G --> F
+    F --> E
+    E --> D
+    D --> C
+    C --> B
+    B --> A

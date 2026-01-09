@@ -1,0 +1,6 @@
+flowchart TD
+    A[ifnet struct] --> B[identity name unit mtu flags]
+    A --> C[output queue if_snd]
+    A --> D[function pointers init output ioctl watchdog]
+    A --> E[statistics counters]
+    A --> F[links upper lower]

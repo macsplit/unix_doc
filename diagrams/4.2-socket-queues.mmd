@@ -1,0 +1,6 @@
+flowchart LR
+    A[listen socket] --> B[so_q0 partial]
+    A --> C[so_q established]
+    B --> D[handshake completes]
+    D --> C
+    C --> E[accept returns]

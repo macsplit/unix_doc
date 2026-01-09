@@ -1,6 +1,9 @@
 graph TD
-    A[swapadd: add device] --> B[Allocate swapinfo structure]
-    B --> C[Create anon free list]
-    C --> D[Link into global list]
-    D --> E[swap_alloc: get slot]
-    E --> F[Return anon pointer]
+    A[swap_alloc] --> B[select swapinfo list]
+    B --> C{si_free nonempty?}
+    C -->|yes| D[pop anon slot]
+    C -->|no| E[advance to next area]
+    D --> F[update si_nfpgs]
+    F --> G[return anon]
+    E --> B
+    G --> H[swap_xlate -> vnode,offset]

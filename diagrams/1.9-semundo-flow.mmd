@@ -1,0 +1,5 @@
+flowchart TD
+    A[SEM_UNDO op] --> B[record undo entry]
+    B --> C[process exits]
+    C --> D[apply adjustments]
+    D --> E[wake waiters]

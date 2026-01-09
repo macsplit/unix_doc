@@ -1,0 +1,6 @@
+flowchart TD
+    A[setuid call] --> B{superuser}
+    B -->|yes| C[set ruid euid suid]
+    B -->|no| D{uid matches ruid or suid}
+    D -->|yes| E[set euid]
+    D -->|no| F[EPERM]

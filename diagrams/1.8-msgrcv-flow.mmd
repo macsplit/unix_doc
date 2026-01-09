@@ -1,0 +1,9 @@
+flowchart TD
+    A[msgrcv] --> B[check permissions]
+    B --> C[scan queue for type]
+    C --> D{match found}
+    D -->|no| E[sleep or ENOMSG]
+    D -->|yes| F[copyout type and text]
+    F --> G[unlink message]
+    G --> H[free header and text]
+    H --> I[wake senders]

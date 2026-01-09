@@ -12,6 +12,11 @@ At the heart of NFS is the Remote Procedure Call (RPC) protocol. Instead of read
 
 The `rfscall` function in `nfs_subr.c` is the heart of the SVR4 NFS client's RPC mechanism. It is responsible for packaging up a request, sending it to the server, and waiting for a reply. It handles the complexities of network timeouts and retransmissions, ensuring that the diplomatic cable reaches its destination.
 
+![NFS Client Architecture](3.3-nfs-client-arch.png)
+**Figure 3.3.1: The Client's Diplomatic Pipeline**
+
+<br/>
+
 ## XDR: The Language of Diplomacy
 
 To ensure that diplomatic cables can be understood by all parties, regardless of their native computer architecture, they must be written in a standardized, machine-independent language. This is the role of the External Data Representation (XDR). XDR specifies a standard way to represent data types like integers, strings, and arrays, so that a machine with a big-endian byte order can communicate seamlessly with a machine with a little-endian byte order.

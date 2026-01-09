@@ -1,0 +1,10 @@
+graph TD
+    A[page_lookup vp,off] --> B[page_find hash bucket]
+    B --> C{match?}
+    C -->|no| D[miss]
+    C -->|yes| E{page_free?}
+    E -->|yes| F[page_reclaim]
+    E -->|no| G[return page]
+    F --> G
+    G --> H[page_hashout on free]
+    H --> I[page_hashin on new identity]

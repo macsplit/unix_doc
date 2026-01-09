@@ -1,0 +1,6 @@
+flowchart TD
+    A[process exit] --> B[pgexit]
+    B --> C[SESS_RELE]
+    C --> D[PID_RELE]
+    D --> E[remove from practive]
+    E --> F[free proc]

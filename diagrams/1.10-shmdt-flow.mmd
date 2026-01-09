@@ -1,0 +1,7 @@
+flowchart TD
+    A[shmdt] --> B[locate segment]
+    B --> C[as_unmap]
+    C --> D[decrement anon_map refcnt]
+    D --> E{marked for removal}
+    E -->|yes and last| F[shm_rm_amp]
+    E -->|no| G[return]

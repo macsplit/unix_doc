@@ -1,0 +1,10 @@
+flowchart TD
+    A[open /dev/... ] --> B[spec_open in specfs]
+    B --> C{v_type}
+    C -->|VCHR| D[cdevsw major d_open]
+    C -->|VBLK| E[bdevsw major d_open]
+    D --> F[driver open routine]
+    E --> F
+    F --> G{device number changed?}
+    G -->|yes| H[makespecvp newdev replace vnode]
+    G -->|no| I[return vnode]

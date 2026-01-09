@@ -1,0 +1,5 @@
+flowchart LR
+    A[user ioctl] --> B[ifreq or ifconf]
+    B --> C[if_ioctl handler]
+    C --> D[update ifnet flags address]
+    D --> E[update routing table]
