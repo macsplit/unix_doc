@@ -147,8 +147,6 @@ if (q->q_count > q->q_hiwat)
 
 This is a **digital sluice**, operating not with water but with electron flow, not at the pace of river currents but at the pace of DRAM refresh cycles (64 milliseconds). Yet the principle—float valve, gate position, backpressure—remains unchanged from James Watt's era.
 
-![STREAMS Flow Control](cartoon_4.10_4703.png)
-
 <br/>
 
 ## Queue Scheduling: The Service Procedure Dance

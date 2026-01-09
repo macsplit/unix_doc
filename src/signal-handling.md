@@ -35,8 +35,6 @@ Once these job control nuances are handled, the signal is added to the process's
 
 For the currently executing process, a special flag (`u.u_sigevpend`) is set. This ensures that any signals posted to `self` (even from an interrupt context) are noticed and handled *before* the kernel finally relinquishes control and returns to user mode. This separation of "posting" (the asynchronous event) from "delivery" (the synchronous handling upon returning to user space) is a cornerstone of UNIX signal reliability.
 
-![Signal Posting](cartoon_1.3_9f1c.png)
-
 ---
 
 > #### **The Ghost of SVR4: Reliability in a Preemptive World**
@@ -167,8 +165,6 @@ When a user-defined handler is invoked (`sendsig()` in `sig.c:467`), the kernel 
     *   The return address, carefully set to point to the user-defined signal handler.
 
     The kernel then modifies the process's saved CPU state (the one that would normally be restored upon return from kernel mode) to make it appear as if the process had called its own signal handler. When the kernel returns to user mode, instead of resuming the interrupted code, the CPU jumps directly to the signal handler.
-
-![Signal Frame](cartoon_1.3_a9f6.png)
 
 When the user-defined signal handler completes its execution, it does *not* typically return using a standard `ret` instruction. Instead, it must invoke the `sigreturn()` system call. This specialized system call is the handler's graceful exit. `sigreturn()`'s sole purpose is to dismantle the signal frame, restore the original process context (from before the signal delivery), and atomically unblock any signals that were blocked by `sa_mask`. This allows the process to seamlessly resume execution from precisely where it was interrupted, often unaware of the kernel's swift, intricate intervention.
 

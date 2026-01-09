@@ -128,6 +128,3 @@ Flow control is a principle, not a policy. It keeps TCP from overwhelming IP, an
 ## Conclusion
 
 The network stack in SVR4 is a switching yard of queues and messages. It does not care whether the traffic is TCP or UDP, Ethernet or loopback. It only insists that every car arrives with the right label and that no track is allowed to flood. The yardmaster keeps the rails aligned, and the trains keep running.
-
-![Network Cartoons](cartoon_4.1_4f44.png)
-![Network Cartoons](cartoon_4.1_5736.png)

@@ -16,8 +16,6 @@ The primary dramatis personae in this scheduling theater were:
 
 *   **Time-Sharing (TS)**: This is the bustling marketplace of user processes, the common folk of the SVR4 kingdom. TS processes are scheduled with an emphasis on fairness and equitable CPU distribution. They dance to a **round-robin** tune, each receiving a quantum of CPU time (a "time slice"), after which they are politely, but firmly, ushered back into the run queue. Their priorities are not static decrees but dynamic whispers, constantly adjusted by the kernel's keen observation of their CPU appetites and periods of rest. A process that has recently been CPU-hungry might find its priority gently nudged downwards, while one that has patiently slept might receive a boost, ensuring that no single process hoards the CPU indefinitely.
 
-![Scheduling Classes](cartoon_1.2_fcbb.png)
-
 ---
 
 > #### **The Ghost of SVR4: The Genesis of Modular Scheduling**

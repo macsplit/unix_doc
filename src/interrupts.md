@@ -39,8 +39,6 @@ The CPU then **atomically**:
 
 **This is not software branching. This is silicon routing.** The scholar's hand (program counter) jerks mid-word to a new page (the ISR entry point). His previous page and pen position (`CS:EIP`, `EFLAGS`) are shoved into a drawer (kernel stack) by reflex—atomically, in hardware, without software involvement.
 
-![Interrupt Handling](cartoon_5.3_830f.png)
-
 <br/>
 
 ## The Trap Gate: Entry from User Mode
@@ -154,8 +152,6 @@ For example, a network driver's ISR might simply enqueue the incoming packet ont
 The **bottom half** executes at a lower priority, often during the return path from kernel mode or via explicitly scheduled kernel threads. This is where the bulk of interrupt-related work occurs: packet processing, buffer management, signal delivery, and more.
 
 In STREAMS (as we saw in [STREAMS Framework](./streams.md)), the bottom half is often the **service procedure**, invoked via `runqueues()` when the queue is enabled. This separation ensures that the top half remains brief, while the bottom half can safely block, allocate memory, and interact with user processes.
-
-![Two-Phase Handler](cartoon_5.3_bf53.png)
 
 <br/>
 

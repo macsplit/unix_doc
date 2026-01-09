@@ -158,12 +158,6 @@ The module itself is a STREAMS component with standard read and write queue init
 ![TLI Connection Flow](4.2-tli-connection.png)
 **Figure 4.2.2: TLI Connection Semantics Used by `sockmod`**
 
-![Socket Cartoons](cartoon_4.2_4518.png)
-**Figure 4.2.3: The Socket Module in the STREAMS Stack**
-
-![Socket Cartoons](cartoon_4.2_da8a.png)
-**Figure 4.2.4: Socket Semantics Over STREAMS**
-
 <br/>
 
 ## The Call Path

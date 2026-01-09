@@ -51,8 +51,6 @@ The parent, a benevolent but watchful guardian, would then pause, suspended in t
 
 However, like any daring maneuver, `vfork()` came with its own perilous tightrope walk. Should the child, in its shared dominion, dare to *modify* the parent's address space before its inevitable `exec()`, chaos could ensue. The kernel, ever vigilant, enforces this strict contract to prevent a child's nascent scribbles from corrupting the parent's pristine canvas.
 
-![Parent and child processes](cartoon_1.1_a62f.png)
-
 ---
 
 > #### **The Ghost of SVR4: Memory Constraints of Yore**
@@ -104,8 +102,6 @@ Alas, even the most vibrant process must, at some juncture, meet its cessation. 
 *   **Involuntary Eviction**: The kernel, or another process, can forcibly terminate a process, most often through the delivery of a signal. A `SIGKILL`, for instance, is the ultimate, unblockable eviction notice, while a `SIGSEGV` (segmentation fault) marks a catastrophic misstep in memory access, compelling the kernel to intervene.
 
 Upon termination, a process does not vanish instantaneously. Instead, it lingers as a spectral **"zombie"** process. In this enigmatic state, its computational essence is gone, its resources largely reclaimed by the kernel. Yet, a vestige remains: its entry in the kernel's Process Table and its Process Control Block (PCB), specifically to house its exit status. This spectral existence serves a vital purpose: it allows the parent process, through the `wait()` or `waitpid()` system calls, to collect the child's final report—its exit status—and only then does the kernel fully expunge the zombie, "reaping" its last kernel resources.
-
-![Zombie process](cartoon_1.1_a729.png)
 
 Should a parent process prematurely depart this digital realm before its children, those orphaned processes are not left to wander the wilderness. Instead, they are nobly adopted by the venerable `init` process (always PID 1), the primordial ancestor of all user-space processes. `init`, the steadfast caretaker, assumes the responsibility of patiently `wait()`ing for these adopted children, dutifully reaping their zombie forms when their time comes. This ensures that no process lingers eternally, hogging precious Process Table entries.
 

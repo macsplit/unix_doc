@@ -73,8 +73,6 @@ Only after these stringent checks are passed are the arguments provided to the s
 
 Having successfully navigated the kernel's labyrinth, performed its sacred duties, and perhaps even transformed the system state, the system call handler must now orchestrate a graceful exit. The journey back from the privileged kernel mode to the constrained user mode is not a mere reversal of entry but a carefully choreographed sequence of checks and context restorations. The `systrap_rtn` routine, the counterpart to `systrap`, assumes command for this delicate phase.
 
-![System Call Exit](cartoon_1.4_a951.png)
-
 Before the CPU can shed its kernel-mode attire and resume user-mode execution, `systrap_rtn` performs two critical checks:
 
 1.  **Signal Interception (`issig()`)**: The very first order of business is to invoke `issig()`, our familiar signal gatekeeper from Section 1.3. This check is paramount: if any signals have been posted to the process while it was executing in kernel mode, `issig()` will identify the highest-priority deliverable signal. If such a signal is found, the kernel will not return directly to the user's interrupted instruction. Instead, it will divert control to the signal delivery mechanism (`psig()`), potentially invoking a user-defined signal handler or executing the signal's default action (e.g., terminating the process). This ensures that asynchronous events are processed promptly and that a process cannot indefinitely defer signal handling by remaining in kernel mode.

@@ -1,0 +1,280 @@
+{
+  "cartoons": [
+    {
+      "chapter": "address-space.md",
+      "section": "1.1",
+      "title": "Address Space - Kingdom Provinces",
+      "prompt": "white background, black lines, sketch, monochrome: A map of a medieval kingdom divided into colored provinces with borders, a viceroy on horseback surveying the realm"
+    },
+    {
+      "chapter": "anonymous-memory.md",
+      "section": "2.2",
+      "title": "Anonymous Memory - Lost and Found",
+      "prompt": "white background, black lines, sketch, monochrome: A library's lost-and-found shelf with stacked unmarked boxes and an archivist holding a ledger"
+    },
+    {
+      "chapter": "block-io.md",
+      "section": "2.5",
+      "title": "Block I/O - Postal Sorting Center",
+      "prompt": "white background, black lines, sketch, monochrome: A Victorian postal sorting center with mail bags being bundled by workers at sorting tables"
+    },
+    {
+      "chapter": "boot.md",
+      "section": "5.7",
+      "title": "Boot Process - Theater Opening Night",
+      "prompt": "white background, black lines, sketch, monochrome: A stage manager with clipboard standing before a theater stage with curtains and stage lights being set up"
+    },
+    {
+      "chapter": "character-io.md",
+      "section": "2.6",
+      "title": "Character I/O - Telegraph Office",
+      "prompt": "white background, black lines, sketch, monochrome: A telegraph office with operators at their desks, one tapping out messages on a telegraph key"
+    },
+    {
+      "chapter": "clock-timers.md",
+      "section": "5.8",
+      "title": "Clock and Timers - City Clock Tower",
+      "prompt": "white background, black lines, sketch, monochrome: A tall city clock tower with multiple bells ringing, showing mechanisms and gear wheels inside"
+    },
+    {
+      "chapter": "console-terminal.md",
+      "section": "5.10",
+      "title": "Console Terminal - Telegraph Station",
+      "prompt": "white background, black lines, sketch, monochrome: A colonial telegraph station with operators at desks, telegraph equipment, and message routing boards on walls"
+    },
+    {
+      "chapter": "credentials.md",
+      "section": "1.7",
+      "title": "Credentials - Royal Seals",
+      "prompt": "white background, black lines, sketch, monochrome: A medieval kingdom's gate with guards checking documents, official seals, and credentials from travelers"
+    },
+    {
+      "chapter": "dma-buffers.md",
+      "section": "5.9",
+      "title": "DMA Buffers - Warehouse Loading Docks",
+      "prompt": "white background, black lines, sketch, monochrome: A warehouse with special loading docks, workers loading cargo directly onto trucks bypassing the sorting area"
+    },
+    {
+      "chapter": "dnlc.md",
+      "section": "3.4",
+      "title": "DNLC - Librarian's Pocket Notebook",
+      "prompt": "white background, black lines, sketch, monochrome: A busy librarian at her desk with a leather pocket notebook in hand, sticky notes visible, surrounded by books"
+    },
+    {
+      "chapter": "driver-framework.md",
+      "section": "5.4",
+      "title": "Driver Framework - Machine Factory",
+      "prompt": "white background, black lines, sketch, monochrome: A modular machine factory with standardized components and workers installing interchangeable parts into devices"
+    },
+    {
+      "chapter": "executable-formats.md",
+      "section": "1.12",
+      "title": "Executable Formats - Customs House",
+      "prompt": "white background, black lines, sketch, monochrome: A customs house at a port examining cargo from ships, workers converting goods into standard containers"
+    },
+    {
+      "chapter": "fdfs.md",
+      "section": "1.8",
+      "title": "File Descriptors - File Drawer System",
+      "prompt": "white background, black lines, sketch, monochrome: A wooden filing cabinet with numbered drawers, some open showing indexed contents, a clerk holding an inventory list"
+    },
+    {
+      "chapter": "fifo.md",
+      "section": "3.7",
+      "title": "FIFO - Theater Queue",
+      "prompt": "white background, black lines, sketch, monochrome: People waiting in a single-file queue at a theater ticket window, first person approaching the counter"
+    },
+    {
+      "chapter": "hat-layer.md",
+      "section": "2.4",
+      "title": "HAT Layer - Royal Milliner's Shop",
+      "prompt": "white background, black lines, sketch, monochrome: A royal milliner's shop with hatmaker at work, abstract hat designs on shelves, region-specific hats being fitted"
+    },
+    {
+      "chapter": "interrupts.md",
+      "section": "5.3",
+      "title": "Interrupts - Butler in Manor",
+      "prompt": "white background, black lines, sketch, monochrome: A butler in a grand manor interrupting his master from reading, delivering an urgent message on a silver tray"
+    },
+    {
+      "chapter": "ip.md",
+      "section": "4.3",
+      "title": "IP Protocol - Postal Routing Center",
+      "prompt": "white background, black lines, sketch, monochrome: A postal routing center with workers examining addressed packages, sorting them onto different delivery routes"
+    },
+    {
+      "chapter": "memory-segments.md",
+      "section": "2.1",
+      "title": "Memory Segments - Medieval Castle",
+      "prompt": "white background, black lines, sketch, monochrome: A cross-section of a medieval castle showing different areas: tower, dungeon, great hall, each with distinct architecture"
+    },
+    {
+      "chapter": "messages.md",
+      "section": "1.10",
+      "title": "Messages IPC - Post Box",
+      "prompt": "white background, black lines, sketch, monochrome: A post office mailbox with sealed envelopes inside marked with type labels, a clerk reaching in to retrieve one"
+    },
+    {
+      "chapter": "network-drivers.md",
+      "section": "4.7",
+      "title": "Network Drivers - Dock Workers",
+      "prompt": "white background, black lines, sketch, monochrome: Dock workers coordinating cargo movement between ships and warehouse, managing multiple simultaneous operations"
+    },
+    {
+      "chapter": "network-interfaces.md",
+      "section": "4.5",
+      "title": "Network Interfaces - City Ports",
+      "prompt": "white background, black lines, sketch, monochrome: A city harbor with multiple distinct docks and piers, different ships loading and unloading at each port"
+    },
+    {
+      "chapter": "network-stack-overview.md",
+      "section": "4.1",
+      "title": "Network Stack - Trading Post",
+      "prompt": "white background, black lines, sketch, monochrome: A multi-story trading post with merchants at different levels negotiating at top, moving goods at the bottom"
+    },
+    {
+      "chapter": "nfs-client.md",
+      "section": "3.6",
+      "title": "NFS Client - Merchant Agent",
+      "prompt": "white background, black lines, sketch, monochrome: A merchant agent in a distant city at a desk with ledgers, arranging shipments from a central warehouse"
+    },
+    {
+      "chapter": "nfs-server.md",
+      "section": "3.5",
+      "title": "NFS Server - Central Warehouse",
+      "prompt": "white background, black lines, sketch, monochrome: A grand central warehouse with massive inventory, clerks managing catalogs and coordinating shipments to distant branches"
+    },
+    {
+      "chapter": "page-management.md",
+      "section": "2.3",
+      "title": "Page Management - Farmer's Field",
+      "prompt": "white background, black lines, sketch, monochrome: A farmer in a field with plots divided into sections, crops planted, fences being adjusted, harvest being recorded"
+    },
+    {
+      "chapter": "page-replacement-paging.md",
+      "section": "2.8",
+      "title": "Page Replacement - Theater Understudy",
+      "prompt": "white background, black lines, sketch, monochrome: A theater stage with main performers acting while backup understudies wait in the wings ready to step in"
+    },
+    {
+      "chapter": "pathname-resolution.md",
+      "section": "3.3",
+      "title": "Pathname Resolution - Postal Carrier",
+      "prompt": "white background, black lines, sketch, monochrome: A postal carrier walking through city streets, checking house numbers and street signs, following hierarchical pathways"
+    },
+    {
+      "chapter": "pid-management.md",
+      "section": "1.5",
+      "title": "PID Management - Registrar's Office",
+      "prompt": "white background, black lines, sketch, monochrome: A registrar's office with clerks at desks maintaining large ledgers, filing documents with identification numbers"
+    },
+    {
+      "chapter": "process-groups.md",
+      "section": "1.9",
+      "title": "Process Groups - Military Regiment",
+      "prompt": "white background, black lines, sketch, monochrome: A military regiment on parade organized into companies and squads, a commander sending messages that reach all soldiers"
+    },
+    {
+      "chapter": "process-lifecycle.md",
+      "section": "1.1",
+      "title": "Process Lifecycle - Theater Troupe",
+      "prompt": "white background, black lines, sketch, monochrome: A theater troupe at different stages: audition, rehearsal, and final bows, with understudies waiting in background"
+    },
+    {
+      "chapter": "process-scheduling.md",
+      "section": "1.2",
+      "title": "Process Scheduling - Restaurant Kitchen",
+      "prompt": "white background, black lines, sketch, monochrome: A busy kitchen with a chef at the stove managing multiple pots and dishes simultaneously, deciding which gets attention next"
+    },
+    {
+      "chapter": "rpc.md",
+      "section": "4.6",
+      "title": "RPC Protocol - Royal Court Dispatches",
+      "prompt": "white background, black lines, sketch, monochrome: A royal court with messengers delivering sealed dispatch envelopes between provinces, clerks reading standardized messages"
+    },
+    {
+      "chapter": "s5fs.md",
+      "section": "3.2",
+      "title": "S5FS - Provincial Library",
+      "prompt": "white background, black lines, sketch, monochrome: A modest provincial lending library with simple wooden shelves, a basic card catalog, and a small staff"
+    },
+    {
+      "chapter": "semaphores.md",
+      "section": "1.11",
+      "title": "Semaphores - Railway Station Turnstiles",
+      "prompt": "white background, black lines, sketch, monochrome: A railway station with turnstiles, passengers queuing and passing through in orderly fashion, turnstile operators managing access"
+    },
+    {
+      "chapter": "shared-memory.md",
+      "section": "1.10",
+      "title": "Shared Memory - Shared Courtyard",
+      "prompt": "white background, black lines, sketch, monochrome: A walled courtyard shared by multiple households, families with keys opening the gate, a clerk tracking key distribution"
+    },
+    {
+      "chapter": "signal-handling.md",
+      "section": "1.3",
+      "title": "Signal Handling - Whispers and Nudges",
+      "prompt": "white background, black lines, sketch, monochrome: A person being disrupted by urgent whispers, sharp nudges, and shouts arriving unexpectedly during their work"
+    },
+    {
+      "chapter": "socket-layer.md",
+      "section": "4.2",
+      "title": "Socket Layer - Telephone Exchange",
+      "prompt": "white background, black lines, sketch, monochrome: A public telephone exchange with brass sockets and a clerk binding lines and routing connections between operators"
+    },
+    {
+      "chapter": "special-files.md",
+      "section": "3.8",
+      "title": "Special Files - Instruments Cabinet",
+      "prompt": "white background, black lines, sketch, monochrome: A city's cabinet filled with instruments (valves, levers, wheels) that appear ordinary but open onto hardware and exotic endpoints"
+    },
+    {
+      "chapter": "streams.md",
+      "section": "4.9",
+      "title": "STREAMS - Victorian Postal System",
+      "prompt": "white background, black lines, sketch, monochrome: A Victorian postal system with packets as letters in cream envelopes, mahogany sorting offices, clerks examining each message"
+    },
+    {
+      "chapter": "swap-space-management.md",
+      "section": "2.9",
+      "title": "Swap Space - Underground Vaults",
+      "prompt": "white background, black lines, sketch, monochrome: A grid of sealed vaults beneath a city, a surface clerk maintaining ledgers of vault contents, various tunnels connecting them"
+    },
+    {
+      "chapter": "system-calls.md",
+      "section": "1.4",
+      "title": "System Calls - Protected Factory",
+      "prompt": "white background, black lines, sketch, monochrome: A protected factory floor with a very specific gateway door, workers requesting raw materials from warehouse through the entrance"
+    },
+    {
+      "chapter": "system-initialization.md",
+      "section": "5.7",
+      "title": "System Init - World's Fair Opening",
+      "prompt": "white background, black lines, sketch, monochrome: A grand world's fair with a master of ceremonies preparing exhibits, lighting gas lamps, preparing for gates to open"
+    },
+    {
+      "chapter": "tcp.md",
+      "section": "4.2",
+      "title": "TCP - Telegraph Office",
+      "prompt": "white background, black lines, sketch, monochrome: A bustling Victorian telegraph office with clerks at desks maintaining ledgers, telegraph operators sending and receiving dispatches"
+    },
+    {
+      "chapter": "udp.md",
+      "section": "4.4",
+      "title": "UDP - Simple Postal Service",
+      "prompt": "white background, black lines, sketch, monochrome: A simple, no-frills postal service with workers quickly dispatching mail in bags without checking contents or guarantees"
+    },
+    {
+      "chapter": "ufs.md",
+      "section": "3.1",
+      "title": "UFS - Grand Library",
+      "prompt": "white background, black lines, sketch, monochrome: A grand library with tall shelves of books, reading rooms, a vast card catalog table, and librarians keeping everything orderly"
+    },
+    {
+      "chapter": "vfs-layer.md",
+      "section": "3.0",
+      "title": "VFS Layer - Customs House",
+      "prompt": "white background, black lines, sketch, monochrome: A neutral customs house at a border, workers examining goods from diverse origins and routing shipments to specialized handlers"
+    }
+  ]
+}
