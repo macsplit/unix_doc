@@ -43,8 +43,8 @@ More often than not, this newborn child process hungers for its own destiny, a p
 
 <br/>
 
-![Process Lifecycle - Theater Troupe](cartoons/process-lifecycle-cartoon.png)
-**Process Lifecycle - Theater Troupe**
+![Process Lifecycle - Orchestra](cartoons/process-lifecycle-cartoon.png)
+**Process Lifecycle - Orchestra**
 
 ### `fork()` vs. `vfork()`: A Tale of Two Births and Kernel Optimization
 

@@ -41,8 +41,8 @@ The CPU then **atomically**:
 
 <br/>
 
-![Interrupts - Butler in Manor](cartoons/interrupts-cartoon.png)
-**Interrupts - Butler in Manor**
+![Interrupts - Scholar](cartoons/interrupts-cartoon.png)
+**Interrupts - Scholar**
 
 ## The Trap Gate: Entry from User Mode
 
