@@ -13,7 +13,7 @@ At the heart of NFS is the Remote Procedure Call (RPC) protocol. Instead of read
 The `rfscall` function in `nfs_subr.c` is the heart of the SVR4 NFS client's RPC mechanism. It is responsible for packaging up a request, sending it to the server, and waiting for a reply. It handles the complexities of network timeouts and retransmissions, ensuring that the diplomatic cable reaches its destination.
 
 ![NFS Client Architecture](3.3-nfs-client-arch.png)
-**Figure 3.3.1: The Client's Diplomatic Pipeline**
+**Figure 3.8.1: The Client's Diplomatic Pipeline**
 
 <br/>
 

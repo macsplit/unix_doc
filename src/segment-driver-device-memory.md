@@ -118,4 +118,5 @@ Like seg_vn, seg_dev supports per-page protections through the vpage array. The 
 The `segdev_dup()` function creates device mappings in child processes after fork(). The child receives a new segdev_data structure but shares the same device and offset. This allows multiple processes to map the same device region while maintaining independent per-page protections.
 
 
-![](2.8-segdev-fault.png)
+![Segdev Fault](2.8-segdev-fault.png)
+**Figure 2.8.1: Device Segment Fault Handling**

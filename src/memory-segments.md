@@ -109,4 +109,5 @@ The `fault` operation handles page faults within the segment. The `dup` operatio
 Each type provides specialized handling for its particular use case while conforming to the common segment driver interface.
 
 
-![](2.4-segment-operations.png)
+![Segment Operations](2.4-segment-operations.png)
+**Figure 2.4.1: Segment Operations Vector**

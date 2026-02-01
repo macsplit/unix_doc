@@ -107,8 +107,14 @@ The `fifo_write()` function performs the following steps:
 - **Write Data**: It writes data from the user's buffer into the FIFO buffer.
 - **Update Pointers**: It updates the tail pointer and size of the buffer.
 
-![FIFO Read and Write Flow](3.6-read-write-flow.png)
-**Figure 3.6.2: Read and Write Paths Through the FIFO**
+![FIFO Open Flow](3.6-fifo-open.png)
+**Figure 3.6.2: The fifo_open() Flow**
+
+![FIFO Read Flow](3.6-fifo-read.png)
+**Figure 3.6.3: The fifo_read() Flow**
+
+![FIFO Write Flow](3.6-fifo-write.png)
+**Figure 3.6.4: The fifo_write() Flow**
 
 <br/>
 

@@ -1,0 +1,7 @@
+flowchart TD
+    A["fifo_write()"] --> B{No readers?}
+    B -->|yes| C[Return EPIPE]
+    B -->|no| D[Copy data from user buffer]
+    D --> E[Update fi_tail]
+    E --> F[Update fi_size]
+    F --> G[Return bytes written]

@@ -1,23 +1,35 @@
-graph TD
-    subgraph "Hash Table (8 buckets)"
-        H0["nc_hash bucket 0"]
-        H1["nc_hash bucket 1"]
-        H7["nc_hash bucket 7"]
-        H0 -.-> E1[ncache entry]
-        H0 -.-> E2[ncache entry]
-        H1 -.-> E3[ncache entry]
+flowchart TD
+    subgraph HASH["Hash Table Organization"]
+        direction TB
+        HT["nc_hash[NCSIZE]"] --> H0["nc_hash[0]"]
+        H0 --> E1["ncache entry"]
+        E1 --> E2["ncache entry"]
+
+        HT --> H1["nc_hash[1]"]
+        H1 --> E3["ncache entry"]
+
+        HT --> Hn["nc_hash[n]"]
+        Hn --> E4["ncache entry"]
     end
 
-    subgraph "LRU List (circular)"
-        L[nc_lru head] --> E1
-        E1 --> E2
-        E2 --> E3
-        E3 --> L
+    subgraph LRU["LRU List (Circular)"]
+        direction TB
+        HEAD["nc_lru head"] --> |forw| N1["ncache"]
+        N1 --> |forw| N2["ncache"]
+        N2 --> |forw| N3["ncache"]
+        N3 --> |back| HEAD
     end
 
-    subgraph "ncache Entry"
-        E1 --> VP[vp: target vnode]
-        E1 --> DP[dp: parent vnode]
-        E1 --> NAME[name: filename]
-        E1 --> CRED[cred: credentials]
+    subgraph ENTRY["ncache Entry Fields"]
+        direction TB
+        F1["hash_next: hash chain link"]
+        F2["hash_prev: hash chain link"]
+        F3["vp: target vnode"]
+        F4["dp: parent directory vnode"]
+        F5["namlen: name length"]
+        F6["name: component name"]
+        F7["cred: credentials at lookup"]
     end
+
+    HASH --> LRU
+    LRU --> ENTRY

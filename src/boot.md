@@ -34,7 +34,7 @@ Once the kernel is loaded into memory, the bootloader's final task is to transfe
 3.  **Jumps to the kernel entry point**: Finally, it performs a long jump to the kernel's entry point, the `main` function in the kernel's own code. At this point, the bootloader's job is done, and the kernel is in control.
 
 ![The SVR4 Boot Sequence](5.1-boot-sequence.png)
-*The SVR4 Boot Sequence*
+**Figure 5.1.1: The SVR4 Boot Sequence**
 
 <br/>
 

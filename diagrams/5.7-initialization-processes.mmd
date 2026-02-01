@@ -1,0 +1,9 @@
+flowchart TD
+    A["8. swapconf()"]
+    B["9. schedpaging()"]
+    C["10. Create init (Process 1)"]
+    D["11. Create pageout daemon"]
+    E["12. Create fsflush daemon"]
+    F["13. Become sched (Process 0)"]
+
+    A --> B --> C --> D --> E --> F

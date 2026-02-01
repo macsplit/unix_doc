@@ -20,7 +20,7 @@ The `filsys` structure is the s5fs superblock, the desk diary of the head librar
 The s5fs inode is, in many ways, the blueprint for its more sophisticated UFS counterpart. It contains all the essential metadata for a file, including its mode, link count, ownership, size, and timestamps.
 
 ![S5FS Inode](3.2-s5fs-inode.png)
-*The S5FS Inode Structure*
+**Figure 3.2.1: The S5FS Inode Structure**
 
 The block addressing scheme is similar to that of UFS, with a set of direct block pointers and single, double, and triple indirect blocks. However, the s5fs inode has only 10 direct block pointers, compared to 12 in the UFS inode.
 

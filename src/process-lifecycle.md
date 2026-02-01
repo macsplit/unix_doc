@@ -7,6 +7,7 @@ The SVR4 i386 kernel, a venerable maestro of multitasking, conducts a perpetual 
 ## The Spark of Life: Process Creation
 
 ![Fork process creation](1.1-fork-creation.png)
+**Figure 1.1.1: Fork Process Creation**
 
 In the dominion of SVR4, a new process doesn't simply *appear*; it is *born*. The primal act of creation is embodied by the `fork()` system call—a moment of digital fission where one process, the stoic parent, begets another, the eager child. Imagine, if you will, the kernel as a meticulous scribe, duplicating the parent's entire universe: its memory segments, its open portals to the filesystem (file descriptors), and even the fleeting thoughts held within its CPU registers.
 
@@ -102,6 +103,7 @@ typedef struct user {
 ## The Final Curtain: Process Termination
 
 ![Process exit and termination](1.1-exit-termination.png)
+**Figure 1.1.2: Process Exit and Termination**
 
 Alas, even the most vibrant process must, at some juncture, meet its cessation. This can occur either by graceful self-annihilation or by an unforeseen, often forceful, intervention.
 
@@ -210,4 +212,5 @@ The `resume()` function is an exquisite piece of engineering, often residing at 
 
 <br/>
 
-![](1.1-wait-reaping.png)
+![Wait and Reaping](1.1-wait-reaping.png)
+**Figure 1.1.3: Wait and Zombie Reaping**

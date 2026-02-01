@@ -152,4 +152,5 @@ The function clears page table entries and returns physical pages to the free po
 The `segkmem_setprot()` function (seg_kmem.c:196) modifies page protections by directly updating PTEs. This low-level approach provides maximum efficiency for kernel operations while avoiding the overhead of the normal segment driver protection mechanisms.
 
 
-![](2.7-segkmem-alloc.png)
+![Segkmem Allocation](2.7-segkmem-alloc.png)
+**Figure 2.7.1: Kernel Memory Segment Allocation**

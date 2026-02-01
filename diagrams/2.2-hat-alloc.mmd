@@ -1,0 +1,6 @@
+flowchart TD
+    A[HAT: Hardware Address Translation] --> B[hat_alloc: create page tables]
+    B --> C[Allocate page directory]
+    C --> D[Initialize directory entries]
+    D --> E[Map kernel space]
+    E --> F[Return hat structure]

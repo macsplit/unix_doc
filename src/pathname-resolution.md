@@ -112,4 +112,5 @@ At each step, `VOP_ACCESS()` verifies that the process has execute permission on
 To optimize repeated lookups, the DNLC caches successful directory lookups. Before calling `VOP_LOOKUP()`, the system checks the cache. Cache hits avoid expensive directory searches and disk I/O.
 
 
-![](3.3-pathname-lookup.png)
+![Pathname Lookup](3.3-pathname-lookup.png)
+**Figure 3.3.1: Pathname Lookup Flow**

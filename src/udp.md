@@ -11,7 +11,7 @@ There is no formal handshake to initiate a correspondence, no sequence numbers t
 The UDP header is a model of minimalism, a simple postcard containing only the most essential information required to get the message to its destination. It is a mere 8 bytes, a fraction of the size of its verbose TCP counterpart.
 
 ![UDP Header](4.2-udp-header.png)
-*The UDP Header*
+**Figure 4.2.6: The UDP Header**
 
 The header contains just four fields:
 

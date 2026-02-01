@@ -59,7 +59,7 @@ Key fields in this ledger include:
 The life of a TCP connection is governed by a strict set of rules known as the Finite State Machine. Each state represents a distinct phase in the conversation, and the transitions between states are triggered by specific events, such as the arrival of a particular type of segment or a request from the user application.
 
 ![TCP State Machine](4.2-tcp-state-machine.png)
-*The TCP State Machine*
+**Figure 4.6.1: The TCP State Machine**
 
 The primary states and their roles:
 
@@ -78,7 +78,7 @@ The primary states and their roles:
 A TCP connection is established through a precise, three-step process known as the three-way handshake. This ensures that both parties are ready to communicate and have agreed upon the initial sequence numbers.
 
 ![TCP Three-Way Handshake](4.2-tcp-handshake.png)
-*The Three-Way Handshake*
+**Figure 4.6.2: The Three-Way Handshake**
 
 1.  **SYN**: The client, wishing to start a conversation, sends a `SYN` (synchronize) segment to the server. This segment includes the client's initial sequence number (`SEQ=x`).
 2.  **SYN-ACK**: The server, having received the `SYN`, responds with a `SYN-ACK` segment. This segment contains the server's own initial sequence number (`SEQ=y`) and an acknowledgement of the client's sequence number (`ACK=x+1`).

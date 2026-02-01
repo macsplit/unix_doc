@@ -1,6 +1,7 @@
 The Plumbing Unveiled: STREAMS Framework Internals
 
 ![STREAMS Internals](4.10-streams-internals.png)
+**Figure 4.10.1: STREAMS Framework Internals**
 
 Having explored the STREAMS-based networking architecture from the application perspective, we now descend into the very machinery itself—the **STREAMS framework**, the kernel subsystem that makes modularity, message passing, and dynamic reconfiguration not merely aspirations but operational realities. This is the plumbing behind the elegant abstractions, where message blocks are allocated, queues are serviced, and flow control prevents the system from drowning in its own data.
 

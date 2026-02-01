@@ -42,6 +42,7 @@ sys_call:
 **Code Snippet 1.8a: The `systrap` Entry Stub (ml/ttrap.s)**
 
 ![System Call Flow](1.4-syscall-flow.png)
+**Figure 1.4.1: System Call Flow**
 
 ![System Calls - Protected Factory](cartoons/system-calls-cartoon.png)
 **System Calls - Protected Factory**

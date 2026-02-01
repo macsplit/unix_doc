@@ -1,0 +1,10 @@
+flowchart TD
+    A["1. Start main()"]
+    B["2. Initialize: uname, cred, dnlc"]
+    C["3. clkstart()"]
+    D["4. Enable Interrupts (spl0)"]
+    E["5. Loop over io_init[]"]
+    F["6. Loop over init_tbl[]"]
+    G["7. vfs_mountroot()"]
+
+    A --> B --> C --> D --> E --> F --> G

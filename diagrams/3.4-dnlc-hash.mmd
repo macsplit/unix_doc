@@ -1,0 +1,11 @@
+flowchart TD
+    A["nc_hash[NCSIZE]"] --> B["nc_hash[0]"]
+    B --> C["ncache entry"]
+    C --> D["ncache entry"]
+
+    A --> E["nc_hash[1]"]
+    E --> F["ncache entry"]
+
+    A --> G["nc_hash[n]"]
+    G --> H["ncache entry"]
+    H --> I["ncache entry"]

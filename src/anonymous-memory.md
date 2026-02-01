@@ -117,4 +117,5 @@ When the reference count reaches zero, the function frees the associated page an
 Anonymous memory provides critical support for efficient fork() through copy-on-write. When a process forks, child and parent initially share the same physical pages with incremented reference counts. Only when one process writes to a shared page does the system create a private copy. This optimization significantly reduces fork() overhead and memory consumption.
 
 
-![](2.5-anon-operations.png)
+![Anonymous Memory Operations](2.5-anon-operations.png)
+**Figure 2.5.1: Anonymous Memory Operations**

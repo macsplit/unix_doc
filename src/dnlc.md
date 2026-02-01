@@ -56,8 +56,14 @@ The 15-character limit (`NC_NAMLEN`) is a pragmatic choice: longer names are rar
 
 The DNLC employs a **dual organization** reminiscent of a Victorian office combining an alphabetized filing cabinet (for speed) with a chronological archive (for aging):
 
-![DNLC Structure](3.4-dnlc-structure.png)
-**Figure 3.4.1: The Dual Organization—Hash Table and LRU List**
+![DNLC Hash Table](3.4-dnlc-hash.png)
+**Figure 3.4.1: Hash Table Organization**
+
+![DNLC LRU List](3.4-dnlc-lru.png)
+**Figure 3.4.2: LRU List Organization**
+
+![DNLC Entry Fields](3.4-dnlc-entry.png)
+**Figure 3.4.3: ncache Entry Fields**
 
 ### Hash Table: The Alphabetized Cabinet
 
@@ -94,7 +100,7 @@ This is the librarian's practice of periodically reviewing her pocket notebook a
 When the pathname resolution code (in `lookuppn()`) needs to find a directory entry, it first consults the DNLC via `dnlc_lookup()` (fs/dnlc.c:232):
 
 ![DNLC Lookup Flow](3.4-dnlc-lookup.png)
-**Figure 3.4.2: The Lookup Ritual—Consulting the Pocket Notebook**
+**Figure 3.4.4: The Lookup Ritual—Consulting the Pocket Notebook**
 
 ```c
 vnode_t *

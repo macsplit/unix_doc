@@ -7,6 +7,7 @@ In the cacophony of a busy kernel, where processes dance to the CPU's tune, ther
 ## The Genesis of a Whisper: Signal Posting
 
 ![Signal Posting Diagram](1.3-signal-posting.png)
+**Figure 1.3.1: Signal Posting**
 
 A signal's journey begins with its **posting**. This is the act of marking a target process as having a pending signal. Whether triggered by a hardware fault (like a `SIGSEGV`), a user's command (`kill -9 PID`), or a kernel event (like a child process terminating, sending a `SIGCHLD`), the kernel's `psignal()` function (often starting its work around `sig.c:103` in the SVR4 source) acts as the signal's dispatcher.
 
@@ -79,6 +80,7 @@ For the currently executing process, a special flag (`u.u_sigevpend`) is set. Th
 ## The Sentry's Gate: Signal Masks and Sets
 
 ![Signal Masks Diagram](1.3-signal-masks.png)
+**Figure 1.3.2: Signal Masks and Sets**
 
 A process is not merely a passive recipient of signals; it possesses a sophisticated array of defenses and preferences, managed by the kernel through various **signal bitmasks** and predefined **signal sets**. These act as filters, allowing a process to selectively block, ignore, or trace specific signals, thereby controlling its susceptibility to external interruptions.
 
@@ -168,6 +170,7 @@ for (;;) {
 **Code Snippet 1.6: The `issig()` Signal Delivery Loop (Excerpt)**
 
 ![Signal Delivery](1.3-signal-delivery.png)
+**Figure 1.3.3: Signal Delivery**
 
 The remaining portion handles tracing stops and debugger release (`stop()` and `procxmt()`), then loops to honor requested stops before returning (sig.c:325-360).
 

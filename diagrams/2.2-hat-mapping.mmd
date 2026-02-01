@@ -1,0 +1,9 @@
+flowchart TD
+    A["hat_memload()"] --> B[Get/create page table entry]
+    B --> C[Set PTE with physical address]
+    C --> D[Set protection bits]
+    D --> E[Flush TLB if needed]
+    E --> F["hat_unload()"]
+    F --> G[Clear PTE]
+    G --> H[Flush TLB entries]
+    H --> I[Free page table if empty]

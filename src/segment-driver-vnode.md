@@ -149,4 +149,5 @@ struct seg_ops segvn_ops = {
 The `segvn_fault` operation handles page faults by reading from the vnode or allocating anonymous pages. The `segvn_dup` operation implements copy-on-write for fork() by sharing the anon_map and marking pages read-only.
 
 
-![](2.6-segvn-create.png)
+![Segvn Create](2.6-segvn-create.png)
+**Figure 2.6.1: Vnode Segment Creation**

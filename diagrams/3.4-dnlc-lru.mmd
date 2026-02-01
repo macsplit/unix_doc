@@ -1,0 +1,6 @@
+flowchart TD
+    A["nc_lru head"] --> |forw| B["ncache (oldest)"]
+    B --> |forw| C["ncache"]
+    C --> |forw| D["ncache"]
+    D --> |forw| E["ncache (newest)"]
+    E --> |back| A

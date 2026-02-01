@@ -17,7 +17,7 @@ A copy of the superblock is replicated in each cylinder group, a crucial redunda
 The inode is the fundamental data structure in UFS, the card in the catalog that describes a file. Each inode contains all the metadata about a file, with the notable exception of its name, which is stored in a directory file.
 
 ![UFS Inode](3.1-ufs-inode.png)
-*The UFS Inode Structure*
+**Figure 3.1.1: The UFS Inode Structure**
 
 The key information on each card includes:
 
@@ -47,6 +47,8 @@ The allocation policy attempts to keep all the blocks of a file in the same cyli
 > **The Ghost of SVR4:**
 >
 > "Our Grand Library was a marvel of its time, a carefully designed system for the orderly storage and retrieval of information. But it was a fragile place. A sudden loss of power during a busy day of reshelving could leave the catalog in a state of disarray, requiring the painstaking efforts of the `fsck` program, our head catalog-keeper, to restore order. Your modern filesystems, with their 'journaling', are a different breed. They are like librarians who keep a meticulous log of every intended change before they make it. If the lights go out, they simply consult their log to quickly restore the library to a consistent state. And your 'copy-on-write' filesystems like ZFS are even more remarkable. They never change a book once it is written; they simply write a new, updated version in a new location and update the catalog to point to it. It is a world of incredible resilience, a world that we, with our delicate, in-place modifications, could only dream of."
+
+---
 
 ![UFS - Grand Library](cartoons/ufs-cartoon.png)
 **UFS - Grand Library**

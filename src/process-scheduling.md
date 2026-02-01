@@ -44,6 +44,7 @@ Within the `Time-Sharing` class, this mechanism becomes particularly nuanced. Th
 ## The Interruption: Preemption
 
 ![Preemption](1.2-preemption.png)
+**Figure 1.2.1: Preemption Flow**
 
 SVR4, a marvel of its time, was a **preemptive kernel**. This means that the CPU's current tenant—the running process—could be summarily interrupted and forced to relinquish its hold, even if it hadn't completed its quantum of time or explicitly paused. Preemption is the very essence of responsive multitasking, ensuring that critical events or higher-priority demands are never ignored.
 
@@ -58,6 +59,7 @@ Preemption could be triggered by several compelling forces:
 ## Dispatch Queues: The Scheduler's Ledger
 
 ![Dispatch Queues](1.2-dispatch-queues.png)
+**Figure 1.2.2: Dispatch Queues**
 
 To manage this dynamic ebb and flow of processes, the SVR4 kernel employs **dispatch queues**. In practice, these are explicit data structures, often linked lists, each corresponding to a distinct priority level. When a process transitions from a blocked state to a runnable state, it is meticulously inserted into the appropriate dispatch queue for its current priority.
 
@@ -70,4 +72,5 @@ The scheduler’s central loop, a relentless cycle of decision and execution, ca
 
 This sophisticated yet elegant dispatching mechanism is how SVR4 maintained both responsiveness for critical tasks and fairness for general computation, a testament to the enduring principles of efficient operating system design.
 
-![](1.2-context-switch.png)
+![Context Switch](1.2-context-switch.png)
+**Figure 1.2.3: Context Switch**

@@ -125,4 +125,5 @@ The VROOT flag marks file system root vnodes. VNOMAP prevents memory mapping for
 The `VN_HOLD(vp)` macro increments v_count, while `VN_RELE(vp)` decrements it. When the count reaches zero, `VOP_INACTIVE()` is invoked. This allows the system to cache inactive vnodes while ensuring cleanup when no longer needed.
 
 
-![](3.2-vnode-operations.png)
+![Vnode Operations](3.2-vnode-operations.png)
+**Figure 3.0.2: Vnode Operations and Reference Counting**

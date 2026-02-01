@@ -1,19 +1,29 @@
 graph TD
-    A[HAT: Hardware Address Translation] --> B[hat_alloc: create page tables]
-    B --> C[Allocate page directory]
-    C --> D[Map kernel space]
+    subgraph ALLOC["hat_alloc: Create Address Space"]
+        A[HAT: Hardware Address Translation] --> B[hat_alloc: create page tables]
+        B --> C[Allocate page directory]
+        C --> D[Map kernel space]
+    end
 
-    E[hat_memload: map page] --> F[Get/create page table entry]
-    F --> G[Set PTE with physical address]
-    G --> H[Set protection bits]
-    H --> I[Flush TLB if needed]
+    subgraph LOAD["hat_memload: Map Page"]
+        E[hat_memload: map page] --> F[Get/create page table entry]
+        F --> G[Set PTE with physical address]
+        G --> H[Set protection bits]
+        H --> I[Flush TLB if needed]
+    end
 
-    J[hat_unload: unmap pages] --> K[Clear PTE]
-    K --> L[Flush TLB entries]
-    L --> M[Free page table if empty]
+    subgraph UNLOAD["hat_unload: Unmap Pages"]
+        J[hat_unload: unmap pages] --> K[Clear PTE]
+        K --> L[Flush TLB entries]
+        L --> M[Free page table if empty]
+    end
 
-    N[TLB Miss] --> O[Hardware page table walk]
-    O --> P{PTE valid?}
-    P -->|yes| Q[Load TLB entry]
-    P -->|no| R[Page fault exception]
-    R --> S[as_fault handles miss]
+    subgraph TLB["TLB Miss Handling"]
+        N[TLB Miss] --> O[Hardware page table walk]
+        O --> P{PTE valid?}
+        P -->|yes| Q[Load TLB entry]
+        P -->|no| R[Page fault exception]
+        R --> S[as_fault handles miss]
+    end
+
+    ALLOC --> LOAD --> UNLOAD --> TLB

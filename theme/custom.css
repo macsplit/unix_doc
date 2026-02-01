@@ -119,4 +119,116 @@ hr {
         margin-right: auto !important;
     }
 
+    /* ===========================================
+       DIAGRAM-SPECIFIC SIZE ADJUSTMENTS FOR PDF
+       =========================================== */
+
+    /* --- Much narrower (30%) --- */
+    img[src*="5.3-bottom-half"] {
+        max-width: 30% !important;
+    }
+
+    /* --- Narrower (70%) --- */
+    img[src*="5.3-interrupt-entry"],
+    img[src*="5.3-interrupt-return"] {
+        max-width: 70% !important;
+    }
+
+    /* --- Narrower (73%) --- */
+    img[src*="4.2-udp-header"] {
+        max-width: 73% !important;
+    }
+
+    /* --- Narrower (77%) --- */
+    img[src*="1.3-signal-posting"] {
+        max-width: 77% !important;
+    }
+
+    /* --- Narrower (80%) --- */
+    img[src*="4.4-interface-control"] {
+        max-width: 80% !important;
+    }
+
+    /* --- Narrower (82%) --- */
+    img[src*="3.7-specfs-snode"],
+    img[src*="4.1-streams-stack"] {
+        max-width: 82% !important;
+    }
+
+    /* --- Narrower (85%) --- */
+    img[src*="4.4-route-resolution"] {
+        max-width: 85% !important;
+    }
+
+    /* --- Tiny bit narrower (88%) --- */
+    img[src*="4.2-socket-queues"],
+    img[src*="4.2-tli-connection"],
+    img[src*="4.2-socket-flow"] {
+        max-width: 88% !important;
+    }
+
+    /* --- Slightly wider (94-95%) --- */
+    img[src*="3.3-pathname-lookup"] {
+        max-width: 94% !important;
+    }
+
+    img[src*="2.1-as-map"],
+    img[src*="4.1-net-stack-flow"] {
+        max-width: 95% !important;
+    }
+
+    /* --- Somewhat wider (97%) --- */
+    img[src*="1.10-shmat-flow"],
+    img[src*="4.3-ifnet-structure"] {
+        max-width: 97% !important;
+    }
+
+    /* --- Full page width (100%) --- */
+    img[src*="2.2-hat-mapping"],
+    img[src*="2.2-hat-tlb"],
+    img[src*="1.8-msgsnd-flow"],
+    img[src*="2.3-page-list"],
+    img[src*="2.3-page-hash"],
+    img[src*="2.9-swap-management"],
+    img[src*="2.9-swap-indirection"],
+    img[src*="3.1-ufs-inode"],
+    img[src*="3.2-s5fs-inode"],
+    img[src*="3.3-nfs-client-arch"],
+    img[src*="3.4-dnlc-entry"],
+    img[src*="3.4-dnlc-lookup"],
+    img[src*="4.2-ip-header"],
+    img[src*="4.2-tcp-state-machine"],
+    img[src*="5.7-initialization-early"],
+    img[src*="5.7-initialization-processes"],
+    img[src*="5.7-init-process-creation"],
+    img[src*="5.8-callout-flow"],
+    img[src*="5.9-dma-bounce-buffer"] {
+        max-width: 100% !important;
+        max-height: 7.5in !important;
+    }
+
+    /* --- Diagrams on their own page (full width) --- */
+    img[src*="1.5-pg-detach"],
+    img[src*="1.8-msgrcv-flow"],
+    img[src*="1.9-semop-flow"],
+    img[src*="1.10-shmdt-flow"],
+    img[src*="2.1-as-fault"],
+    img[src*="2.2-hat-memload"],
+    img[src*="2.2-hat-unload"],
+    img[src*="2.10-pvn-pageout"],
+    img[src*="3.2-s5fs-inode"],
+    img[src*="3.4-dnlc-lookup"],
+    img[src*="3.7-specfs-open"],
+    img[src*="4.3-driver-data-path"],
+    img[src*="4.4-route-resolution"],
+    img[src*="4.5-rpc-call-flow"],
+    img[src*="5.1-boot-sequence"],
+    img[src*="5.2-device-switch-dispatch"],
+    img[src*="5.8-callout-flow"],
+    img[src*="5.10-console-tty-flow"] {
+        page-break-before: always;
+        max-width: 100% !important;
+        max-height: 7.5in !important;
+    }
+
 }

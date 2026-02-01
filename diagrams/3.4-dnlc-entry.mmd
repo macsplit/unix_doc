@@ -1,0 +1,10 @@
+flowchart TD
+    A["struct ncache"] --> B["hash_next"]
+    B --> C["hash_prev"]
+    C --> D["lru_next"]
+    D --> E["lru_prev"]
+    E --> F["vp: target vnode"]
+    F --> G["dp: parent directory"]
+    G --> H["namlen: name length"]
+    H --> I["name[NC_NAMLEN]"]
+    I --> J["cred: credentials"]

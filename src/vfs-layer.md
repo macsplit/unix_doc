@@ -116,4 +116,5 @@ These flags affect operations like permission checking, name handling, and locki
 The `vfs_add()` function links a new vfs into the global list, while `vfs_remove()` unlinks it during unmount. The `vfs_lock()` and `vfs_unlock()` functions provide locking to stabilize the VFS tree during operations that traverse mount points.
 
 
-![](3.1-vfs-layer.png)
+![VFS Layer](3.1-vfs-layer.png)
+**Figure 3.0.1: VFS List and Mount Structure**

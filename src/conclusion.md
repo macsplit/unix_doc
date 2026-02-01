@@ -50,9 +50,10 @@ Yet the foundational concepts—process abstraction, virtual memory, filesystem 
 
 Readers interested in deepening their understanding might explore:
 
+- **The Magic Garden Explained**: *The Magic Garden Explained: The Internals of UNIX System V Release 4* by Berny Goodheart and James Cox (Prentice Hall, 1994) remains the definitive reference on SVR4 internals. While both works cover similar technical territory, Goodheart and Cox provide comprehensive academic treatment, whereas this guide emphasizes narrative accessibility and modern comparisons.
 - **Source Code**: The full SVR4 source at `https://github.com/calmsacibis995/svr4-src` provides extensive detail
 - **Modern Kernels**: Compare with Linux kernel source and FreeBSD to see evolutionary changes
-- **Academic Papers**: Classic works like "The Design of the UNIX Operating System" by Maurice Bach
+- **Academic Papers**: Classic works like "The Design of the UNIX Operating System" by Maurice Bach (covering System V Release 2)
 - **Implementation Projects**: xv6, a teaching kernel that demonstrates similar principles in miniature
 
 The SVR4 kernel represents a significant milestone in operating system design, and its study provides valuable insights into both historical development and contemporary systems programming.

@@ -1,0 +1,9 @@
+flowchart TD
+    A[TLB Miss] --> B[Hardware page table walk]
+    B --> C{PTE valid?}
+    C -->|yes| D[Load TLB entry]
+    C -->|no| E[Page fault exception]
+    E --> F[as_fault handles miss]
+    F --> G[Segment driver loads page]
+    G --> H[hat_memload creates mapping]
+    H --> I[Return to faulting instruction]

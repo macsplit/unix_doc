@@ -1,0 +1,8 @@
+flowchart TD
+    A["fifo_open()"] --> B{FREAD mode?}
+    B -->|yes| C[Increment fi_readers]
+    B -->|no| D{FWRITE mode?}
+    D -->|yes| E[Increment fi_writers]
+    C --> F[Return 0]
+    E --> F
+    D -->|no| F

@@ -11,7 +11,7 @@ The cartographers of this service are the routing daemons, who tirelessly work t
 Every packet that travels across the internetwork is enclosed in an IP header, the envelope that contains the addressing and control information necessary for its delivery.
 
 ![IP Header](4.2-ip-header.png)
-*The IP Header*
+**Figure 4.2.3: The IP Header**
 
 The key fields on this envelope are:
 

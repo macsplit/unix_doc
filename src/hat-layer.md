@@ -20,8 +20,14 @@ typedef struct hat {
 
 The HAT keeps a list of page tables and a locality hint (`hat_ptlast`) to speed repeated faults in the same region. It is a simple structure, but it anchors the entire translation system.
 
-![HAT Layer](2.2-hat-layer.png)
-**Figure 2.2.1: HAT Between Address Space and Hardware**
+![HAT Alloc](2.2-hat-alloc.png)
+**Figure 2.2.1: Address Space Allocation with hat_alloc**
+
+![HAT Mapping](2.2-hat-mapping.png)
+**Figure 2.2.2: Loading and Unloading Mappings**
+
+![HAT TLB](2.2-hat-tlb.png)
+**Figure 2.2.3: TLB Miss Handling**
 
 <br/>
 
@@ -50,7 +56,7 @@ When a segment driver has a page to map, it calls `hat_memload()`. The i386 impl
 The mapping can be locked with `HAT_LOCK` to keep it resident, which is how the kernel pins critical pages.
 
 ![HAT Load Flow](2.2-hat-memload.png)
-**Figure 2.2.2: Loading a Translation**
+**Figure 2.2.4: Loading a Translation**
 
 <br/>
 
@@ -61,7 +67,7 @@ When a mapping is removed, `hat_unload()` clears the PTEs and may release the un
 Page synchronization is handled by `hat_pagesync()`, which pulls reference and modification bits from hardware into the page structure (vm/hat.h:110-112). This is how the VM system learns which pages are dirty or recently accessed.
 
 ![HAT Unload Flow](2.2-hat-unload.png)
-**Figure 2.2.3: Clearing Mappings and Flushing the TLB**
+**Figure 2.2.5: Clearing Mappings and Flushing the TLB**
 
 <br/>
 

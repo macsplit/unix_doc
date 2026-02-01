@@ -1,0 +1,7 @@
+flowchart TD
+    A["fifo_read()"] --> B{No writers and empty?}
+    B -->|yes| C[Return EOF]
+    B -->|no| D[Copy data to user buffer]
+    D --> E[Update fi_head]
+    E --> F[Update fi_size]
+    F --> G[Return bytes read]

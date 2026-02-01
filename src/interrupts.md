@@ -182,21 +182,18 @@ A typical device interrupt flow in SVR4 unfolds as follows:
 
 This multi-stage pipeline ensures that latency-sensitive acknowledgment happens immediately, while complex processing is deferred to a safer, more permissive context.
 
-**Figure 5.3.1: Interrupt Entry Path**
-
 ![Interrupt Entry](5.3-interrupt-entry.png)
+**Figure 5.3.1: Interrupt Entry Path**
 
 The diagram shows hardware event detection through ISR execution and bottom-half scheduling.
 
-**Figure 5.3.2: Return to User Mode**
-
 ![Interrupt Return](5.3-interrupt-return.png)
+**Figure 5.3.2: Return to User Mode**
 
 The return path checks for preemption and signals before resuming user execution.
 
-**Figure 5.3.3: Bottom Half Processing**
-
 ![Bottom Half](5.3-bottom-half.png)
+**Figure 5.3.3: Bottom Half Processing**
 
 Deferred processing in the bottom half handles protocol stack operations.
 
