@@ -13,3 +13,5 @@ book/
 .DS_Store
 Thumbs.db
 .aider*
+.claude/
+.plandex-v2/
