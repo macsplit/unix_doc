@@ -12,6 +12,12 @@ This documentation explores the internal architecture of the SVR4 operating syst
 - **Networking:** STREAMS architecture, TCP/IP stack, and NFS
 - **I/O and Device Management:** Device drivers, interrupts, and boot process
 
+## License
+
+This repository is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+You may copy, redistribute, and adapt the material, including material produced with AI assistance, provided appropriate attribution is given.
+
 ## Repository Scope
 
 This repository is the source for the book project itself: markdown, diagrams, theme assets, and generated book output.
