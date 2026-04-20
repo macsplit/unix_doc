@@ -72,17 +72,6 @@ The book uses custom fonts for enhanced readability:
 
 Technical diagrams are created using [Mermaid](https://mermaid.js.org/) and stored as `.mmd` files in the `diagrams/` directory. See `diagrams/README.md` for instructions on editing and regenerating diagrams.
 
-## Recent Improvements
-
-Based on technical review feedback, the following improvements were made:
-
-1. **Complete Decision Branches:** All flowchart decision diamonds now show both yes/no paths
-2. **Modern System Call Entry:** Added SYSENTER/SYSCALL fast entry path alongside legacy INT 0x80
-3. **Terminology Consistency:** Uses formal kernel state names (e.g., SZOMB) throughout
-4. **Enhanced Documentation:** Explained modern CPU features while maintaining historical context
-
-See `git log` for detailed history of changes.
-
 ## Git Workflow
 
 This repository tracks source files only (markdown, diagrams, fonts), not build outputs:
