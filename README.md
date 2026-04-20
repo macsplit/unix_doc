@@ -1,6 +1,6 @@
 # The Ghost of SVR4
 
-A comprehensive technical guide to the SVR4 (System V Release 4) i386 kernel architecture, presented with technical rigor and narrative whimsy.
+A comprehensive technical guide to the SVR4 (System V Release 4) i386 kernel architecture.
 
 ## About This Book
 
@@ -11,6 +11,15 @@ This documentation explores the internal architecture of the SVR4 operating syst
 - **File Systems:** VFS layer, vnodes, pathname resolution, and filesystem implementations
 - **Networking:** STREAMS architecture, TCP/IP stack, and NFS
 - **I/O and Device Management:** Device drivers, interrupts, and boot process
+
+## Repository Scope
+
+This repository is the source for the book project itself: markdown, diagrams, theme assets, and generated book output.
+
+- **Book repository:** <https://github.com/macsplit/unix_doc>
+- **SVR4 source repository referenced by the book:** <https://github.com/calmsacibis995/svr4-src>
+
+If a path such as `svr4-src/uts/i386/...` appears in the published text, the authoritative upstream repository to consult is `calmsacibis995/svr4-src`. The `macsplit/unix_doc` repository is not the canonical host for the original SVR4 source tree.
 
 ## Building the Book
 
